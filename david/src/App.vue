@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <h1>Fetch data with API</h1>
-    <EmployeeList />
+    <marketPlace />
   </div>
 </template>
 <script>
-  import EmployeeList from './components/employee'
+  import marketPlace from './components/MarketPlace'
   export default {
       name: "App",
       components: {
-        EmployeeList
+        marketPlace
       }
     }
 </script>
