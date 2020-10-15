@@ -5,7 +5,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name:"EmployeeList"
+  name:"EmployeeList",
+
+  mounted(){
+    axios.get('http://dummy.restapiexample.com/api/v1/employees').then((resp)=>{
+          console.log(resp)
+        })
+  }
 }
 </script>

@@ -1,5 +1,4 @@
 {
-  "main": "dist/vue.runtime.common.js",
   "name": "david",
   "version": "0.1.0",
   "private": true,
