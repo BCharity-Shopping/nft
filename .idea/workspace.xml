@@ -11,11 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d3d4df-f8d1-40a5-bb2c-4755241d66c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +69,7 @@
       <updated>1602780153232</updated>
       <workItem from="1602780154395" duration="1354000" />
       <workItem from="1602804130470" duration="28976000" />
-      <workItem from="1602865190010" duration="15172000" />
+      <workItem from="1602865190010" duration="16268000" />
     </task>
     <servers />
   </component>
@@ -128,5 +124,17 @@
       <screen x="0" y="23" width="1680" height="967" />
     </state>
     <state x="819" y="412" key="svn.passwordDialog/0.23.1680.967@0.23.1680.967" timestamp="1602804418355" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/david/src/components/MarketPlace.vue</url>
+          <line>13</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

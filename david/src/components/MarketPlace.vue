@@ -16,10 +16,12 @@
 </template>
 <style scoped>
 .picture {
-  img-height:auto;
-  img-width: auto;
-  background-position: center;
-  background-size:cover;
+  width: 130px;
+  height: 156px;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
+
 }
 
 .scaleDownImg{
