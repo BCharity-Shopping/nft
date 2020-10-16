@@ -11,9 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d3d4df-f8d1-40a5-bb2c-4755241d66c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/nft.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/david/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/david/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/david/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +34,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ivFRnNFFIMufl0waq658U3bibe" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -44,6 +47,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/nft/David/index.html" useBuiltInWebServerPort="true">
@@ -56,6 +61,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="15d3d4df-f8d1-40a5-bb2c-4755241d66c8" name="Default Changelist" comment="" />
@@ -64,6 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1602780153232</updated>
       <workItem from="1602780154395" duration="1354000" />
+      <workItem from="1602804130470" duration="28976000" />
+      <workItem from="1602865190010" duration="15172000" />
     </task>
     <servers />
   </component>
@@ -80,8 +90,43 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1659" height="259" key="GridCell.Tab.0.bottom" timestamp="1602868445466">
+      <screen x="0" y="23" width="1680" height="963" />
+    </state>
+    <state width="1659" height="259" key="GridCell.Tab.0.bottom/0.23.1680.963@0.23.1680.963" timestamp="1602868445466" />
+    <state width="1659" height="259" key="GridCell.Tab.0.center" timestamp="1602868445464">
+      <screen x="0" y="23" width="1680" height="963" />
+    </state>
+    <state width="1659" height="259" key="GridCell.Tab.0.center/0.23.1680.963@0.23.1680.963" timestamp="1602868445464" />
+    <state width="1659" height="259" key="GridCell.Tab.0.left" timestamp="1602868445461">
+      <screen x="0" y="23" width="1680" height="963" />
+    </state>
+    <state width="1659" height="259" key="GridCell.Tab.0.left/0.23.1680.963@0.23.1680.963" timestamp="1602868445461" />
+    <state width="1659" height="259" key="GridCell.Tab.0.right" timestamp="1602868445465">
+      <screen x="0" y="23" width="1680" height="963" />
+    </state>
+    <state width="1659" height="259" key="GridCell.Tab.0.right/0.23.1680.963@0.23.1680.963" timestamp="1602868445465" />
+    <state x="550" y="149" key="SettingsEditor" timestamp="1602804394640">
+      <screen x="0" y="23" width="1680" height="967" />
+    </state>
+    <state x="550" y="149" key="SettingsEditor/0.23.1680.967@0.23.1680.967" timestamp="1602804394640" />
+    <state x="649" y="250" key="Vcs.Push.Dialog.v2" timestamp="1602804602318">
+      <screen x="0" y="23" width="1680" height="967" />
+    </state>
+    <state x="649" y="250" key="Vcs.Push.Dialog.v2/0.23.1680.967@0.23.1680.967" timestamp="1602804602318" />
+    <state x="847" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602804500594">
+      <screen x="0" y="23" width="1680" height="967" />
+    </state>
+    <state x="847" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.967@0.23.1680.967" timestamp="1602804500594" />
+    <state x="819" y="412" key="svn.passwordDialog" timestamp="1602804418355">
+      <screen x="0" y="23" width="1680" height="967" />
+    </state>
+    <state x="819" y="412" key="svn.passwordDialog/0.23.1680.967@0.23.1680.967" timestamp="1602804418355" />
   </component>
 </project>

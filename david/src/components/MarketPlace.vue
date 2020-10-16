@@ -1,27 +1,42 @@
 <template>
   <div>
-    <h1>MarketPlace</h1>
-    <table border="1px">
-      <tr>
-        <th>asset_id</th>
-        <th>name</th>
-        <th>schema</th>
-        <th>minted_at_time</th>
-      </tr>
-      <tr v-for="item in list" v-bind:key="item.asset_id">
-        <td>{{item.asset_id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.schema}}</td>
-        <td>{{item.minted_at_time}}</td>
-      </tr>
-    </table>
+    <b-card-group deck>
+      <div v-for="item in list" :key="item.asset_id">
+      <b-card :title="item.name" v-bind:img-src="'https://ipfs.io/ipfs/'+item.data.img" class="picture scaleDownImg">
+        <b-card-text>
+         {{item.asset_id}}<br />
+          {{item.owner}}
+        </b-card-text>
+        <b-button variant="outline-primary">Info</b-button>
+        <b-button variant="outline-primary">button</b-button>
+      </b-card>
+      </div>
+    </b-card-group>
   </div>
 </template>
+<style scoped>
+.picture {
+  img-height:auto;
+  img-width: auto;
+  background-position: center;
+  background-size:cover;
+}
+
+.scaleDownImg{
+  object-fit: cover;
+}
+</style>
 
 <script>
+import Vue from 'vue'
+import { BootstrapVue,IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 export default {
-  name:"EmployeeList",
+  name:"marketplace",
   data(){
     return {list:undefined}
   },
