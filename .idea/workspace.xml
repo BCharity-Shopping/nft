@@ -69,7 +69,7 @@
       <updated>1602780153232</updated>
       <workItem from="1602780154395" duration="1354000" />
       <workItem from="1602804130470" duration="28976000" />
-      <workItem from="1602865190010" duration="16268000" />
+      <workItem from="1602865190010" duration="39596000" />
     </task>
     <servers />
   </component>
@@ -130,9 +130,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/david/src/components/MarketPlace.vue</url>
-          <line>13</line>
+          <line>21</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
