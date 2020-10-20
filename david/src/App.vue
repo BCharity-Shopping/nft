@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
-    <h1>Fetch data with API</h1>
-    <marketPlace />
-  </div>
+   <div id="app">
+    <Navbar />
+     <router-view></router-view>
+   </div>
 </template>
 <script>
-  import marketPlace from './components/MarketPlace'
+  import Navbar from './components/Navbar.vue'
   export default {
       name: "App",
       components: {
-        marketPlace
+        Navbar
       }
     }
 

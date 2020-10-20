@@ -6,28 +6,31 @@
             <div class="large-card">
               <div class="picture-wrapper">
                 <b-card>
+                  <div v-if="containsCharacter(item.assets[0].data.img)==true">
+                    <b-card-img v-bind:src="item.assets[0].data.img" style="height: 150px">
+                    </b-card-img>
+                  </div>
+                  <div v-else>
                   <b-card-img v-bind:src="'https://ipfs.io/ipfs/'+item.assets[0].data.img" style="height: 150px">
                   </b-card-img>
+                  </div>
                 </b-card>
                 <b-card-text>
-                  <p style="font-size: 15px">{{item.price.amount}}&nbsp;{{item.price.token_symbol}}</p><br>
-                  <p>{{item.assets[0].name}}</p>
+                  <p>{{item.assets[0].template_mint}}</p>
+                  <p>{{item.sale_id}}</p>
+                  <p style="font-size: 15px">{{item.price.amount}}&nbsp;{{item.price.token_symbol}}</p>
+                  <p style="white-space: nowrap;overflow: hidden; text-overflow:ellipsis">{{item.assets[0].name}}</p>
+                  <button class="btn btn-primary" @click="jump(item.sale_id)">Details</button>&nbsp;&nbsp;
+                  <button class="btn btn-primary">Buy</button>
                 </b-card-text>
               </div>
             </div>
-
           </div>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
-
-.truncate-with-css-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .grid {
   display: grid;
@@ -91,8 +94,28 @@ export default {
   mounted(){
     axios.get('https://wax.api.atomicassets.io/atomicmarket/v1/sales').then((resp)=>{
           this.list=resp.data.data;
-          console.log(resp)
-        })
+    })
+  },
+  methods: {
+    containsCharacter:function(x) {
+      if (x.includes("https")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    jump:function (x){
+      this.$router.push({path:x})
+
+    }
+
+  },watch: {
+    '$route' () {
+      this.$router.go(0);
+    }
   }
+
+
+
 }
 </script>
