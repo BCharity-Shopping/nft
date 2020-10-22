@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link> | 
+      <router-link to="/explorer">Explorer</router-link>  |
+      <router-link to="/market">Market</router-link>  |
+      <router-link to="/trading">Trading</router-link>  |
+      <router-link to="/creator">Creator</router-link>  |
+      <Login/>
     </div>
     <router-view/>
-    <Login/>
   </div>
 </template>
 
@@ -32,6 +36,10 @@ export default {
 
 #nav {
   padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 #nav a {

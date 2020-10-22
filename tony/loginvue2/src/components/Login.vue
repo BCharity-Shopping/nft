@@ -1,21 +1,15 @@
 <template>
   <div class="login-block">
-    <div class="buttons" v-if='userAccount==""'>
+    <div class="login-button" v-if='userAccount==""'>
       <button @click="login">Login</button>
     </div>
     <div class="account-info" v-if='userAccount!=""'>
       <b-dropdown id="account-dropdown" :text="userAccount">
-        <b-dropdown-item to="/profile">Inventory</b-dropdown-item>
-        <b-dropdown-item>My Sales</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'sales' }}">My Sales</b-dropdown-item>
         <b-dropdown-item>Notify Me</b-dropdown-item>
         <b-dropdown-item>Logout</b-dropdown-item>
       </b-dropdown>
-      <p>Active: {{ pubKeys[0] }}</p>
-      <p>Owner: {{ pubKeys[1] }}</p>
-    </div>
-    <div class="login-status">
-      <p>Status: {{ loginStatus }}</p>
-      <p>Result: {{ result }}</p>
     </div>
   </div>
 </template>
@@ -92,5 +86,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.login-button{
+  font-weight: bold;
+  color: #2c3e50;
 }
 </style>
