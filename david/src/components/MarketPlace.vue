@@ -17,8 +17,8 @@
                 </b-card>
                 <b-card-text>
                   <p>{{item.assets[0].template_mint}}</p>
-                  <p>{{item.sale_id}}</p>
-                  <p style="font-size: 15px">{{item.price.amount}}&nbsp;{{item.price.token_symbol}}</p>
+                  <p>{{item.assets[0].collection.collection_name}}</p>
+                  <p>{{ waxPriceFormat(item.price.amount,item.price.token_precision) }}.00{{item.price.token_symbol}}&nbsp;&nbsp;(${{wasPriceUSDollarConversion(item.price.amount,item.price.token_precision, exchangePriceUSD)}})</p>
                   <p style="white-space: nowrap;overflow: hidden; text-overflow:ellipsis">{{item.assets[0].name}}</p>
                   <button class="btn btn-primary" @click="jump(item.sale_id)">Details</button>&nbsp;&nbsp;
                   <button class="btn btn-primary">Buy</button>
@@ -81,20 +81,30 @@
 <script>
 import Vue from 'vue'
 import { BootstrapVue,IconsPlugin } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 export default {
   name:"marketplace",
+  components:{
+  },
   data(){
-    return {list:undefined}
+    return {
+      list:undefined,
+      exchangePriceUSD:undefined,
+    }
   },
   mounted(){
     axios.get('https://wax.api.atomicassets.io/atomicmarket/v1/sales').then((resp)=>{
           this.list=resp.data.data;
     })
+    axios.get('https://api.coingecko.com/api/v3/coins/wax?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false')
+        .then((resp)=>{
+          this.exchangePriceUSD=resp.data.market_data.current_price.usd
+        })
   },
   methods: {
     containsCharacter:function(x) {
@@ -105,15 +115,28 @@ export default {
       }
     },
     jump:function (x){
+      this.$emit('sistersaid','Mom said do your home work')
       this.$router.push({path:x})
 
+    },
+    waxPriceFormat:function(waxPrice,token_precision){
+      var PriceSplit=waxPrice.substring(0,waxPrice.length-token_precision)
+      return PriceSplit;
+    },
+    wasPriceUSDollarConversion:function(waxPrice,token_precision,exchangeRate){
+      var PriceSplit=parseInt(waxPrice.substring(0,waxPrice.length-token_precision));
+      console.log(exchangeRate);
+      var usDollar=(PriceSplit*exchangeRate).toFixed(2);
+      return usDollar;
     }
 
-  },watch: {
+  },
+  watch: {
     '$route' () {
       this.$router.go(0);
     }
-  }
+  },
+
 
 
 
