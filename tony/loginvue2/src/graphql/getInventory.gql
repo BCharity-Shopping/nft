@@ -1,0 +1,20 @@
+query atomicassets_assets ($owner: String) {
+  atomicassets_assets(where: {owner: {_eq: $owner}}) {
+    asset_id
+    atomicassets_template {
+      immutable_data
+      max_supply
+      issued_supply
+      burnable
+      transferable
+    }
+    owner
+    template_id
+    schema_name
+    collection_name
+    atomicassets_assets_backed_tokens {
+      token_symbol
+      amount
+    }
+  }
+}
