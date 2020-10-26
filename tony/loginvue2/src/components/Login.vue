@@ -8,7 +8,7 @@
         <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
         <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'sales' }}">My Sales</b-dropdown-item>
         <b-dropdown-item>Notify Me</b-dropdown-item>
-        <b-dropdown-item>Logout</b-dropdown-item>
+        <b-dropdown-item @click="logout">Logout</b-dropdown-item>
       </b-dropdown>
     </div>
   </div>
@@ -75,6 +75,13 @@ export default {
         this.result = e
         console.log(e)
       }
+    },
+    logout() {
+      this.userAccount = "",
+      this.pubKeys = "",
+      this.wax = new waxjs.WaxJS('https://wax.greymass.com', null, null, false),
+      this.userName = "",
+      this.loginStatus = "User is not logged in"
     }
   }
 }
