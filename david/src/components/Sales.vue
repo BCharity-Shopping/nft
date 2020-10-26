@@ -1,37 +1,49 @@
 <template>
   <div class="Sales">
-    <router-link to="/MarketPlace">
-      <div class="Breadcrumbs grey-color"><h2>Return to Market</h2></div>
-    </router-link>
-    <h1>Sale:#{{ id }}</h1>
-    <h1>{{ Sales }}</h1>
-    <p>{{exchangePriceUSD}}</p>
-    <router-view></router-view>
+      <router-link to="/MarketPlace">
+        <div class="Breadcrumbs grey-color"><h2>Return to Market</h2></div>
+      </router-link>
+      <h1>Sale:#{{ id }}</h1>
+    <div class="main-block w-100">
+      <div class="row">
+        <div class="grid text-center px-0 MobileCardDesign">
+            <div class="picture-wrapper">
+              <ApolloQuery :query="require('../graphQL/saleinfo.gql')" :variables="{id}">
+                  <template v-slot="{ result: { loading, error, data} }">
+                    <div v-if="data">
+                      <p>{{data.atomicmarket_sales}}</p>
+                      <b-card class="large-card">
+                        <p>Listing_Price:{{data.atomicmarket_sales[0].listing_price}}</p><p>{{data.atomicmarket_sales[0].listing_symbol}}</p>
+                        <p>Seller: {{data.atomicmarket_sales[0].seller}}</p>
+                        <p>OfferId:{{data.atomicmarket_sales[0].offer_id}}</p>
+                        <p>Minimum Mint:{{data.atomicmarket_sales[0].atomicmarket_sale_mints.min_template_mint}}</p>
+                        <p>Maximum Mint:{{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_template.issued_supply}}</p>
+                        <p>Collection Name: {{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_asset_data.collection_name}}</p>
+                        <p>Schema Name: {{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_asset_data.schema_name}}</p>
+                      </b-card>
+                    </div>
+                  </template>
+                </ApolloQuery>
+
+            </div>
+        </div>
+      </div>
+    </div>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
 import router from '../router';
 import axios from "axios";
-import gql from 'graphql-tag';
 
 // Create the apollo client
 
 export default {
     name: 'sales',
-    apollo:{
-      Sales: gql`query sales {
-                                atomicmarket_sales :{
-                                seller
-                                sale_id state
-                                settlement_symbol
-                                }
-                            }`
-    },
     data() {
       return {
         id: 0,
-        Sales: undefined,
         exchangePriceUSD: undefined,
       };
     },
@@ -47,12 +59,56 @@ export default {
     methods: {
       navigate() {
         router.go(-1);
-      }
+      },
     },
   }
 </script>
 
-<style scoped>
+<style>
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(20px, auto);
+  grid-gap: 1rem;
+}
+.main-block {
+  padding: 35px 49px 33.5px 51px;
+}
+
+.large-card {
+  width: 180px;
+  border-radius: 20px;
+  box-shadow: 0 3px 20px rgba(0,0,0,.4);
+  display: inline-block;
+  height: fit-content;
+  margin: 15px 10px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  text-align: initial;
+
+}
+
+.large-card .content-wrapper {
+  background-color: #1a203c;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: relative;
+}
+
+
+.large-card .picture-wrapper {
+  padding: 20px 10px;
+  border-top-left-radius: 40px;
+  border-top-right-radius:40px;
+  position: relative;
+}
+
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
 h1, h2 {
   font-weight: normal;
 }
@@ -70,5 +126,5 @@ li {
 a {
   color: #42b983;
 }
-</style>
 
+</style>

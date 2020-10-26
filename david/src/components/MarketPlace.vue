@@ -100,6 +100,7 @@ export default {
   mounted(){
     axios.get('https://wax.api.atomicassets.io/atomicmarket/v1/sales').then((resp)=>{
           this.list=resp.data.data;
+          console.log(this.list)
     })
     axios.get('https://api.coingecko.com/api/v3/coins/wax?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false')
         .then((resp)=>{
