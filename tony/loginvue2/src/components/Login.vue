@@ -1,7 +1,7 @@
 <template>
   <div class="login-block">
     <div class="login-button" v-if='userAccount==""'>
-      <button @click="login">Login</button>
+      <b-button @click="login">Login</b-button>
     </div>
     <div class="account-info" v-if='userAccount!=""'>
       <b-dropdown id="account-dropdown" :text="userAccount">

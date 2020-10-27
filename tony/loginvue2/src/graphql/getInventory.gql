@@ -16,5 +16,9 @@ query atomicassets_assets ($owner: String) {
       token_symbol
       amount
     }
+    immutable_data
+    atomicassets_asset_mints {
+      template_mint
+    }
   }
 }
