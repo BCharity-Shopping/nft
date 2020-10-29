@@ -1,7 +1,7 @@
 <template>
   <div class="login-block">
     <div class="login-button" v-if='userAccount==""'>
-      <button @click="login">Login</button>
+      <b-button @click="login">Login</b-button>
     </div>
     <div class="account-info" v-if='userAccount!=""'>
       <b-dropdown id="account-dropdown" :text="userAccount">
@@ -11,6 +11,10 @@
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
       </b-dropdown>
     </div>
+      <b-button @click="regmarket">regmarket</b-button>
+      <b-button @click="announcesale">announcesale</b-button>
+      <b-button @click="createoffer">createoffer</b-button>
+      <p>{{ aid }}</p>
   </div>
 </template>
 
@@ -27,7 +31,8 @@ export default {
       wax: new waxjs.WaxJS('https://wax.greymass.com', null, null, false),
       result: "",
       userName: "",
-      loginStatus: "User is not logged in"
+      loginStatus: "User is not logged in",
+      aid: 1099512463310n
     }
   },
   methods: {
@@ -44,32 +49,93 @@ export default {
         this.loginStatus = `User denied dApp access`
       }
     },
-    async transact() {
+    async regmarket() {
       if(!this.wax.api) {
         return console.log("Need to Login first")
       }
       try {
         this.result = await this.wax.api.transact({
           actions: [{
-            account: 'eosio',
-            name: 'delegatebw',
+            account: 'atomicmarket',
+            name: 'regmarket',
             authorization: [{
               actor: this.wax.userAccount,
               permission: 'active',
             }],
             data: {
-              from: this.wax.userAccount,
-              receiver: this.wax.userAccount,
-              stake_net_quantity: '0.00000001 WAX',
-              stake_cpu_quantity: '0.00000000 WAX',
-              transfer: false,
-              memo: 'This is a WaxJS/Cloud Wallet Demo.'
+              creator: this.wax.userAccount,
+              marketplace_name: "l5oawtestmkt",
             },
           }]
         }, {
           blocksBehind: 3,
           expireSeconds: 30
         })
+        console.log(this.result)
+      }
+      catch (e) {
+        this.result = e
+        console.log(e)
+      }
+    },
+    async announcesale() {
+      if(!this.wax.api) {
+        return console.log("Need to Login first")
+      }
+      try {
+        this.result = await this.wax.api.transact({
+          actions: [{
+            account: 'atomicmarket',
+            name: 'announcesale',
+            authorization: [{
+              actor: this.wax.userAccount,
+              permission: 'active',
+            }],
+            data: {
+              seller: this.wax.userAccount,
+              asset_ids: [1099512463310n],
+              listing_price: "10.00000000 WAX",
+              settlement_symbol: "8,WAX",
+              maker_marketplace: this.wax.userAccount,
+            },
+          }]
+        }, {
+          blocksBehind: 3,
+          expireSeconds: 30
+        })
+        console.log(this.result)
+      }
+      catch (e) {
+        this.result = e
+        console.log(e)
+      }
+    },
+    async createoffer() {
+      if(!this.wax.api) {
+        return console.log("Need to Login first")
+      }
+      try {
+        this.result = await this.wax.api.transact({
+          actions: [{
+            account: 'atomicassets',
+            name: 'createoffer',
+            authorization: [{
+              actor: this.wax.userAccount,
+              permission: 'active',
+            }],
+            data: {
+              sender: this.wax.userAccount,
+              recipient: "atomicmarket",
+              sender_asset_ids: [1099512463310n],
+              recipient_asset_ids: [],
+              memo: "sale"
+            },
+          }]
+        }, {
+          blocksBehind: 3,
+          expireSeconds: 30
+        })
+        console.log(this.result)
       }
       catch (e) {
         this.result = e

@@ -2,7 +2,7 @@
   <div class="profile">
     <h1>{{ id }} Profile Page</h1>
   <div>
-    <b-tabs v-model="tabIndex" content-class="profile-tabs">
+    <b-tabs class="tab" v-model="tabIndex" content-class="profile-tabs">
       <b-tab @click="setInventoryTab" title="Inventory"><Inventory :id="id"/></b-tab>
       <b-tab @click="setSalesTab" title="Active Sales">Sales...</b-tab>
     </b-tabs>
@@ -57,3 +57,13 @@ export default {
   }
 }
 </script>
+
+
+<style>
+.profile {
+  margin-left: 15%;
+  justify-content: center;
+  align-content: center;
+  max-width: 70%;
+}
+</style>
