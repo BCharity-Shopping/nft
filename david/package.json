@@ -11,6 +11,7 @@
   "dependencies": {
     "@vue/apollo-composable": "^4.0.0-alpha.12",
     "@vue/composition-api": "^1.0.0-beta.18",
+    "@waxio/waxjs": "^0.0.13",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-datasource-rest": "^0.9.4",
@@ -18,6 +19,7 @@
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
+    "eosjs": "^21.0.3",
     "expess": "0.0.1-security",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
