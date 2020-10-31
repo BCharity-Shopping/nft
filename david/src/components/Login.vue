@@ -18,7 +18,6 @@
 
 <script>
 import * as waxjs from "@waxio/waxjs/dist"
-import Eos from 'eosjs'
 export default{
   config:{
     httpEndpoint:"https://chain.wax.io",
@@ -27,7 +26,7 @@ export default{
     verbose:false,
     sign: true
 
-  };
+  },
   name: 'App',
   data(){
     return {
