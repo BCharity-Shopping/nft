@@ -1,0 +1,49 @@
+"Included scalars"
+scalar JSON
+scalar Upload
+
+type Actions {
+  account: String
+  name: String
+  authorization: [Authorization]
+  data: Data
+}
+
+type Authorization {
+  actor: String
+  permission: String
+}
+
+type Data {
+  seller: String
+}
+
+type Result {
+  transactionID: String
+}
+
+type Optparams {
+  blocksBehind: Int
+  expireSeconds: Int
+}
+
+
+
+
+
+type Query {
+  "Test query with a parameter"
+  hello(name: String): String!
+
+}
+
+type Mutation {
+  myMutation: String!
+  regmarket(creator: String, marketplace_name: String): String
+
+}
+
+type Subscription {
+  mySub: String!
+
+}
