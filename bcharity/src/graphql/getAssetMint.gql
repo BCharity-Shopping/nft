@@ -1,0 +1,6 @@
+query atomicassets_asset_mints($asset_id: bigint) {
+  atomicassets_asset_mints(where: {asset_id: {_eq: 1099512453178}}) {
+    template_mint
+    asset_id
+  }
+}
