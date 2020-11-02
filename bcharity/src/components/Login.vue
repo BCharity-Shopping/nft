@@ -1,6 +1,7 @@
 <template>
   <div class="login-block">
     <div class="login-button" v-if='userAccount==""'>
+      {{ wax }}
       <b-button @click="login">Login</b-button>
     </div>
     <div class="account-info" v-if='userAccount!=""'>
@@ -10,6 +11,26 @@
         <b-dropdown-item>Notify Me</b-dropdown-item>
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
       </b-dropdown>
+      <ApolloMutation
+        :mutation="gql => gql`
+          mutation regmarket ($userName: String!, $marketName: String!) {
+            regmarket (creator: $userName, marketplace_name: $marketName) {
+              transactionid
+            }
+          }
+        `"
+        :variables="{
+          userName, marketName
+        }"
+        :context="{
+          wax
+        }"
+        >
+        <template v-slot="{ mutate, loading, error }">
+        <button :disabled="loading" @click="mutate()">Click me</button>
+        <p v-if="error">An error occurred: {{ error }}</p>
+        </template>
+      </ApolloMutation>
       <b-button @click="registerMarket">registermarket</b-button>
     </div>
       <b-button @click="regmarket">regmarket</b-button>
@@ -85,6 +106,7 @@ export default {
     async login() {
       try {
         console.log("logging in through WCW")
+        console.log("wax: " + this.wax)
         this.userAccount = await this.wax.login()
         this.pubKeys = this.wax.pubKeys
         this.userName = this.wax.userAccount
