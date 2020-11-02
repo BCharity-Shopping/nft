@@ -1,4 +1,5 @@
 //Hello World
+//Hello world 2
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
