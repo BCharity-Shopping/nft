@@ -1,7 +1,5 @@
-import * as waxjs from "@waxio/waxjs/dist";
-
+const waxjs=require('@waxio/waxjs/dist')
 module.exports = {
-    
     Query: {
       
     },

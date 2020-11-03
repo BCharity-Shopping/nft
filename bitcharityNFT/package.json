@@ -1,0 +1,20 @@
+{
+  "name": "bitcharitynft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@waxio/waxjs": "^0.0.13",
+    "apollo-boost": "^0.4.9",
+    "domino": "^2.1.6",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "jwt-decode": "^3.0.0",
+    "vue-apollo": "^3.0.5"
+  }
+}

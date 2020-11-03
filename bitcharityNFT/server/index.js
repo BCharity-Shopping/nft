@@ -1,6 +1,10 @@
-const { ApolloServer, gql } = require('apollo-server');
-const typeDefs = require('./schema');
+//import ApolloServer from 'apollo-server';
+//import typeDefs from 'schema';
+//import resolvers from './resolvers';
+const { ApolloServer }=require('apollo-server');
 const resolvers = require('./resolvers');
+const typeDefs = require('./schema');
+
 
 
 const server = new ApolloServer({ 
@@ -10,7 +14,7 @@ const server = new ApolloServer({
     settings: {
       'editor.theme': 'light',
     }
-  }
+  },
  });
 
 server.listen().then(({ url }) => {
