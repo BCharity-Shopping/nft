@@ -4,7 +4,7 @@
 const { ApolloServer }=require('apollo-server');
 const resolvers = require('./resolvers');
 const typeDefs = require('./schema');
-
+const actionAPI = require('./datasources/action');
 
 
 const server = new ApolloServer({ 
@@ -15,6 +15,11 @@ const server = new ApolloServer({
       'editor.theme': 'light',
     }
   },
+  dataSources: () => ({
+  
+    actionAPI: new actionAPI()
+
+  })
  });
 
 server.listen().then(({ url }) => {
