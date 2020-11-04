@@ -12,6 +12,7 @@
     "@waxio/waxjs": "^0.0.13",
     "apollo-boost": "^0.4.9",
     "apollo-datasource-rest": "^0.9.5",
+    "apollo-fetch": "^0.7.0",
     "domino": "^2.1.6",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",

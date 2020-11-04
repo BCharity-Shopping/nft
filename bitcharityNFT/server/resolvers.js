@@ -1,6 +1,7 @@
 module.exports = {
     Query: {
-      
+      atomicmarket_sales: (_,__,{ dataSources })=>
+        dataSources.salesAPI.getSales()
     },
     Mutation: {
       registermarket: (_,args,{ dataSources })=>

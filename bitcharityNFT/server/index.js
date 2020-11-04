@@ -5,7 +5,7 @@ const { ApolloServer }=require('apollo-server');
 const resolvers = require('./resolvers');
 const typeDefs = require('./schema');
 const actionAPI = require('./datasources/action');
-
+const salesAPI = require('./datasources/sales');
 
 const server = new ApolloServer({ 
   typeDefs, 
@@ -17,7 +17,8 @@ const server = new ApolloServer({
   },
   dataSources: () => ({
   
-    actionAPI: new actionAPI()
+    actionAPI: new actionAPI(),
+    salesAPI: new salesAPI()
 
   })
  });
