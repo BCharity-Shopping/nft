@@ -6,9 +6,13 @@
       <router-link to="/market">Market</router-link>  |
       <router-link to="/trading">Trading</router-link>  |
       <router-link to="/creator">Creator</router-link>  |
-      <Login/>
+      <Login v-on:logged-in="setWax" v-on:logged-out="clearWax"/>
     </div>
     <router-view/>
+    <div v-if='wax!=""'>
+      <RegisterMarket :wax="wax"/>
+      <CreateSale :wax="wax"/>
+    </div>
   </div>
 </template>
 
@@ -16,10 +20,28 @@
 // @ is an alias to /src
 import Login from '@/components/Login.vue'
 
+import RegisterMarket from '@/components/RegisterMarket.vue'
+import CreateSale from '@/components/CreateSale.vue'
+
 export default {
   name: 'Home',
   components: {
-    Login
+    Login,
+    RegisterMarket,
+    CreateSale,
+  },
+  data () {
+    return {
+      wax: ""
+    }
+  },
+  methods: {
+    setWax: function (waxObj) {
+      this.wax = waxObj
+    },
+    clearWax: function () {
+      this.wax = ""
+    }
   }
 }
 </script>
