@@ -26,15 +26,15 @@ class salesAPI extends DataSource{
                     }
                 }`
           }).then(res => {
-            info=res.data
-            //console.log(info.atomicmarket_sales);
-            //console.log(this.getallInfo(info))
+            info=res.data.atomicmarket_sales
+            console.log(info.market_contract);
+            //console.log(this.getSales())
             return  {
-                market_contract: 'atomicmarket',
-                assets_contract: 'atomicassets',
-                listing_symbol: 'WAX',
-                offer_id: 466093
-              }
+                    market_contract: info.market_contract,
+                    ssets_contract: info.assets_contract,
+                    listing_symbol: info.listing_symbol,
+                    offer_id: info.offer_id
+                }
             }
           );
         
