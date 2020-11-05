@@ -10,13 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15d3d4df-f8d1-40a5-bb2c-4755241d66c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/david/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/components/MarketPlace.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/david/src/components/Sales.vue" beforeDir="false" afterPath="$PROJECT_DIR$/david/src/components/Sales.vue" afterDir="false" />
-    </list>
+    <list default="true" id="15d3d4df-f8d1-40a5-bb2c-4755241d66c8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,6 +96,7 @@
       <workItem from="1603074063227" duration="1000" />
       <workItem from="1603118059827" duration="1030000" />
       <workItem from="1603127512119" duration="55670000" />
+      <workItem from="1604595483647" duration="7000" />
     </task>
     <servers />
   </component>
