@@ -2,11 +2,11 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql` 
   type Query {
-    atomicmarket_sales:Atomicmarket_sale
+    atomicmarket_sales:[Atomicmarket_sales]
   }
 
-  type Atomicmarket_sale {
-      market_contract:String
+  type Atomicmarket_sales {
+      market_contract:String!
       assets_contract:String
       listing_symbol:String
       offer_id:ID

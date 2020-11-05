@@ -17,36 +17,22 @@ class salesAPI extends DataSource{
           fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
-                       
-                                market_contract
-                                assets_contract
-                                listing_symbol
-                                offer_id
-                        
+                       market_contract
+                       assets_contract
+                       listing_symbol
+                        offer_id
                     }
                 }`
           }).then(res => {
+                       
             info=res.data.atomicmarket_sales
-            console.log(info.market_contract);
+            console.log(info);
             //console.log(this.getSales())
-            return  {
-                    market_contract: info.market_contract,
-                    ssets_contract: info.assets_contract,
-                    listing_symbol: info.listing_symbol,
-                    offer_id: info.offer_id
-                }
-            }
-          );
-        
-    }
-
-    getAllInfo(){
-        return {
-            market_contract: 'atomicmarket',
-                assets_contract: 'atomicassets',
-                listing_symbol: 'WAX',
-                offer_id: 466093
+            
+          })
+          return fetch;
         }
     }
-}
+
+   
 module.exports = salesAPI
