@@ -10,11 +10,13 @@ class salesAPI extends DataSource{
     }
 
     async getSales(){
-        var info;
+        //var info;
         const fetch = await createApolloFetch({
             uri: 'https://wax.api.atomicassets.io/graphql',
           });
-          fetch({
+          
+          
+        fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
                        market_contract
@@ -24,13 +26,13 @@ class salesAPI extends DataSource{
                     }
                 }`
           }).then(res => {
-                       
-            info=res.data.atomicmarket_sales
-            
-            //console.log(this.getSales())
+            console.log(res.data.atomicmarket_sales);
         })
-        console.log(fetch());
-          return fetch;
+
+        
+        //console.log(info);
+          //console.log(typeof fetch);
+          //fetch();
         }
     }
 
