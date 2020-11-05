@@ -26,10 +26,10 @@ class salesAPI extends DataSource{
           }).then(res => {
                        
             info=res.data.atomicmarket_sales
-            console.log(info);
-            //console.log(this.getSales())
             
-          })
+            //console.log(this.getSales())
+        })
+        console.log(fetch());
           return fetch;
         }
     }
