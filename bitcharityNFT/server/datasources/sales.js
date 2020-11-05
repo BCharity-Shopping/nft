@@ -17,25 +17,35 @@ class salesAPI extends DataSource{
           fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
-                    market_contract
-                    assets_contract
-                    listing_symbol
-                    offer_id
+                       
+                                market_contract
+                                assets_contract
+                                listing_symbol
+                                offer_id
+                        
                     }
                 }`
           }).then(res => {
             info=res.data
-            return this.getallInfo(info)
-          });
+            //console.log(info.atomicmarket_sales);
+            //console.log(this.getallInfo(info))
+            return  {
+                market_contract: 'atomicmarket',
+                assets_contract: 'atomicassets',
+                listing_symbol: 'WAX',
+                offer_id: 466093
+              }
+            }
+          );
         
     }
 
-    async getallInfo(info){
+    getAllInfo(){
         return {
-            market_contract:info.market_contract,
-            assets_contract:info.assets_contract,
-            listing_symbol:info.listing_symbol,
-            offer_id:info.offer_id
+            market_contract: 'atomicmarket',
+                assets_contract: 'atomicassets',
+                listing_symbol: 'WAX',
+                offer_id: 466093
         }
     }
 }

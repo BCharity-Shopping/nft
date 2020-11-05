@@ -2,31 +2,31 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql` 
   type Query {
-    Collections:collections
-    atomicmarket_sales:atomicmarket_sale
+    atomicmarket_sales:Atomicmarket_sales
   }
 
-  type atomicmarket_sale{
+  type Atomicmarket_sales {
       market_contract:String
       assets_contract:String
-      listing_price: Float
       listing_symbol:String
       offer_id:ID
     }
 
-  type atomicassets_template{
+  
+
+  type atomicassets_template {
     Issued_supply:String!
-    Template_id: String!
+    Template_id:String!
     immutable_data: String!
   }
 
-  type atomicassets_asset_data{
+  type atomicassets_asset_data {
     asset_id: String!
     collections_name: String!
     schema_name: String!
   }
 
-  type atomicassets_asset{
+  type atomicassets_asset {
     atomicassets_asset_data:[atomicassets_asset_data]!
     atomicassets_template:[atomicassets_template]!
   }
@@ -35,7 +35,7 @@ const typeDefs = gql`
     atomicassets_asset:[atomicassets_asset]
   }
 
-  type atomicassets_offer{
+  type atomicassets_offer {
     atomicassets_offers_assets:[atomicassets_offers_assets]
   }
 
@@ -52,19 +52,6 @@ const typeDefs = gql`
 
 
 
-
-
-
-
-type collections {
-      author: String!
-      collection_name: String!
-      allow_notify: String!
-      authorized_account: String!
-      notify_accounts: String
-      market_fee: Float!
-      data: String!
-  }
 
   type Data {
     seller: String
@@ -84,7 +71,6 @@ type collections {
   }
   type Mutation {
     login(login:String):String
-    createcol(author:String, collection_name:String,allow_notify:String, authorized_account:String, notify_accounts:String, market_fee:String,data:String):collections
     createschema(authorized_creator: String, collections_name:String, schema_name:String, schema_format: String):String
     registermarket(creator:String,market_place_name: String):String
   }
