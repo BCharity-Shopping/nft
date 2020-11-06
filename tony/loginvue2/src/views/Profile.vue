@@ -1,11 +1,16 @@
 <template>
   <div class="profile">
-    <h1>{{ account_name }} Profile Page</h1>
   <div>
+    <div v-if='wax!=""'>
+    <h2>{{ wax.userAccount }}</h2>
     <b-tabs class="tab" v-model="tabIndex" content-class="profile-tabs">
       <b-tab @click="setInventoryTab" title="Inventory"><Inventory :account_name="account_name"/></b-tab>
       <b-tab @click="setSalesTab" title="Active Sales"><ActiveSales :account_name="account_name"/></b-tab>
     </b-tabs>
+    </div>
+    <div v-else>
+      <p>Please log in first</p>
+    </div>
   </div>
   </div>
 </template>
@@ -23,7 +28,8 @@ export default {
   },
   data () {
     return {
-      tabIndex: 0
+      tabIndex: 0,
+      wax: "",
     }
   },
   watch: {
@@ -38,6 +44,10 @@ export default {
     }
   },
   mounted () {
+    this.wax = this.$store.getters.getWax
+    if (this.wax == "") {
+      this.$router.push('/explorer/account/'+ this.account_name)
+    }
     if(this.tab == "inventory") {
         this.tabIndex = 0
       }
@@ -56,7 +66,7 @@ export default {
         this.$router.push('/profile/' + this.account_name + '/sales')
       }
     }
-  }
+  },
 }
 </script>
 

@@ -41,7 +41,8 @@ export default {
         this.pubKeys = this.wax.pubKeys
         this.userName = this.wax.userAccount
         this.loginStatus = `User has approved dApp access`
-        this.$emit('logged-in', this.wax)
+        this.$store.commit('storeWax', this.wax)
+        this.$emit('logged-in')
       }
       catch (e) {
         console.log(e)
@@ -54,7 +55,9 @@ export default {
       this.wax = new waxjs.WaxJS('https://wax.greymass.com', null, null, false),
       this.userName = "",
       this.loginStatus = "User is not logged in"
+      this.$store.commit('clearWax')
       this.$emit('logged-out')
+      this.$router.push('/')
     }
   }
 }

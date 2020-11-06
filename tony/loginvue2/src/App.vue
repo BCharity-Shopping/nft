@@ -39,13 +39,14 @@ export default {
     }
   },
   methods: {
-    setWax: function (waxObj) {
-      this.wax = waxObj
+    setWax: function () {
+      console.log(this.$store.getters.getWax)
+      this.wax = this.$store.getters.getWax
     },
     clearWax: function () {
       this.wax = ""
     }
-  }
+  },
 }
 </script>
 

@@ -3,7 +3,7 @@
     <h1>Asset Page of {{ $route.params.asset_id }}</h1>
     <ApolloQuery
     :query="require('../graphql/getAsset.gql')"
-    :variables="{ asset_id: aid}"
+    :variables="{ asset_id: $route.params.asset_id}"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
