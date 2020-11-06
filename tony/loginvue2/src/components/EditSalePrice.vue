@@ -1,5 +1,6 @@
 <template>
   <div>
+      <input v-model="sale_id" placeholder="Sale ID">
       <input v-model="asset_id" placeholder="Asset ID">
       <input v-model="price" placeholder="Listing Price">
       <b-button @click="createSale">Create Sale</b-button>
@@ -10,9 +11,11 @@
 <script>
 export default {
   name: 'CreateSale',
-  props: ['wax','assetID'],
+  props: ['wax','saleID', 'assetID'],
   data() {
     return {
+      sale_id: "",
+
       asset_id: "",
       price: "",
       settlement_symbol: "8,WAX",
@@ -47,6 +50,17 @@ export default {
       try {
         this.result = await this.wax.api.transact({
           actions: [{
+            account: 'atomicmarket',
+            name: 'cancelsale',
+            authorization: [{
+              actor: this.wax.userAccount,
+              permission: 'active',
+            }],
+            data: {
+              sale_id: [Number(this.sale_id)],
+            },
+          },
+          {
             account: 'atomicmarket',
             name: 'announcesale',
             authorization: [{

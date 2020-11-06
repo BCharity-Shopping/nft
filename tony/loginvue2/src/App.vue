@@ -12,6 +12,7 @@
     <div v-if='wax!=""'>
       <RegisterMarket :wax="wax"/>
       <CreateSale :wax="wax"/>
+      <CancelSale :wax="wax"/>
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ import Login from '@/components/Login.vue'
 
 import RegisterMarket from '@/components/RegisterMarket.vue'
 import CreateSale from '@/components/CreateSale.vue'
+import CancelSale from '@/components/CancelSale.vue'
 
 export default {
   name: 'Home',
@@ -29,6 +31,7 @@ export default {
     Login,
     RegisterMarket,
     CreateSale,
+    CancelSale,
   },
   data () {
     return {

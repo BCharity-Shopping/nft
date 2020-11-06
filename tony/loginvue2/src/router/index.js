@@ -11,7 +11,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/profile/:id/:tab?',
+    path: '/profile/:account_name/:tab?',
     name: 'Profile',
     props: true,
     // route level code-splitting
@@ -23,6 +23,11 @@ const routes = [
     path: '/explorer',
     name: 'Explorer',
     component: () => import('../views/Explorer.vue')
+  },
+  {
+    path: '/explorer/asset/:asset_id',
+    name: 'Asset',
+    component: () => import('../views/Asset.vue')
   },
   {
     path: '/market',

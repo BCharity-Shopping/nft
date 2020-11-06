@@ -5,8 +5,8 @@
     </div>
     <div class="account-info" v-if='userAccount!=""'>
       <b-dropdown id="account-dropdown" :text="userAccount">
-        <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
-        <b-dropdown-item :to="{ name: 'Profile', params: { id:userAccount, tab:'sales' }}">My Sales</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Profile', params: { account_name:userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Profile', params: { account_name:userAccount, tab:'sales' }}">My Sales</b-dropdown-item>
         <b-dropdown-item>Notify Me</b-dropdown-item>
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
       </b-dropdown>
@@ -61,7 +61,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .login-block {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
