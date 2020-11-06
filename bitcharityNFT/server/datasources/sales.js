@@ -16,7 +16,7 @@ class salesAPI extends DataSource{
           });
           
           
-        fetch({
+        var info=await fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
                        market_contract
@@ -26,9 +26,18 @@ class salesAPI extends DataSource{
                     }
                 }`
           }).then(res => {
-            console.log(res.data.atomicmarket_sales);
+            //console.log(res.data);
+            return res.data.atomicmarket_sales;
         })
-
+        //var info=fetch;
+        console.log(info);
+        return {
+            
+            market_contract:info[0].market_contract,
+            assets_contract:info[0].assets_contract,
+            listing_symbol:info[0].listing_symbol,
+            offer_id:info[0].offer_id
+        }
         
         //console.log(info);
           //console.log(typeof fetch);
