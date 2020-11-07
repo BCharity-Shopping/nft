@@ -2,7 +2,7 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql` 
   type Query {
-    atomicmarket_sales:Atomicmarket_sales
+    atomicmarket_sales:[Atomicmarket_sales]
   }
 
   type Atomicmarket_sales {
