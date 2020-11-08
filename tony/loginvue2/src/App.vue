@@ -6,47 +6,47 @@
       <router-link to="/market">Market</router-link>  |
       <router-link to="/trading">Trading</router-link>  |
       <router-link to="/creator">Creator</router-link>  |
-      <Login v-on:logged-in="setWax" v-on:logged-out="clearWax"/>
+      <div v-if='this.getWax==""'>
+        <Login/>
+      </div>
+      <div v-else>
+        <AccountDropdown/>
+      </div>
     </div>
     <router-view/>
-    <div v-if='wax!=""'>
-      <RegisterMarket :wax="wax"/>
-      <CreateSale :wax="wax"/>
-      <CancelSale :wax="wax"/>
+    <!--
+    <div v-if='this.getWax==""'>
+      <p>Not Logged In</p>
     </div>
+    <div v-else>
+      <p>Logged In To {{this.getWax.userAccount}}</p>
+    </div>
+    -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex'
 import Login from '@/components/Login.vue'
-
-import RegisterMarket from '@/components/RegisterMarket.vue'
-import CreateSale from '@/components/CreateSale.vue'
-import CancelSale from '@/components/CancelSale.vue'
+import AccountDropdown from '@/components/AccountDropdown.vue'
 
 export default {
   name: 'Home',
   components: {
     Login,
-    RegisterMarket,
-    CreateSale,
-    CancelSale,
+    AccountDropdown,
   },
   data () {
     return {
       wax: ""
     }
   },
-  methods: {
-    setWax: function () {
-      console.log(this.$store.getters.getWax)
-      this.wax = this.$store.getters.getWax
-    },
-    clearWax: function () {
-      this.wax = ""
-    }
-  },
+  computed: {
+    ...mapGetters([
+      'getWax'
+    ])
+  }
 }
 </script>
 
