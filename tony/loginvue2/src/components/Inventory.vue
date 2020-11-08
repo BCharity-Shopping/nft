@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{ account_name }} Inventory</p>
     <ApolloQuery
     :query="require('../graphql/getAccountInventory.gql')"
     :variables="{owner}"

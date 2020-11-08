@@ -1,8 +1,8 @@
 <template>
   <div class="profile">
   <div>
-    <div v-if='wax!=""'>
-    <h2>{{ wax.userAccount }}</h2>
+    <div v-if='this.getWax!=""'>
+    <h2>{{ this.getWax.userAccount }}</h2>
     <b-tabs class="tab" v-model="tabIndex" content-class="profile-tabs">
       <b-tab @click="setInventoryTab" title="Inventory"><Inventory :account_name="account_name"/></b-tab>
       <b-tab @click="setSalesTab" title="Active Sales"><ActiveSales :account_name="account_name"/></b-tab>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Inventory from '@/components/Inventory.vue'
 import ActiveSales from '@/components/ActiveSales.vue'
 
@@ -29,7 +30,6 @@ export default {
   data () {
     return {
       tabIndex: 0,
-      wax: "",
     }
   },
   watch: {
@@ -44,8 +44,7 @@ export default {
     }
   },
   mounted () {
-    this.wax = this.$store.getters.getWax
-    if (this.wax == "") {
+    if (this.getWax == "") {
       this.$router.push('/explorer/account/'+ this.account_name)
     }
     if(this.tab == "inventory") {
@@ -67,6 +66,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'getWax'
+    ]),
+  }
 }
 </script>
 
