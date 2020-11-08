@@ -12,6 +12,7 @@
     "apollo:start": "vue-cli-service apollo:start"
   },
   "dependencies": {
+    "@waxio/waxjs": "^0.0.13",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "graphql-type-json": "^0.2.1",
@@ -53,20 +54,7 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "rules": {
-      "graphql/template-strings": [
-        "error",
-        {
-          "env": "literal",
-          "projectName": "app",
-          "schemaJsonFilepath": "node_modules/.temp/graphql/schema.json"
-        }
-      ]
-    },
-    "plugins": [
-      "graphql"
-    ]
+    }
   },
   "browserslist": [
     "> 1%",
