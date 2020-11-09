@@ -16,7 +16,7 @@ class salesAPI extends DataSource{
           });
           
           
-        var info = await fetch({
+        var infoA = await fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
                        market_contract
@@ -30,11 +30,9 @@ class salesAPI extends DataSource{
             return res.data.atomicmarket_sales;
         })
         var infoObj = {};
-            for ( var index in info ) {
-                if ( info[index].Status == "Valid" ) { 
-                     infoObj[index] = info[index]; 
-                } 
-            }
+            for (var index in infoA) {
+                infoObj = infoA[index];
+            };
             console.log(infoObj);
         return {
             market_contract:infoObj.market_contract,
