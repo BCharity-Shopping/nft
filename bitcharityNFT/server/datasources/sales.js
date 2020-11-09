@@ -16,7 +16,7 @@ class salesAPI extends DataSource{
           });
           
           
-        var info=await fetch({
+        var infoA = await fetch({
             query: `query atomicmarket_sales{
                     atomicmarket_sales{
                        market_contract
@@ -29,14 +29,16 @@ class salesAPI extends DataSource{
             //console.log(res.data);
             return res.data.atomicmarket_sales;
         })
-        //var info=fetch;
-        console.log(info);
+        var infoObj = {};
+            for (var index in infoA) {
+                infoObj = infoA[index];
+            };
+            console.log(infoObj);
         return {
-            
-            market_contract:info[0].market_contract,
-            assets_contract:info[0].assets_contract,
-            listing_symbol:info[0].listing_symbol,
-            offer_id:info[0].offer_id
+            market_contract:infoObj.market_contract,
+            assets_contract:infoObj.assets_contract,
+            listing_symbol:infoObj.listing_symbol,
+            offer_id:infoObj.offer_id
         }
         
         //console.log(info);
