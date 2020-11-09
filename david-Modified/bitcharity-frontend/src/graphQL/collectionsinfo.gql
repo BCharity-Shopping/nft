@@ -1,0 +1,5 @@
+query collectionInfo($owner: String!) {
+  atomicassets_assets(where: {owner: {_eq: $owner}}) {
+    collection_name
+  }
+}
