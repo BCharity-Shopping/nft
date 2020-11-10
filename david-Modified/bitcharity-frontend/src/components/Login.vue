@@ -43,8 +43,8 @@ export default{
     },
     async login() {
       this.wax = new waxjs.WaxJS('https://wax.greymass.com', null, null, false)
-      console.log("logging in through WCW")
       try {
+        console.log("logging in through WCW")
         this.userAccount = await this.wax.login()
         this.$store.commit('storeWax', this.wax)
       }
