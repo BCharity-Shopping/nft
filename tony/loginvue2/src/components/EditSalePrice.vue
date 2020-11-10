@@ -1,35 +1,39 @@
 <template>
   <div>
-      <input v-model="sale_id" placeholder="Sale ID">
-      <input v-model="asset_id" placeholder="Asset ID">
-      <input v-model="price" placeholder="Listing Price">
-      <b-button @click="createSale">Create Sale</b-button>
+    <p class="heading">Listing Price</p>
+    <input v-model="price">
+    <p class="heading">Fee Summary</p>
+    <p>Collection Fee: {{ this.collectionFee * 100 }}%</p>
+    <p>Maker Marketplace Fee: {{ this.makerMarketPlaceFee * 100 }}%</p>
+    <p>Taker Marketplace Fee: {{ this.takerMarketPlaceFee * 100 }}%</p>
+    <p>You will receive {{ this.amount }} WAX</p>
+    <b-button id="confirm-button" @click="editSale">Edit Price</b-button>
   </div>
 </template>
 
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'CreateSale',
-  props: ['wax','saleID', 'assetID'],
+  name: 'EditSalePrice',
+  props: ['listingPrice', 'saleID', 'assetID', 'collectionFee'],
   data() {
     return {
-      sale_id: "",
-
-      asset_id: "",
-      price: "",
+      price: this.listingPrice,
       settlement_symbol: "8,WAX",
       maker_marketplace: "l5oaw.wam",
 
-      sender: this.wax.userAccount,
       recipient: "atomicmarket",
       recipient_asset_ids: [],
-      memo: "sale"
+      memo: "sale",
+
+      makerMarketPlaceFee: 0.01,
+      takerMarketPlaceFee: 0.01
     }
   },
   computed: {
-    listing_price: function () {
-      var p = this.price
+    listing_price: function() {
+      var p = String(this.price)
       if(p.includes('.')){
         var decimals = p.split('.')[1].length
         for(var i=0; i<(8-decimals); i++){
@@ -40,36 +44,47 @@ export default {
         p = p + ".00000000"
       }
       return p
-    }
+    },
+    amount: function() {
+      console.log("price: " + this.price)
+      return (this.price * (1 - Number(this.collectionFee) - Number(this.makerMarketPlaceFee) - Number(this.takerMarketPlaceFee)))
+    },
+    ...mapGetters([
+      'getWax'
+    ])
   },
   methods: {
-    async createSale() {
-      if(!this.wax.api) {
+    async editSale() {
+      console.log(this.listingPrice)
+      console.log(this.listing_price)
+      console.log(this.assetID)
+      console.log(this.saleID)
+      if(!this.getWax.api) {
         return console.log("Need to Login first")
       }
       try {
-        this.result = await this.wax.api.transact({
+        this.result = await this.getWax.api.transact({
           actions: [{
             account: 'atomicmarket',
             name: 'cancelsale',
             authorization: [{
-              actor: this.wax.userAccount,
+              actor: this.getWax.userAccount,
               permission: 'active',
             }],
             data: {
-              sale_id: [Number(this.sale_id)],
+              sale_id: [Number(this.saleID)],
             },
           },
           {
             account: 'atomicmarket',
             name: 'announcesale',
             authorization: [{
-              actor: this.wax.userAccount,
+              actor: this.getWax.userAccount,
               permission: 'active',
             }],
             data: {
-              seller: this.wax.userAccount,
-              asset_ids: [Number(this.asset_id)],
+              seller: this.getWax.userAccount,
+              asset_ids: [Number(this.assetID)],
               listing_price: this.listing_price + " WAX",
               settlement_symbol: this.settlement_symbol,
               maker_marketplace: this.maker_marketplace,
@@ -79,13 +94,13 @@ export default {
             account: 'atomicassets',
             name: 'createoffer',
             authorization: [{
-              actor: this.wax.userAccount,
+              actor: this.getWax.userAccount,
               permission: 'active',
             }],
             data: {
-              sender: this.wax.userAccount,
+              sender: this.getWax.userAccount,
               recipient: this.recipient,
-              sender_asset_ids: [Number(this.asset_id)],
+              sender_asset_ids: [Number(this.assetID)],
               recipient_asset_ids: this.recipient_asset_ids,
               memo: this.memo
             },
@@ -95,6 +110,7 @@ export default {
           expireSeconds: 30
         })
         console.log(this.result)
+        this.$emit('edit-reload')
       }
       catch (e) {
         this.result = e
@@ -107,14 +123,12 @@ export default {
 
 
 <style scoped>
-.login-block {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#confirm-button {
+  background-color: orange;
 }
 
-.login-button{
-  font-weight: bold;
-  color: #2c3e50;
+.heading {
+  padding-top: 30px;
+  font-size: 20px;
 }
 </style>

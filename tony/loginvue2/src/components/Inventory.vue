@@ -27,8 +27,8 @@
                     <img v-bind:src="ipfs + asset.immutable_data.img" width="100%" height="100%">
                   </div>
                 </div>
-                <div class="mint-num">
-                  {{asset.atomicassets_asset_mints.template_mint}}
+                <div class="mint-num" v-if="asset.atomicassets_asset_mints!=null">
+                  #{{asset.atomicassets_asset_mints.template_mint}}
                 </div>
                 <div class="col-name">
                   {{asset.collection_name}}
@@ -106,12 +106,13 @@ export default {
 .card {
   margin-bottom : 10px;
   width: 250px;
-  height: 350px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
+  background-color: white;
 }
 
 .inventory {
@@ -161,8 +162,9 @@ export default {
 }
 
 .asset-img-2 {
-  width: 100%;
-  height: 100%;
+  width: 100rem;
+  max-width: 200px;
+  height: 200px;
 }
 
 .asset-img {

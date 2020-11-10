@@ -1,36 +1,31 @@
 <template>
   <div>
-      <input v-model="sale_id" placeholder="Sale ID">
-      <b-button @click="cancelSale">Cancel Sale</b-button>
+    <b-button id="cancel-button" @click="cancelSale">Cancel Sale</b-button>
   </div>
 </template>
 
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'CancelSale',
-  props: ['wax','saleID'],
-  data() {
-    return {
-      sale_id: ""
-    }
-  },
+  props: ['saleID'],
   methods: {
     async cancelSale() {
-      if(!this.wax.api) {
+      if(!this.getWax.api) {
         return console.log("Need to Login first")
       }
       try {
-        this.result = await this.wax.api.transact({
+        this.result = await this.getWax.api.transact({
           actions: [{
             account: 'atomicmarket',
             name: 'cancelsale',
             authorization: [{
-              actor: this.wax.userAccount,
+              actor: this.getWax.userAccount,
               permission: 'active',
             }],
             data: {
-              sale_id: [Number(this.sale_id)],
+              sale_id: [Number(this.saleID)],
             },
           }]
         }, {
@@ -38,26 +33,25 @@ export default {
           expireSeconds: 30
         })
         console.log(this.result)
+        console.log(this.result.transaction_id)
       }
       catch (e) {
         this.result = e
         console.log(e)
       }
     },
+  },
+  computed: {
+    ...mapGetters([
+      'getWax'
+    ])
   }
 }
 </script>
 
 
 <style scoped>
-.login-block {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.login-button{
-  font-weight: bold;
-  color: #2c3e50;
+#cancel-button{
+  background-color: red;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :key="aqKey">
     <ApolloQuery
     :query="require('../graphql/getAccountSales.gql')"
     :variables="{seller:seller1, state:state1}"
@@ -42,8 +42,8 @@
                                 <img v-bind:src="ipfs + asset.immutable_data.img" width="100%" height="100%">
                               </div>
                             </div>
-                            <div class="mint-num">
-                              {{asset.atomicassets_asset_mints.template_mint}}
+                            <div class="mint-num" v-if="asset.atomicassets_asset_mints!=null">
+                              #{{asset.atomicassets_asset_mints.template_mint}}
                             </div>
                             <div class="col-name">
                               {{asset.collection_name}}
@@ -58,7 +58,12 @@
                               {{sale.listing_price/100000000}} WAX
                             </div>
                             <b-button class="button-details" :to="`/explorer/asset/${asset.asset_id}`">Details</b-button>
-                            <b-button class="button-edit">Edit</b-button>
+                            <b-button class="button-edit" @click="showManageSaleModal(
+                              sale.sale_id, 
+                              sale.listing_price, 
+                              sale.atomicmarket_token.token_precision, 
+                              sale.atomicassets_offer.atomicassets_offers_assets[0].asset_id,
+                              sale.collection_fee)">Edit</b-button>
                           </div>
                         </div>
                       </div>
@@ -74,24 +79,65 @@
         <div v-else class="no-result apollo">No result :(</div>
       </template>
     </ApolloQuery>
+    <b-modal ref='edit-sale-modal' hide-footer title="Manage Sale">
+      <div class="d-block">
+      </div>
+      <CancelSale :saleID="saleID"/>
+      <hr>
+      <EditSalePrice v-on:edit-reload="reload" :listingPrice="listingPrice" :saleID="saleID" :assetID="assetID" :collectionFee="collectionFee"/>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import CancelSale from '@/components/CancelSale.vue'
+import EditSalePrice from '@/components/EditSalePrice.vue'
 
 export default {
   name: 'ActiveSales',
   props: ['account_name'],
+  components: {
+    CancelSale,
+    EditSalePrice,
+  },
   data () {
     return {
       limit: 10,
       seller1: this.account_name,
       state1: 1,
       ipfs: "http://ipfs.io/ipfs/",
-      aid: 762451
+      saleID: "",
+      price: "",
+      tokenPrecision: "",
+      assetID: "",
+      collectionFee: "",
+      aqKey: 0,
     }
   },
-  
+  methods: {
+    showManageSaleModal(sale_id, listing_price, token_precision, asset_id, collection_fee) {
+      this.saleID = sale_id
+      this.price = listing_price / (Math.pow(10, token_precision))
+      this.tokenPrecision = token_precision
+      this.assetID = asset_id
+      this.collectionFee = collection_fee
+      this.$refs['edit-sale-modal'].show()
+    },
+    reload() {
+      this.aqKey += 1
+      console.log("edit reload")
+    }
+  },
+  computed: {
+    listingPrice: function () {
+      if(this.price!="") {
+        return this.price
+      }
+      else {
+        return 0
+      }
+    }
+  }
 }
 </script>
 
@@ -99,12 +145,13 @@ export default {
 .card {
   margin-bottom : 10px;
   width: 250px;
-  height: 350px;
+  height: 400px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
+  background-color: white;
 }
 
 .sales {
@@ -148,13 +195,22 @@ export default {
 }
 
 .asset-img-2 {
-  width: 100%;
-  height: 100%;
+  width: 100rem;
+  max-width: 200px;
+  height: 200px;
 }
 
 .asset-img {
   width: 80%;
   height: 50%;
+}
+
+#cancel-button {
+  background-color: red;
+}
+
+#confirm-button {
+  background-color: orange;
 }
 
 </style>
