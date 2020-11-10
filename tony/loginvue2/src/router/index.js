@@ -30,7 +30,7 @@ const routes = [
     component: () => import('../views/Asset.vue')
   },
   {
-    path: '/market',
+    path: '/market/sale/:sale_id',
     name: 'Market',
     component: () => import('../views/Market.vue')
   },

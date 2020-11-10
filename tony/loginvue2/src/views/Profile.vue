@@ -2,11 +2,17 @@
   <div class="profile">
   <div>
     <div v-if='this.getWax!=""'>
-    <h2>{{ this.getWax.userAccount }}</h2>
-    <b-tabs class="tab" v-model="tabIndex" content-class="profile-tabs">
-      <b-tab @click="setInventoryTab" title="Inventory"><Inventory :account_name="account_name"/></b-tab>
-      <b-tab @click="setSalesTab" title="Active Sales"><ActiveSales :account_name="account_name"/></b-tab>
-    </b-tabs>
+      <h2>{{ this.getWax.userAccount }}</h2>
+      <a class="bloks-link" :href="bloksURL" target="_blank">View on Bloks</a>
+      <b-tabs class="tab" v-model="tabIndex" content-class="profile-tabs">
+        <b-tab @click="setInventoryTab" title="Inventory"><Inventory :account_name="account_name"/></b-tab>
+        <b-tab @click="setSalesTab" title="Active Sales"><ActiveSales :account_name="account_name"/></b-tab>
+        <b-tab title="Sold"></b-tab>
+        <b-tab title="Bought"></b-tab>
+        <b-tab title="Collections"></b-tab>
+        <b-tab title="Watchlist"></b-tab>
+        <b-tab title="Friends"></b-tab>
+      </b-tabs>
     </div>
     <div v-else>
       <p>Please log in first</p>
@@ -30,6 +36,7 @@ export default {
   data () {
     return {
       tabIndex: 0,
+      bloksBaseURL: "https://wax.bloks.io/account/"
     }
   },
   watch: {
@@ -70,6 +77,9 @@ export default {
     ...mapGetters([
       'getWax'
     ]),
+    bloksURL: function() {
+      return this.bloksBaseURL + this.getWax.userAccount
+    }
   }
 }
 </script>
@@ -78,8 +88,15 @@ export default {
 <style scoped>
 .profile {
   margin-left: 15%;
-  justify-content: center;
-  align-content: center;
   max-width: 70%;
+  color: white;
+}
+
+.bloks-link {
+  color: orange;
+}
+
+.tab {
+  font-size: 15px;
 }
 </style>

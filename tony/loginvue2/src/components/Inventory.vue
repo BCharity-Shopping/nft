@@ -112,7 +112,11 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  background-color: white;
+  background-color: #666699;
+  box-shadow: 0px 0px 10px 1px #262626;
+  margin-top: 10px;
+  color: white;
+  border-radius: 15px;
 }
 
 .inventory {
@@ -126,18 +130,23 @@ export default {
   margin-top: 3%;
   width: 40%;
   height: 10%;
+  background-color: #ff8000;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 
 .button-more {
   margin-top: 3%;
   width: 40%;
   height: 10%;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 
 .button-list {
-  margin-top: 3%;
+  margin-top: 5%;
   width: 90%;
   height: 10%;
+  background-color: #2eb82e;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 
 .col-name {
@@ -168,8 +177,9 @@ export default {
 }
 
 .asset-img {
+  margin-top: 3%;
   width: 80%;
-  height: 50%;
+  height: 53%;
 }
 
 </style>

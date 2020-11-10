@@ -46,7 +46,7 @@ export default {
       return p
     },
     amount: function() {
-      console.log("price: " + this.price)
+      //console.log("price: " + this.price)
       return (this.price * (1 - Number(this.collectionFee) - Number(this.makerMarketPlaceFee) - Number(this.takerMarketPlaceFee)))
     },
     ...mapGetters([
@@ -55,10 +55,6 @@ export default {
   },
   methods: {
     async editSale() {
-      console.log(this.listingPrice)
-      console.log(this.listing_price)
-      console.log(this.assetID)
-      console.log(this.saleID)
       if(!this.getWax.api) {
         return console.log("Need to Login first")
       }

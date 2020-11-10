@@ -57,13 +57,14 @@
                             <div class="sale-price">
                               {{sale.listing_price/100000000}} WAX
                             </div>
-                            <b-button class="button-details" :to="`/explorer/asset/${asset.asset_id}`">Details</b-button>
-                            <b-button class="button-edit" @click="showManageSaleModal(
-                              sale.sale_id, 
-                              sale.listing_price, 
-                              sale.atomicmarket_token.token_precision, 
-                              sale.atomicassets_offer.atomicassets_offers_assets[0].asset_id,
-                              sale.collection_fee)">Edit</b-button>
+                            <div class="detail-edit">
+                            <b-button class="button-details" :to="`/market/sale/${sale.sale_id}`">Details</b-button>
+                            <EditSaleModal 
+                              :listingPrice="sale.listing_price/(Math.pow(10,sale.atomicmarket_token.token_precision))" 
+                              :saleID="sale.sale_id" 
+                              :assetID="sale.atomicassets_offer.atomicassets_offers_assets[0].asset_id" 
+                              :collectionFee="sale.collection_fee"/>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -79,26 +80,18 @@
         <div v-else class="no-result apollo">No result :(</div>
       </template>
     </ApolloQuery>
-    <b-modal ref='edit-sale-modal' hide-footer title="Manage Sale">
-      <div class="d-block">
-      </div>
-      <CancelSale :saleID="saleID"/>
-      <hr>
-      <EditSalePrice v-on:edit-reload="reload" :listingPrice="listingPrice" :saleID="saleID" :assetID="assetID" :collectionFee="collectionFee"/>
-    </b-modal>
+    
   </div>
 </template>
 
 <script>
-import CancelSale from '@/components/CancelSale.vue'
-import EditSalePrice from '@/components/EditSalePrice.vue'
+import EditSaleModal from '@/components/EditSaleModal.vue'
 
 export default {
   name: 'ActiveSales',
   props: ['account_name'],
   components: {
-    CancelSale,
-    EditSalePrice,
+    EditSaleModal,
   },
   data () {
     return {
@@ -115,14 +108,6 @@ export default {
     }
   },
   methods: {
-    showManageSaleModal(sale_id, listing_price, token_precision, asset_id, collection_fee) {
-      this.saleID = sale_id
-      this.price = listing_price / (Math.pow(10, token_precision))
-      this.tokenPrecision = token_precision
-      this.assetID = asset_id
-      this.collectionFee = collection_fee
-      this.$refs['edit-sale-modal'].show()
-    },
     reload() {
       this.aqKey += 1
       console.log("edit reload")
@@ -145,13 +130,17 @@ export default {
 .card {
   margin-bottom : 10px;
   width: 250px;
-  height: 400px;
+  height: 360px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  background-color: white;
+  background-color: #666699;
+  box-shadow: 0px 0px 10px 1px #262626;
+  margin-top: 10px;
+  color: white;
+  border-radius: 15px;
 }
 
 .sales {
@@ -162,15 +151,18 @@ export default {
 }
 
 .button-details {
-  margin-top: 3%;
-  width: 40%;
-  height: 10%;
+  margin-top: 10px;
+  width: 90px;
+  height: 40px;
+  background-color: #ff8000;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 
-.button-edit {
-  margin-top: 3%;
-  width: 40%;
-  height: 10%;
+.detail-edit {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .col-name {
@@ -201,8 +193,9 @@ export default {
 }
 
 .asset-img {
-  width: 80%;
-  height: 50%;
+  margin-top: 3%;
+  width: 100;
+  height: 60%;
 }
 
 #cancel-button {

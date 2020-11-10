@@ -1,10 +1,12 @@
 <template>
-  <b-dropdown class="account-dropdown" :text="this.getWax.userAccount">
-    <b-dropdown-item :to="{ name: 'Profile', params: { account_name:this.getWax.userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
-    <b-dropdown-item :to="{ name: 'Profile', params: { account_name:this.getWax.userAccount, tab:'sales' }}">My Sales</b-dropdown-item>
-    <b-dropdown-item>Notify Me</b-dropdown-item>
-    <b-dropdown-item @click="logout">Logout</b-dropdown-item>
-  </b-dropdown>
+  <div class="dropdown">
+    <b-dropdown class="account-dropdown" :text="this.getWax.userAccount">
+      <b-dropdown-item :to="{ name: 'Profile', params: { account_name:this.getWax.userAccount, tab:'inventory' }}">Inventory</b-dropdown-item>
+      <b-dropdown-item :to="{ name: 'Profile', params: { account_name:this.getWax.userAccount, tab:'listings' }}">My Sales</b-dropdown-item>
+      <b-dropdown-item>Notify Me</b-dropdown-item>
+      <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+    </b-dropdown>
+  </div>
 </template>
 
 <script>
@@ -26,3 +28,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> | 
-      <router-link to="/explorer">Explorer</router-link>  |
-      <router-link to="/market">Market</router-link>  |
-      <router-link to="/trading">Trading</router-link>  |
-      <router-link to="/creator">Creator</router-link>  |
+      <router-link to="/">Home</router-link> |
+      <router-link to="/explorer">Explorer</router-link> |
+      <router-link to="/market">Market</router-link> |
+      <router-link to="/trading">Trading</router-link> |
+      <router-link to="/creator">NFT Creator</router-link> |
       <div v-if='this.getWax==""'>
         <Login/>
       </div>
@@ -57,8 +57,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: white;
+  background-color: #3d3d5c;
+  color: #b3b4c5;
 }
 
 #nav {
@@ -67,14 +67,19 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-size: 30px;
+  color: #b3b4c5;
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ffffff;
+}
+
+html {
+  background-color: #3d3d5c;
 }
 </style>
