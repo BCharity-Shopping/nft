@@ -27,6 +27,16 @@ const router = new VueRouter({
       component: ()=>import("./../components/CreateCollection.vue")
     },
     {
+      path:'/creator/:collectionname',
+      name: "collectionInfo",
+      component: ()=>import("./../components/CollectionInfo.vue")
+    },
+    {
+      path:'/creator/:collectionname/createSchema',
+      name:"createSchema",
+      component: ()=>import("./../components/CreateSchema.vue")
+    },
+    {
       path: '/login/',
       name: 'login',
       component: ()=>import("./../components/Login.vue")

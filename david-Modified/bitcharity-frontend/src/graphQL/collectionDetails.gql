@@ -1,0 +1,9 @@
+query collectionInfo($collection_name: String) {
+  atomicassets_collections(where: {collection_name: {_eq: $collection_name}}) {
+    collection_name
+    market_fee
+    authorized_accounts
+    notify_accounts
+    data
+  }
+}
