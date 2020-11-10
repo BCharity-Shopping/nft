@@ -27,6 +27,11 @@ const router = new VueRouter({
       component: ()=>import("./../components/CreateCollection.vue")
     },
     {
+      path:'/NFT/creator/:id',
+      name: 'CollectionInfo',
+      component: ()=>import("./../components/CollectionInfo.vue")
+    },
+    {
       path: '/login/',
       name: 'login',
       component: ()=>import("./../components/Login.vue")

@@ -4,13 +4,16 @@
       <v-if>
         <p>this is {{getWax.userAccount}}</p>
       </v-if>
-      <ApolloQuery :query="require('../graphQL/collectionsinfo.gql')" :variables="{owner:getWax.userAccount}">
-        <template v-slot="{ result: { data } }">
-          <div v-for="(item, index) in data.atomicassets_assets" :key="item.collection_name">
-            {{ index}}: {{item.collection_name}}
-          </div>
-        </template>
-        </ApolloQuery> 
+      
+        <ApolloQuery :query="require('../graphQL/collectionsinfo.gql')" :variables="{author:'kdoaw.wam'}">
+          <template v-slot="{ result: { data } }">
+            <p>{{ data }}</p>
+            <div v-for="(item, index) in data.atomicassets_collections" :key="item.collection_name">
+              {{ index}}: {{item.collection_name}}
+              <button class="btn btn-primary" @click="jump(item.collection_name)">View Collections</button>&nbsp;&nbsp;
+            </div>
+          </template>
+          </ApolloQuery> 
         <button @click="$router.push({path:'/NFT/creator'})">Create</button>
   </div>
 </template>
