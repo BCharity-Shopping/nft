@@ -32,7 +32,10 @@ export default {
     computed: {
       ...mapGetters([
         'getWax'
-      ])
+      ]),
+      data:function(){
+          
+      }
     },
     methods:{
        async CreateCollection(){
