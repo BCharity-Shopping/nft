@@ -27,17 +27,30 @@ export default {
       ...mapGetters([
         'getWax'
       ]),
-      collectnname:function(){
+      collectionname:function(){
           return this.collectionname
+      },
+      schemaFormat:function(){
+          var schemaformat=[
+              {
+                "name":"name",
+                "type":"string"
+              },
+              {
+                  "name":"img",
+                  "type":"image"
+              }
+          ];
+          return this.schemaformat;
       }
     },
     methods:{
        async CreateSchema(){
-            if(!this.wax.api){
+            if(!this.getWax.api){
                return console.log("Need to login first")
            }
            try {
-               this.result=await this.wax.api.transact({
+               this.result=await this.getWax.api.transact({
                    actions:[{
                     account: 'atomicassets',
                     name: 'createschema',
@@ -46,9 +59,9 @@ export default {
                         permission:'active',
                     }],
                     data: {
-                        authorized_creator:this.wax.userAccount,
+                        authorized_creator:this.getWax.userAccount,
                         collection_name:this.collectionname,
-                        Schema_name:this.Schema_name
+                        Schema_name:this.schemaFormat,
                     },
                    }]
                },
