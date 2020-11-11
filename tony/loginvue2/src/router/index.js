@@ -30,9 +30,14 @@ const routes = [
     component: () => import('../views/Asset.vue')
   },
   {
-    path: '/market/sale/:sale_id',
+    path: '/market/',
     name: 'Market',
     component: () => import('../views/Market.vue')
+  },
+  {
+    path: '/market/sale/:sale_id',
+    name: 'Sale',
+    component: () => import('../views/Market.vue') //todo: add Sale.vue page
   },
   {
     path: '/trading',

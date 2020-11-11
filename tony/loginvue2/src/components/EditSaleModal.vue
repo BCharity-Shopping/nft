@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 #edit-button {
-  background-color: #ff3300;
+  background-color: #ff5100;
   box-shadow: 0px 0px 1px 1px #262626;
   margin-top: 10px;
   width: 90px;

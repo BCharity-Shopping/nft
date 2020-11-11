@@ -50,7 +50,31 @@
                   <b-dropdown-item>Back Token</b-dropdown-item>
                   <b-dropdown-item>Burn</b-dropdown-item>
                 </b-dropdown>
-                <b-button class="button-list">List on Market</b-button>
+                <ApolloQuery
+                  :query="require('../graphql/getAssetBySale.gql')"
+                  :variables="{asset_id:asset.asset_id, state:state1}"
+                  >
+                    <template v-slot="{ result: { loading, error, data } }">
+                      <!-- Loading -->
+                      <div v-if="loading" class="loading apollo">Loading...</div>
+
+                      <!-- Error -->
+                      <div v-else-if="error" class="error apollo">An error occurred</div>
+
+                      <!-- Result -->
+                      <div v-else-if="data" class="result apollo">
+
+                        <div class="sales">
+                          <div v-if="data.atomicmarket_sales.length== 0">
+                            <CreateSaleModal :assetID="asset.asset_id" :collectionFee="asset.atomicassets_collection.market_fee"/>
+                          </div>
+                          <div v-else>
+                            <CancelSale :saleID="data.atomicmarket_sales[0].sale_id"/>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                </ApolloQuery>
               </div>            
             </div>
           </div>
@@ -63,42 +87,24 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import CreateSaleModal from '@/components/CreateSaleModal.vue'
+import CancelSale from '@/components/CancelSale.vue'
 
 export default {
   name: 'Inventory',
   props: ['account_name'],
+  components: {
+    CreateSaleModal,
+    CancelSale,
+  },
   data () {
     return {
       limit: 10,
       owner: this.account_name,
-      ipfs: "http://ipfs.io/ipfs/"
+      ipfs: "http://ipfs.io/ipfs/",
+      state1: 1
     }
   },
-  apollo: {
-    atomicassets_assets: gql`
-      query {
-        atomicassets_assets (where: {owner: {_eq: "l5oaw.wam"}}){
-          asset_id
-          atomicassets_template {
-            immutable_data
-            max_supply
-            issued_supply
-            burnable
-            transferable
-          }
-          owner
-          template_id
-          schema_name
-          collection_name
-          atomicassets_assets_backed_tokens {
-            token_symbol
-            amount
-          }
-        }
-      }
-    `
-  }
 }
 </script>
 
@@ -112,10 +118,10 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  background-color: #666699;
+  /*background-color: #666699;*/
   box-shadow: 0px 0px 10px 1px #262626;
   margin-top: 10px;
-  color: white;
+  color: grey;
   border-radius: 15px;
 }
 
@@ -138,14 +144,6 @@ export default {
   margin-top: 3%;
   width: 40%;
   height: 10%;
-  box-shadow: 0px 0px 1px 1px #262626;
-}
-
-.button-list {
-  margin-top: 5%;
-  width: 90%;
-  height: 10%;
-  background-color: #2eb82e;
   box-shadow: 0px 0px 1px 1px #262626;
 }
 

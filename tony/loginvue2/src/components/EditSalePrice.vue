@@ -120,7 +120,8 @@ export default {
 
 <style scoped>
 #confirm-button {
-  background-color: orange;
+  background-color: #ff5100;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 
 .heading {
