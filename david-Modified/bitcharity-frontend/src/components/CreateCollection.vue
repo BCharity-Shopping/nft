@@ -58,7 +58,7 @@ export default {
                     "key":"description",
                     "value":[
                         "string",
-                        this.Collection_description
+                        this.Collection_Description
                     ]
                 })
             }
@@ -77,17 +77,16 @@ export default {
                     name: 'createcol',
                     authorization: [{
                         actor: this.getWax.userAccount,
-                        permission:'active'
+                        permission:'active',
                     }],
                     data: {
                         allow_notify:true,
                         author:this.getWax.userAccount,
-                        authorized_accounts:[this.authorized_accounts],
+                        authorized_accounts:this.authorized_accounts,
                         collection_name:this.Collection_name,
                         data:this.data,
                         market_fee:this.market_fee,
-                        notified_accounts:[this.notified_accounts],
-                        Collection_Description:this.Collection_Description
+                        notify_accounts:this.notified_accounts,
                     },
                    }]
                },{
