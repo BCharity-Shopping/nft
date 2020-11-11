@@ -136,10 +136,10 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  background-color: #666699;
+  /*background-color: #666699;*/
   box-shadow: 0px 0px 10px 1px #262626;
   margin-top: 10px;
-  color: white;
+  color: grey;
   border-radius: 15px;
 }
 

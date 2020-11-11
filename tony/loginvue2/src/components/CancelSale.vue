@@ -53,5 +53,7 @@ export default {
 <style scoped>
 #cancel-button{
   background-color: red;
+  margin-top: 10px;
+  box-shadow: 0px 0px 1px 1px #262626;
 }
 </style>

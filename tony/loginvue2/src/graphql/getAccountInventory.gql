@@ -20,5 +20,8 @@ query atomicassets_assets ($owner: String) {
     atomicassets_asset_mints {
       template_mint
     }
+    atomicassets_collection {
+      market_fee
+    }
   }
 }

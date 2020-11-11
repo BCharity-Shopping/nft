@@ -45,7 +45,7 @@ export default {
       if(val == "inventory") {
         this.tabIndex = 0
       }
-      else if(val == "sales") {
+      else if(val == "listings") {
         this.tabIndex = 1
       }
     }
@@ -57,7 +57,7 @@ export default {
     if(this.tab == "inventory") {
         this.tabIndex = 0
       }
-      else if(this.tab == "sales") {
+      else if(this.tab == "listings") {
         this.tabIndex = 1
       }
   },
@@ -68,8 +68,8 @@ export default {
       }
     },
     setSalesTab: function () {
-      if(this.tab != "sales") {
-        this.$router.push('/profile/' + this.account_name + '/sales')
+      if(this.tab != "listings") {
+        this.$router.push('/profile/' + this.account_name + '/listings')
       }
     }
   },
@@ -89,7 +89,7 @@ export default {
 .profile {
   margin-left: 15%;
   max-width: 70%;
-  color: white;
+  color: grey;
 }
 
 .bloks-link {
