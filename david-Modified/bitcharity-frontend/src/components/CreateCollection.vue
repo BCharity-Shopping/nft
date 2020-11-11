@@ -6,6 +6,7 @@
         <input v-model="Display_name" placeholder="Display name">
         <input v-model="WebURL" placeholder="Web URL">
         <input v-model="Collection_Description" placeholder="Collection Description">
+        <input v-model="market_fee" placeholder="market fee">
         <input v-model="authorized_accounts" placeholder="authorized account ">
         <b-button @click="CreateCollection">Create Collection</b-button>
     </div>
