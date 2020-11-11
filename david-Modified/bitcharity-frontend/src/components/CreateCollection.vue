@@ -34,8 +34,36 @@ export default {
         'getWax'
       ]),
       data:function(){
-          
-      }
+          var dataElement=[
+              {
+                  "key":"name",
+                  "value":[
+                      "string",
+                      this.Display_name
+                  ]
+              }
+            ];
+            if(this.WebURL!=""){
+                dataElement.push({
+                    "key":"url",
+                    "value":[
+                        "string",
+                        this.WebURL
+                    ]
+
+                })
+            }
+            if(this.description!=null){
+                dataElement.push({
+                    "key":"description",
+                    "value":[
+                        "string",
+                        this.description
+                    ]
+                })
+            }
+            return dataElement;
+        }
     },
     methods:{
        async CreateCollection(){
@@ -52,11 +80,13 @@ export default {
                         permission:'active',
                     }],
                     data: {
+                        allow_notify:1,
                         author:this.wax.userAccount,
+                        authorized_accounts:[this.authorized_accounts],
                         collection_name:this.Collection_name,
-                        authorized_accounts:this.authorized_accounts,
-                        notified_accounts:this.notified_accounts,
+                        data:this.data,
                         market_fee:this.market_fee,
+                        notified_accounts:this.notified_accounts,
                         Collection_Description:this.Collection_Description
                     },
                    }]
