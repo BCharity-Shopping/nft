@@ -2,7 +2,7 @@
    <div id="app">
     <Navbar />
      <router-view></router-view>
-    <Login/>
+    <Login />
    </div>
 </template>
 <script>
