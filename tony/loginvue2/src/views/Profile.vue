@@ -36,7 +36,7 @@ export default {
   data () {
     return {
       tabIndex: 0,
-      bloksBaseURL: "https://wax.bloks.io/account/"
+      bloksBaseURL: "https://wax.bloks.io/account/",
     }
   },
   watch: {
@@ -71,7 +71,7 @@ export default {
       if(this.tab != "listings") {
         this.$router.push('/profile/' + this.account_name + '/listings')
       }
-    }
+    },
   },
   computed: {
     ...mapGetters([
@@ -80,7 +80,7 @@ export default {
     bloksURL: function() {
       return this.bloksBaseURL + this.getWax.userAccount
     }
-  }
+  },
 }
 </script>
 

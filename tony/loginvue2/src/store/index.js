@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    wax: ""
+    wax: "",
   },
   mutations: {
     storeWax (state, waxObj) {
@@ -13,7 +13,7 @@ export default new Vuex.Store({
     },
     clearWax (state) {
       state.wax = ""
-    }
+    },
   },
   actions: {
   },

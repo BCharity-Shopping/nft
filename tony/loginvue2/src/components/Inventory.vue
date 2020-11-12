@@ -42,7 +42,7 @@
                 <div class="owner-name">
                   {{asset.owner}}
                 </div>
-                <b-button class="button-details" :to="`/explorer/asset/${asset.asset_id}`">Details</b-button>
+                <b-button class="button-details" variant="info" :to="`/explorer/asset/${asset.asset_id}`">Details</b-button>
                 <b-dropdown class="button-more" text="More">
                   <b-dropdown-item>Transfer</b-dropdown-item>
                   <b-dropdown-item>Create Link</b-dropdown-item>
@@ -136,15 +136,13 @@ export default {
   margin-top: 3%;
   width: 40%;
   height: 10%;
-  background-color: #ff8000;
-  box-shadow: 0px 0px 1px 1px #262626;
+  border-width: 2px;
 }
 
 .button-more {
   margin-top: 3%;
   width: 40%;
   height: 10%;
-  box-shadow: 0px 0px 1px 1px #262626;
 }
 
 .col-name {

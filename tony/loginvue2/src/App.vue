@@ -22,20 +22,23 @@
       <p>Logged In To {{this.getWax.userAccount}}</p>
     </div>
     -->
+    <TransactionStateModal/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import { mapGetters } from 'vuex'
+// @ is an alias to /src
 import Login from '@/components/Login.vue'
 import AccountDropdown from '@/components/AccountDropdown.vue'
+import TransactionStateModal from '@/components/TransactionStateModal.vue'
 
 export default {
   name: 'Home',
   components: {
     Login,
     AccountDropdown,
+    TransactionStateModal,
   },
   data () {
     return {

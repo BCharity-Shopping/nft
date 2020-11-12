@@ -1,8 +1,8 @@
 <template>
-  <div :key="aqKey">
+  <div>
     <ApolloQuery
     :query="require('../graphql/getAccountSales.gql')"
-    :variables="{seller:seller1, state:state1}"
+    :variables="{seller:seller2, state:state1}"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
@@ -58,7 +58,7 @@
                               {{sale.listing_price/100000000}} WAX
                             </div>
                             <div class="detail-edit">
-                            <b-button class="button-details" :to="`/market/sale/${sale.sale_id}`">Details</b-button>
+                            <b-button class="button-details" variant="info" :to="`/market/sale/${sale.sale_id}`">Details</b-button>
                             <EditSaleModal 
                               :listingPrice="sale.listing_price/(Math.pow(10,sale.atomicmarket_token.token_precision))" 
                               :saleID="sale.sale_id" 
@@ -86,7 +86,6 @@
 
 <script>
 import EditSaleModal from '@/components/EditSaleModal.vue'
-
 export default {
   name: 'ActiveSales',
   props: ['account_name'],
@@ -104,25 +103,21 @@ export default {
       tokenPrecision: "",
       assetID: "",
       collectionFee: "",
-      aqKey: 0,
-    }
-  },
-  methods: {
-    reload() {
-      this.aqKey += 1
-      console.log("edit reload")
     }
   },
   computed: {
-    listingPrice: function () {
+    listingPrice: function() {
       if(this.price!="") {
         return this.price
       }
       else {
         return 0
       }
+    },
+    seller2: function() {
+      return this.seller1
     }
-  }
+  },
 }
 </script>
 
@@ -154,8 +149,7 @@ export default {
   margin-top: 10px;
   width: 90px;
   height: 40px;
-  background-color: #ff8000;
-  box-shadow: 0px 0px 1px 1px #262626;
+  border-width: 2px;
 }
 
 .detail-edit {
