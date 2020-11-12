@@ -61,6 +61,9 @@ export default {
             ]
         }
     },
+    created(){
+        this.collectionname=this.$route.params.collectionname
+    },
     watch:{
 
     },
@@ -116,7 +119,7 @@ export default {
                     }],
                     data: {
                         authorized_creator:this.getWax.userAccount,
-                        collection_name:this.collectionName,
+                        collection_name:this.collectionname,
                         schema_format:this.schemaFormat,
                         schema_name:this.Schema_name,
                     },
