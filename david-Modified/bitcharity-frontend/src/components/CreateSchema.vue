@@ -64,9 +64,6 @@ export default {
     created(){
         this.collectionname=this.$route.params.collectionname
     },
-    watch:{
-
-    },
     computed: {
       ...mapGetters([
         'getWax'
@@ -94,10 +91,6 @@ export default {
         },
         removeElement: function(index) {
                     this.rows.splice(index, 1);
-        },
-         setFilename: function(event, row) {
-                    var file = event.target.files[0];
-                    row.file = file
         },
         async CreateSchema(){
             
