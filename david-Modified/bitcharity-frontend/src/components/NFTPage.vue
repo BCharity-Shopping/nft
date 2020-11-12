@@ -2,11 +2,12 @@
   <div>
       <P>My Collections</p>
       
-        <p>this is {{getWax}}</p>
-        <div v-if='this.getWax!=""'>
-          <p>fetch is {{AuthorizedCollectionOnCurrentAccount()}}</p>
+        <p>this is {{this.getWax}}</p>
           <p>fetch something:{{this.fetch}}</p>
-        </div>
+          <div v-for="(item,index) in this.fetch" :key="item.collection_name">
+                {{index}}: {{item.collection_name}}
+              <button class="btn btn-primary" @click="$router.push({name:'collectionInfo',params:{collectionname:item.collection_name}})">Details</button>&nbsp;&nbsp;
+          </div>
 <!--      <div v-if='this.getWax!=""'>
         <ApolloQuery :query="require('../graphQL/collectionsinfo.gql')" :variables="{owner:'kdoaw.wam'}">
           <template v-slot="{ result: { data } }">
@@ -35,30 +36,33 @@ export default {
         fetch:"",
       }
     },
-    created(){
-          },
      computed: {
       ...mapGetters([
         'getWax'
       ]),
     },
-    methods:{
-     async AuthorizedCollectionOnCurrentAccount(){
+    updated(){
         console.log("fetch for"+this.getWax.userAccount);
-        await axios.get('https://wax.api.atomicassets.io/atomicassets/v1/collections'
+        if(this.getWax!=null){
+        this.isFiltering = true;
+        axios.get('https://wax.api.atomicassets.io/atomicassets/v1/collections'
         ,{
           params:{
-            authorized_account:this.getWax.userAccount}
+            authorized_account:this.getWax.userAccount,
+            Accept: 'application/json'
+            }
             }
             )
           .then((resp)=>{
               this.fetch=resp.data.data;
               console.log(this.fetch);
               }
-            )
+            ).catch(error => console.log(error))
+
             return this.fetch;
-          },
+          }
         }
-    }
+}
+    
 
 </script>
