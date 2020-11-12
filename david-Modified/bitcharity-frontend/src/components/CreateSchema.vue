@@ -1,6 +1,7 @@
 <template>
     <div>
         <p>{{getWax}}</p>
+        <P>this is:{{collectionname}}</P>
         <p>Create Schema</p>
         <p>Schema_name</p>
         <input v-model="Schema_name" placeholder="Schema name">
@@ -44,17 +45,20 @@ export default {
         return{
             rows:[],
             title:"",
+            collectionname:"",
             countFirstboxInputID:0,
             countSecondboxInputID:0,
             Schema_name:"",
-            schemaformat:[{
-                "name":"name",
-                "type":"string"
-              },
-              {
-                  "name":"img",
-                  "type":"image"
-              }]
+            schema_format:[
+                {
+                    "name":"name",
+                    "type":"string"
+                },
+                {
+                    "name":"img",
+                    "type":"image"
+                }
+            ]
         }
     },
     watch:{
@@ -68,7 +72,7 @@ export default {
           return this.collectionname
       },
       schemaFormat:function(){
-         return this.schemaformat;
+         return this.schema_format;
       }
     },
     methods:{
@@ -93,11 +97,11 @@ export default {
                     row.file = file
         },
         async CreateSchema(){
-           for(var key in this.rows){
-               this.schemaformat.push({"name":this.rows[key].name,"type":this.rows[key].type})
+            
+            for(var key in this.rows){
+               this.schema_format.push({"name":this.rows[key].name,"type":this.rows[key].type})
            }
-           console.log(this.schemaformat);
-
+            console.log("it is "+this.collectionName);
             if(!this.getWax.api){
                return console.log("Need to login first")
            }
@@ -113,16 +117,14 @@ export default {
                     data: {
                         authorized_creator:this.getWax.userAccount,
                         collection_name:this.collectionName,
-                        schema_format:this.schemaformat,
-                        schema_name:this.Schema_name
+                        schema_format:this.schemaFormat,
+                        schema_name:this.Schema_name,
                     },
                 }]
                },{
                    blocksBehind: 3,
                    expireSeconds: 30
-               })
-               console.log(this.result);
-               console.log("THIS AUTHOR IS "+this.author);
+               });
            }
            catch(e){
                this.result=e
