@@ -1,4 +1,4 @@
-query atomicassets_assets ($asset_id: bigint) {
+query atomicassets_assets ($asset_id: bigint!) {
   atomicassets_assets(where: {asset_id: {_eq: $asset_id}}) {
     asset_id
     atomicassets_template {
