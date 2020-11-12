@@ -1,6 +1,6 @@
 <template>
   <div id="edit-sale">
-    <b-button id="edit-button" @click="showModal">Edit</b-button>
+    <b-button id="edit-button" variant="warning" @click="showModal">Edit</b-button>
     <b-modal ref='edit-sale-modal' hide-footer title="Manage Sale">
       <div class="d-block">
       </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { bus } from '../main.js';
 import CancelSale from '@/components/CancelSale.vue'
 import EditSalePrice from '@/components/EditSalePrice.vue'
 export default {
@@ -25,14 +26,20 @@ export default {
     showModal() {
       this.$refs['edit-sale-modal'].show()
     },
+    hideModal() {
+      this.$refs['edit-sale-modal'].hide()
+    }
   },
+  created () {
+    bus.$on('signing', () => {
+      this.hideModal()
+    })
+  }
 }
 </script>
 
 <style scoped>
 #edit-button {
-  background-color: #ff5100;
-  box-shadow: 0px 0px 1px 1px #262626;
   margin-top: 10px;
   width: 90px;
   height: 40px;

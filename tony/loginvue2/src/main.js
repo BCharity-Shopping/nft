@@ -7,6 +7,8 @@ import router from './router'
 import { createProvider } from './vue-apollo'
 import store from './store'
 
+export const bus = new Vue();
+
 Vue.config.productionTip = false
 
 new Vue({

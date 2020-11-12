@@ -7,12 +7,13 @@
     <p>Maker Marketplace Fee: {{ this.makerMarketPlaceFee * 100 }}%</p>
     <p>Taker Marketplace Fee: {{ this.takerMarketPlaceFee * 100 }}%</p>
     <p>You will receive {{ this.amount }} WAX</p>
-    <b-button id="confirm-button" @click="editSale">Edit Price</b-button>
+    <b-button id="confirm-button" variant="warning" @click="editSale">Edit Price</b-button>
   </div>
 </template>
 
 
 <script>
+import { bus } from '../main.js';
 import { mapGetters } from 'vuex'
 export default {
   name: 'EditSalePrice',
@@ -59,6 +60,7 @@ export default {
         return console.log("Need to Login first")
       }
       try {
+        bus.$emit('signing')
         this.result = await this.getWax.api.transact({
           actions: [{
             account: 'atomicmarket',
@@ -105,12 +107,13 @@ export default {
           blocksBehind: 3,
           expireSeconds: 30
         })
-        console.log(this.result)
-        this.$emit('edit-reload')
+        //console.log(this.result)
+        bus.$emit('createSuccess',this.result.transaction_id)
       }
       catch (e) {
         this.result = e
-        console.log(e)
+        //console.log(e)
+        bus.$emit('createFailed',this.result)
       }
     },
   }
@@ -119,11 +122,6 @@ export default {
 
 
 <style scoped>
-#confirm-button {
-  background-color: #ff5100;
-  box-shadow: 0px 0px 1px 1px #262626;
-}
-
 .heading {
   padding-top: 30px;
   font-size: 20px;

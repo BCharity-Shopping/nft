@@ -1,11 +1,12 @@
 <template>
   <div>
-    <b-button id="cancel-button" @click="cancelSale">Cancel Sale</b-button>
+    <b-button id="cancel-button" variant="danger" @click="cancelSale">Cancel Sale</b-button>
   </div>
 </template>
 
 
 <script>
+import { bus } from '../main.js';
 import { mapGetters } from 'vuex'
 export default {
   name: 'CancelSale',
@@ -16,6 +17,7 @@ export default {
         return console.log("Need to Login first")
       }
       try {
+        bus.$emit('signing')
         this.result = await this.getWax.api.transact({
           actions: [{
             account: 'atomicmarket',
@@ -32,12 +34,14 @@ export default {
           blocksBehind: 3,
           expireSeconds: 30
         })
-        console.log(this.result)
-        console.log(this.result.transaction_id)
+        //console.log(this.result)
+        //console.log(this.result.transaction_id)
+        bus.$emit('createSuccess',this.result.transaction_id)
       }
       catch (e) {
         this.result = e
-        console.log(e)
+        //console.log(e)
+        bus.$emit('createFailed',this.result)
       }
     },
   },
@@ -52,8 +56,6 @@ export default {
 
 <style scoped>
 #cancel-button{
-  background-color: red;
   margin-top: 10px;
-  box-shadow: 0px 0px 1px 1px #262626;
 }
 </style>
