@@ -7,6 +7,15 @@
             </template>
             <button @click="$router.push({path:`/creator/${collectnname}/createSchema`})">CreatSchema</button><br /><br />
         </ApolloQuery> 
+        <ApolloQuery :query="require('../graphQL/collectionSchema.gql')" :variables="{collection_name:collectionname}">
+              {{data}}
+            <template v-slot="{ result: { data } }">
+                <div v-for="(item,index) in data.atomicassets_schemas" :key="item.schema_name">
+                    {{index}}: {{item.schema_name}}
+                    <button class="btn btn-primary" @click="$router.push({path:`/creator/${collectnname}/createSchema/${schema_name}`})">Details</button>&nbsp;&nbsp;
+                </div>
+            </template>
+        </ApolloQuery> 
     </div>
 </template>
 
@@ -34,8 +43,6 @@ export default {
     mounted(){
       this.wax = this.$store.getters.getWax
     },
-    methods:{
-      
-    }
+    
 }
 </script>
