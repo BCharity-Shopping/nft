@@ -1,0 +1,7 @@
+query collectionSchema($schema_name: String){
+  atomicassets_schemas_aggregate(where: {schema_name: {_eq: $schema_name}}) {
+    nodes {
+      format
+    }
+  }
+}
