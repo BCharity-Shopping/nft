@@ -21,7 +21,7 @@
 import { mapGetters } from 'vuex'
 export default {
     name:'SchemaInfo',
-   
+    
     data(){
         return {
             schema_name: "",

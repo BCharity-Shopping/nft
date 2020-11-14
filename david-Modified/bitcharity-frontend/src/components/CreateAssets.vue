@@ -9,26 +9,20 @@
             <template v-slot="{ result: { data } }">
                 {{data.atomicassets_schemas[0].format}}
                 <div v-for="(item) in data.atomicassets_schemas[0].format" :key="item.name">
-                    {{item.name}}:{{item.type}}
+                    <input type="text" value="{{item.name}}">:{{item.type}}
                 </div>
             </template>
         </ApolloQuery>
-        <tr v-for="(row, index) in rows" :key=row.index>
-            <td><input type="text" v-model="row.name"></td>
-            <td><input type="text" v-model="row.type"></td>
-            <td>
-                <a v-on:click="removeElement(index);" style="cursor: pointer">Remove</a>
-            </td>
-        </tr> 
         <b-button @click="CreateAssets">Create Collection</b-button>
     </div>
 </template>
-
 <script>
-
 import { mapGetters } from 'vuex'
-
+import CreateAssetsBox from '.components/'
 export default {
+    components:{
+        CreateAssetsBox
+    },
     data(){
         return {
             collectionname: "",
