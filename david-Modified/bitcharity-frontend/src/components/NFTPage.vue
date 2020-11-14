@@ -25,7 +25,7 @@
 import { mapGetters } from 'vuex'
 import axios from 'axios';
 export default {
-    name:'NFT Assets',
+    name:'NFTPage',
     components:{
 
     },

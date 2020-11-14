@@ -9,10 +9,10 @@
         </ApolloQuery> 
         <ApolloQuery :query="require('../graphQL/collectionSchema.gql')" :variables="{collection_name:collectionname}">
             <template v-slot="{ result: { data } }">
-                {{data}}
+                {{data.atomicassets_schemas}}
                 <div v-for="(item,index) in data.atomicassets_schemas" :key="item.schema_name">
                     {{index}}: {{item.schema_name}}
-                    <button class="btn btn-primary" @click="$router.push({path:`/creator/${collectnname}/schema/${item.schema_name}`})">Details</button>&nbsp;&nbsp;
+                    <button class="btn btn-primary" @click="$router.push({path:`/creator/${collectnname}/schema/${item.schema_name}`})">Create Asset</button>&nbsp;&nbsp;
                 </div>
             </template>
         </ApolloQuery> 
@@ -30,6 +30,7 @@ export default {
         }
     },
     created() {
+      
       this.collectionname = this.$route.params.collectionname;
     },
     computed: {
