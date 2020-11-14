@@ -5,35 +5,70 @@
  */
 
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
-import BottomTab from './Assets/Navigation/BottomTabNav';
-import MyDrawer from './Assets/Navigation/MyDrawer';
-import AsyncStorage from '@react-native-community/async-storage';
-import {persistCache} from 'apollo3-cache-persist';
+import {
+  AppearanceProvider,
+  useColorScheme,
+  Appearance,
+} from 'react-native-appearance';
+import React from 'react';
+import MyDrawer from './src/Navigation/BottomTabNav';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import {inflate} from 'graphql-deduplicator';
+import {ApolloLink, concat} from 'apollo-link';
+import {HttpLink} from 'apollo-link-http';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {StatusBar} from 'react-native';
+import {offsetLimitPagination} from '@apollo/client/utilities';
+import MyDarkTheme from './src/Styles/DarkThemes';
+import MyLightTheme from './src/Styles/LightTheme';
 
-const cache = new InMemoryCache();
+Appearance.getColorScheme();
+const httpLink = new HttpLink({
+  credentials: 'include',
+  uri: 'https://wax.api.atomicassets.io/graphql?deduplicate=1',
+});
+
+const inflateLink = new ApolloLink((operation, forward) => {
+  return forward(operation).map((response) => {
+    return inflate(response);
+  });
+});
 
 const client = new ApolloClient({
-  uri: 'https://wax.api.atomicassets.io/graphql',
-  cache,
-  defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          atomicassets_assets: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
+          //Uncomment this will fix the apollo client out of date warning, but it will break the search functionality
+          // atomicassets_assets: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
+  link: concat(inflateLink, httpLink),
 });
 
 const App = () => {
-  const [loadingCache, setLoadingCache] = useState(true);
-  useEffect(() => {
-    persistCache({
-      cache,
-      storage: AsyncStorage,
-      trigger: 'background',
-    }).then(() => setLoadingCache(false));
-  }, []);
+  const scheme = useColorScheme();
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <MyDrawer />
-      </NavigationContainer>
+      <AppearanceProvider>
+        <NavigationContainer
+          theme={scheme === 'dark' ? MyDarkTheme : MyLightTheme}>
+          <PaperProvider>
+            <StatusBar
+              backgroundColor={scheme === 'dark' ? `#696969` : `#00bfff`}
+              barStyle={scheme === 'dark' ? 'dark-content' : 'light-content'}
+            />
+            <MyDrawer />
+          </PaperProvider>
+        </NavigationContainer>
+      </AppearanceProvider>
     </ApolloProvider>
   );
 };

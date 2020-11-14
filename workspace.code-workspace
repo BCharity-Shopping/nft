@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\Desktop\\res\\mipmap-xxhdpi"
+		},
+		{
+			"path": "..\\Desktop\\res\\mipmap-xxxhdpi"
+		},
+		{
+			"path": "..\\Desktop\\res\\mipmap-hdpi"
+		},
+		{
+			"path": "..\\Desktop\\res\\mipmap-mdpi"
+		},
+		{
+			"path": "..\\Desktop\\res\\mipmap-xhdpi"
+		}
+	],
+	"settings": {}
+}
