@@ -3,4 +3,4 @@ How to run: npx react-native run-android. I used a virtual device via android st
 Refer to link to set up environment: https://reactnative.dev/docs/environment-setup 
 
 
-Bugs: Clicking a card in the search screen and clicking back will go to marketplace screen. Search isn't 100% accurate (I used gte for where) nothing else goes by similar words. 
+Bugs: Clicking a card in the search screen and clicking back will go to marketplace screen. Search isn't 100% accurate (I used gte for where) nothing else goes by similar words. Can not get login with wax to work since React native doesn't support pop outs, according to one developers in the telegram group.
