@@ -31,8 +31,8 @@ export default {
             },
           }]
         }, {
-          blocksBehind: 3,
-          expireSeconds: 30
+          blocksBehind: this.getBlocksBehind,
+          expireSeconds: this.getExpireSeconds
         })
         //console.log(this.result)
         //console.log(this.result.transaction_id)
@@ -47,7 +47,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getWax'
+      'getWax',
+      'getBlocksBehind',
+      'getExpireSeconds',
     ])
   }
 }

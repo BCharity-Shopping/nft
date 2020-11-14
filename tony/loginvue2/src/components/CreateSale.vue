@@ -61,7 +61,9 @@ export default {
       }
     },
     ...mapGetters([
-      'getWax'
+      'getWax',
+      'getBlocksBehind',
+      'getExpireSeconds',
     ])
   },
   methods: {
@@ -111,8 +113,8 @@ export default {
             },
           }]
         }, {
-          blocksBehind: 3,
-          expireSeconds: 30
+          blocksBehind: this.getBlocksBehind,
+          expireSeconds: this.getExpireSeconds
         })
         //console.log(this.result)
         bus.$emit('createSuccess',this.result.transaction_id)

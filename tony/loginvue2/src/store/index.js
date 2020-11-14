@@ -6,6 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     wax: "",
+    blocksBehind: 3,
+    expireSeconds: 1200,
   },
   mutations: {
     storeWax (state, waxObj) {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
   getters: {
     getWax: state => {
       return state.wax
+    },
+    getBlocksBehind: state => {
+      return state.blocksBehind
+    },
+    getExpireSeconds: state => {
+      return state.expireSeconds
     }
   }
 })

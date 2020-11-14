@@ -54,6 +54,16 @@ const routes = [
     name: 'Creator',
     component: () => import('../views/Creator.vue')
   },
+  {
+    path: '/fundraisers/',
+    name: 'Discover',
+    component: () => import('../views/Discover.vue')
+  },
+  {
+    path: '/fundraisers/:fundraiser_id',
+    name: 'Fundraiser',
+    component: () => import('../views/Fundraiser.vue')
+  },
 ]
 
 const router = new VueRouter({
