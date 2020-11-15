@@ -15,7 +15,7 @@
             </template>
         </ApolloQuery>
         <b-button @click="CreateAssets">Create Collection</b-button>-->
-        {{attribute_table}}
+        {{ attribute_table}}
     </div>
 </template>
 <script>
@@ -42,10 +42,14 @@ export default {
                         }
                     }
                 }`,
-            variables: {
-                schema_name:'deviant'
+                variables:{
+
+                        schema_name:"deviant"
+                },
+                update: data => data.atomicassets_schemas_aggregate
             }
-        }
+                  
+
     },
     created() {
       this.collection_name = this.$route.params.collectname;
