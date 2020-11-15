@@ -81,6 +81,22 @@ export default {
     bus.$on('signing', () => {
       this.showSigningModal()
     })
+  },
+  destroyed () {
+    bus.$off('createSuccess', (data) => {
+      this.transaction_id = data
+      this.hideSigningModal()
+      this.showSuccessModal()
+      bus.$emit('updateHTML')
+    }),
+    bus.$off('createFailed', (data) => {
+      this.result = data
+      this.hideSigningModal()
+      this.showFailedModal()
+    }),
+    bus.$off('signing', () => {
+      this.showSigningModal()
+    })
   }
 }
 </script>

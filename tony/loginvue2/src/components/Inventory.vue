@@ -36,8 +36,11 @@
                 <div class="asset-name" v-if="asset.atomicassets_template!=null">
                   {{asset.atomicassets_template.immutable_data.name}}
                 </div>
-                <div class="asset-name" v-else>
+                <div class="asset-name" v-else-if="asset.immutable_data.name!=null">
                   {{asset.immutable_data.name}}
+                </div>
+                <div class="asset-name" v-else>
+                  #{{asset.asset_id}}
                 </div>
                 <div class="owner-name">
                   {{asset.owner}}
@@ -174,7 +177,7 @@ export default {
 
 .asset-img {
   margin-top: 3%;
-  width: 80%;
+  width: 200px;
   height: 53%;
 }
 

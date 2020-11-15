@@ -1,0 +1,25 @@
+query searchTransactionsForward ($query: String!, $cursor: String, $limit: Int64) {
+  searchTransactionsForward(query: $query, limit: $limit, cursor: $cursor) {
+    results {
+      undo
+      cursor
+      trace {
+        block {
+          num
+          id
+          confirmed
+          timestamp
+          previous
+        }
+        id
+        matchingActions {
+          account
+          name
+          json
+          seq
+          receiver
+        }
+      }
+    }
+  }
+}

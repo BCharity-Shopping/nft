@@ -49,7 +49,11 @@
                       atomicassets_offers_assets.
                       atomicassets_asset.
                       immutable_data.img!=null">
-                      <img v-bind:src="ipfs + asset.immutable_data.img" width="100%" height="100%">
+                      <img v-bind:src="ipfs + event.
+                        atomicassets_offer.
+                        atomicassets_offers_assets.
+                        atomicassets_asset.
+                        immutable_data.img" width="100%" height="100%">
                     </div>
                   </div>
                   <div class="mint-num" v-if="event.
@@ -86,8 +90,8 @@
                     immutable_data.name}}
                   </div>
                   <div class="sale-price">
-                    Donation Goal: {{event.listing_price/100000000}} WAX
                   </div>
+                  <DonationProgress :account_name="event.seller" :sale_id="event.sale_id" :listing_price="event.listing_price"/>
                   <b-button class="button-details" variant="info" :to="`/fundraisers/${event.sale_id}`">Details</b-button>
                 </div>
               </div>
@@ -98,20 +102,22 @@
         <div v-else class="no-result apollo">No result :(</div>
       </template>
     </ApolloQuery>
-    
   </div>
 </template>
 
 <script>
+import DonationProgress from '@/components/DonationProgress.vue'
 export default {
   name: 'ActiveFundraisers',
+  components: {
+    DonationProgress
+  },
   data () {
     return {
       limit: 10,
       market_place: "l5oaw.wam",
       state: 1,
       ipfs: "http://ipfs.io/ipfs/",
-      tokenPrecision: "",
     }
   },
   computed: {
@@ -197,8 +203,8 @@ export default {
 
 .asset-img {
   margin-top: 3%;
-  width: 100;
-  height: 60%;
+  width: 200px;
+  height: 58%;
 }
 
 #cancel-button {

@@ -8,7 +8,7 @@
 <script>
 import ActiveFundraisers from '@/components/ActiveFundraisers.vue'
 export default {
-  name: 'Fundraiser',
+  name: 'Fundraisers',
   components: {
     ActiveFundraisers,
   },

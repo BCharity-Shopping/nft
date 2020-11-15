@@ -188,7 +188,7 @@ export default {
 
 .asset-img {
   margin-top: 3%;
-  width: 100;
+  width: 200px;
   height: 60%;
 }
 

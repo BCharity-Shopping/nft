@@ -56,8 +56,8 @@ const routes = [
   },
   {
     path: '/fundraisers/',
-    name: 'Discover',
-    component: () => import('../views/Discover.vue')
+    name: 'Fundraisers',
+    component: () => import('../views/Fundraisers.vue')
   },
   {
     path: '/fundraisers/:fundraiser_id',
