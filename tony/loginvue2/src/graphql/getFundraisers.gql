@@ -17,5 +17,6 @@ query atomicmarket_sales ($state: smallint, $maker_marketplace: String, $limit: 
     collection_name
     sale_id
     listing_price
+    seller
   }
 }

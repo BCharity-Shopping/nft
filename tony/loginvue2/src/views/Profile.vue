@@ -90,6 +90,7 @@ export default {
   margin-left: 15%;
   max-width: 70%;
   color: grey;
+  background-color: #eeeeee;
 }
 
 .bloks-link {

@@ -6,6 +6,10 @@ import App from './App.vue'
 import router from './router'
 import { createProvider } from './vue-apollo'
 import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
 
 export const bus = new Vue();
 

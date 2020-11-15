@@ -20,7 +20,7 @@
             <div v-if="data.atomicassets_assets.length!=0">
               <div class="cards">
                 <div v-for="asset in data.atomicassets_assets" :key="asset.asset_id">
-                  <AssetSmallCard class="unselected" :id="'asset'+asset.asset_id+role" :asset_id="asset.asset_id" @click.native="toggleOfferAsset(asset.asset_id)"/>
+                  <AssetSmallCard class="unselected" :id="'asset'+asset.asset_id+role" :asset_id="asset.asset_id" :asset="asset" @click.native="toggleOfferAsset(asset.asset_id)"/>
                 </div>
               </div>
             </div>

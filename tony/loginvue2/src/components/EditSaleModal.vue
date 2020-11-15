@@ -34,6 +34,11 @@ export default {
     bus.$on('signing', () => {
       this.hideModal()
     })
+  },
+  destroyed () {
+    bus.$off('signing', () => {
+      this.hideModal()
+    })
   }
 }
 </script>
