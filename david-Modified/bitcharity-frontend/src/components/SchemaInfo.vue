@@ -7,16 +7,12 @@
                 {{data}}
             <div v-for="(item) in data.atomicassets_schemas_aggregate.nodes[0].format" :key="item.name">
                             {{item.name}}:{{item.type}}
-                </div>
-                <CreateAsset v-bind:data=data />
+            </div>
             </template>
             </ApolloQuery> 
-        <button class="btn btn-primary" @click="$router.push({path:`/creator/${collectname}/schema/${schema_name}/CreateAsset`})">Details</button>&nbsp;&nbsp;
+        <button class="btn btn-primary" @click="$router.push({path:`/creator/${collection_name}/schema/${schema_name}/CreateAssets`})">Details</button>&nbsp;&nbsp;
     </div>
 </template>
-
-
-
 <script>
 import { mapGetters } from 'vuex'
 export default {
@@ -25,17 +21,25 @@ export default {
     data(){
         return {
             schema_name: "",
-            collection_name:""
+            collection_name:"",
         }
     },
     created() {
       this.schema_name=this.$route.params.schemaname;
+      console.log(this.schema_name);
       this.collection_name = this.$route.params.collectionname;
+      console.log(this.collection_name);
       },
     computed: {
       ...mapGetters([
         'getWax'
       ]),
+      schemanames:function(){
+          return this.schema_name
+      },
+      collectionnames:function(){
+          return this.collectionname
+      }
     }
 }
 </script> 

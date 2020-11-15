@@ -1,0 +1,96 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add .components/ react
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  15.0.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/.components%2f: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66947:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140665:22)
+      at Request.emit (node:events:327:20)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141637:10)
+      at Request.emit (node:events:327:20)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141559:12)
+      at Object.onceWrapper (node:events:433:28)
+      at IncomingMessage.emit (node:events:339:22)
+      at endReadableNT (node:internal/streams/readable:1289:12)
+      at processTicksAndRejections (node:internal/process/task_queues:80:21)
+
+npm manifest: 
+  {
+    "name": "bitcharity-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "serve": "vue-cli-service serve",
+      "build": "vue-cli-service build",
+      "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+      "bootstrap-vue": "^2.17.3",
+      "core-js": "^3.6.5",
+      "jquery": "^3.5.1",
+      "vue": "^2.6.11",
+      "vue-apollo": "^3.0.0-beta.11",
+      "vue-router": "^3.2.0",
+      "vuex": "^3.5.1"
+    },
+    "devDependencies": {
+      "@babel/polyfill": "^7.11.5",
+      "@vue/cli-plugin-babel": "~4.5.0",
+      "@vue/cli-plugin-eslint": "~4.5.0",
+      "@vue/cli-plugin-router": "^4.5.8",
+      "@vue/cli-plugin-vuex": "^4.5.8",
+      "@vue/cli-service": "~4.5.0",
+      "axios": "^0.18.0",
+      "babel-eslint": "^10.1.0",
+      "bootstrap": "^4.5.2",
+      "eslint": "^6.7.2",
+      "eslint-plugin-vue": "^6.2.2",
+      "graphql-tag": "^2.9.0",
+      "mutationobserver-shim": "^0.3.7",
+      "popper.js": "^1.16.1",
+      "portal-vue": "^2.1.7",
+      "sass": "^1.26.11",
+      "sass-loader": "^10.0.2",
+      "vue-cli-plugin-apollo": "^0.22.2",
+      "vue-cli-plugin-axios": "^0.0.4",
+      "vue-cli-plugin-bootstrap-vue": "^0.7.0",
+      "vue-template-compiler": "^2.6.11"
+    },
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "node": true
+      },
+      "extends": [
+        "plugin:vue/essential",
+        "eslint:recommended"
+      ],
+      "parserOptions": {
+        "parser": "babel-eslint"
+      },
+      "rules": {}
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions",
+      "not dead"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

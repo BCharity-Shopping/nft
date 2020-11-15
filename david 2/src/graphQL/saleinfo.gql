@@ -1,0 +1,31 @@
+query atomicmarket_sales($id: bigint!) {
+    atomicmarket_sales(where: {sale_id: {_eq: $id}}) {
+        sale_id
+        seller
+        listing_price
+        listing_symbol
+        offer_id
+        atomicmarket_token {
+            token_precision
+        }
+        atomicmarket_sale_mints {
+            min_template_mint
+        }
+        atomicassets_offer {
+            atomicassets_offers_assets {
+                atomicassets_asset {
+                    atomicassets_asset_data {
+                        asset_id
+                        collection_name
+                        schema_name
+                    }
+                    atomicassets_template {
+                        issued_supply
+                        template_id
+                        immutable_data
+                    }
+                }
+            }
+        }
+    }
+}

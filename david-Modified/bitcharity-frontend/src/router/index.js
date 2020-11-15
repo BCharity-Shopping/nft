@@ -42,7 +42,7 @@ const router = new VueRouter({
       component: ()=>import("./../components/SchemaInfo.vue")
     },
     {
-      path:'/creator/:collectionname/schema/:schemaname/CreateAsset',
+      path:'/creator/:collectname/schema/:schemaName/CreateAssets',
       name:"CreateAsset",
       component: ()=>import("./../components/CreateAssets.vue")
     },
