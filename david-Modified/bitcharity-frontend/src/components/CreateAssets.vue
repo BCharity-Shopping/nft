@@ -5,19 +5,15 @@
         <input v-model="AssetOwner" placeholder="Account Name"><br/>
         <input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
         <input v-model="Template" placeholder="Template"><br/>
-        <!--<ApolloQuery :query="require('../graphQL/schemaImmuntableMutableData.gql')" :variables="{schema_name:this.schema_name}">
-            <template v-slot="{ result: { data } }">
-                {{data.atomicassets_schemas[0].format}}
-                <div v-for="(item) in data.atomicassets_schemas[0].format" :key="item.name">
-                    <input type="text" value="{{item.name}}">:{{item.type}}
-                </div>
-            </template>
-        </ApolloQuery>
-        <b-button @click="CreateAssets">Create Collection</b-button>-->
         {{ attribute_table}}
-         <div v-for="(item) in attribute_table" :key="item.name">
-                    {{item.name}}:{{item.type}}
+        {{input_value}}
+         <div v-for="(item,index) in attribute_table" :key="index">
+            {{item.name}}:<td><input v-model="item.swe" :key="index"></td>
         </div>
+        <button @click="addFind()">
+            New Find
+        </button>
+        <button class="button btn-primary" @click="CreateAssets()">Add Schema</button>
     </div>
 </template>
 <script>
@@ -28,11 +24,12 @@ export default {
    
     data(){
         return {
+            input_value:[],
             schema_name:"",
             AssetOwner:"",
             NumberOfCopies:"",
             Template:"",
-            attribute_table:[],
+            attribute_table:this.data,
         }
     },
     apollo:{
@@ -49,7 +46,8 @@ export default {
                             schema_name: this.schema_name
                         }
                 }, 
-                update: data => data.atomicassets_schemas_aggregate.nodes[0].format
+                update: data => data.atomicassets_schemas_aggregate.nodes[0].format,
+
             }
                   
 
@@ -60,17 +58,20 @@ export default {
       console.log("collection name is" + this.collection_name);
       console.log("the schema name is"+this.schema_name);
     },
+    updated(){
+        console.log("this is modified"+this.data);
+    },
     computed: {
       ...mapGetters([
         'getWax'
       ]),
-    
     },
-    method:{
+    methods:{
+        addFind() {
+            this.input_value.push({ value:"" });
+        },
         async CreateAssets(){
-              for(var key in this.rows){
-               this.attribute_table.push({"name":this.rows[key].name,"type":this.rows[key].type})
-           }
+            console.log("it is the data"+this.modified);
             console.log("it is "+this.collectionName);
             if(!this.getWax.api){
                return console.log("Need to login first")
@@ -110,4 +111,5 @@ export default {
         }
     },
 }
+
 </script>
