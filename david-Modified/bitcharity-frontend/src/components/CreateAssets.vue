@@ -1,7 +1,6 @@
 <template>
     <div>
         <p>name is</p>
-        <p>{{schema_name}}</p>
         <p>{{collection_name}}</p>
         <input v-model="AssetOwner" placeholder="Account Name"><br/>
         <input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
@@ -16,6 +15,9 @@
         </ApolloQuery>
         <b-button @click="CreateAssets">Create Collection</b-button>-->
         {{ attribute_table}}
+         <div v-for="(item) in attribute_table" :key="item.name">
+                    {{item.name}}:{{item.type}}
+        </div>
     </div>
 </template>
 <script>
@@ -42,16 +44,17 @@ export default {
                         }
                     }
                 }`,
-                variables:{
-
-                        schema_name:"deviant"
-                },
-                update: data => data.atomicassets_schemas_aggregate
+                variables(){
+                        return {
+                            schema_name: this.schema_name
+                        }
+                }, 
+                update: data => data.atomicassets_schemas_aggregate.nodes[0].format
             }
                   
 
     },
-    created() {
+    beforeMount() {
       this.collection_name = this.$route.params.collectname;
       this.schema_name=this.$route.params.schemaName
       console.log("collection name is" + this.collection_name);
@@ -71,7 +74,7 @@ export default {
             console.log("it is "+this.collectionName);
             if(!this.getWax.api){
                return console.log("Need to login first")
-           }
+           } 
            try {
                this.result=await this.getWax.api.transact({
                    actions:[{
