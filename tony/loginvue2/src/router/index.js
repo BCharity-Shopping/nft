@@ -55,6 +55,21 @@ const routes = [
     component: () => import('../views/Creator.vue')
   },
   {
+    path: '/creator/collection/:collection_name',
+    name: 'CreateCollection',
+    component: () => import('../views/CreatorCollection.vue')
+  },
+  {
+    path: '/creator/collection/:collection_name/schema/:schema_name',
+    name: 'CreateSchema',
+    component: () => import('../views/CreatorSchema.vue')
+  },
+  {
+    path: '/creator/collection/:collection_name/schema/:schema_name/createAsset',
+    name: 'CreateAsset',
+    component: () => import('../views/CreateAsset.vue')
+  },
+  {
     path: '/fundraisers/',
     name: 'Fundraisers',
     component: () => import('../views/Fundraisers.vue')

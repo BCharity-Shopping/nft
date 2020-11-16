@@ -1,11 +1,11 @@
 <template>
-  <div class="creator">
+  <div class="creator-collection">
     <div v-if='this.getWax==""'>
       <Login/>
     </div>
     <div v-else>
-      <h1>Creator</h1>
-      <b-button variant="info" :to="`/creator/collection/l5oaw1111111`">l5oaw1111111</b-button>
+      <h1>Collection: {{$route.params.collection_name}}</h1>
+      <b-button variant="info" :to="`/creator/collection/${$route.params.collection_name}/schema/series1`">series1</b-button>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import { mapGetters } from 'vuex'
 import Login from '@/components/Login.vue'
 export default {
-  name: 'Creator',
+  name: 'CreatorCollection',
   components: {
     Login,
   },

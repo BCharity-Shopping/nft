@@ -5,7 +5,7 @@
       <router-link to="/explorer">Explorer</router-link> |
       <router-link to="/market">Market</router-link> |
       <router-link to="/trading">Trading</router-link> |
-      <router-link to="/creator">NFT Creator</router-link> |
+      <router-link to="/creator">Cause Creator</router-link> |
       <router-link to="/fundraisers">Fundraisers</router-link> |
       <div v-if='this.getWax==""'>
         <Login/>
@@ -40,11 +40,6 @@ export default {
     Login,
     AccountDropdown,
     TransactionStateModal,
-  },
-  data () {
-    return {
-      wax: ""
-    }
   },
   computed: {
     ...mapGetters([
