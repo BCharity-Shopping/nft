@@ -1,32 +1,23 @@
 <template>
-  <div class="create-asset">
-    <h1>Mint Asset</h1>
-    <input v-model="asset_owner" placeholder="Account Name">
-    <input v-model="copies" placeholder="Number between 1-10">
-    <ApolloQuery
-    :query="require('../graphql/getSchema.gql')"
-    :variables="{schema_name:$route.params.schema_name, collection_name:$route.params.collection_name}"
-    >
-      <template v-slot="{ result: { loading, error, data } }">
-        <!-- Loading -->
-        <div v-if="loading" class="loading apollo">Loading...</div>
-
-        <!-- Error -->
-        <div v-else-if="error" class="error apollo">An error occurred</div>
-
-        <!-- Result -->
-        <div v-else-if="data" class="result apollo">
-          <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-            <label :for=format.name >{{format.name}}</label>
-            <input :id=format.name class="format-name" :name=format.name :placeholder=format.type>
-            <br>
-          </div>
-        </div>
-        <!-- No result -->
-        <div v-else class="no-result apollo">No result :(</div>
-      </template>
-      <b-button @click="createCause">Create Cause</b-button>
-    </ApolloQuery>
+  <div class="create-schema">
+    <h1>Create Schema</h1>
+    <input v-model="schema_name" placeholder="12 Characters Max">
+    <br>
+    <label>name</label>
+    <label>string</label>
+    <br>
+    <label>img</label>
+    <label>image</label>
+    <br>
+    <form>
+      <label>somedata</label>
+      <select name="datatype">
+        <option value="double">double</option>
+        <option value="string">string</option>
+        <option value="bool">bool</option>
+        <option value="image">image</option>
+      </select>
+    </form>
   </div>
 </template>
 
@@ -34,12 +25,11 @@
 import { mapGetters } from 'vuex'
 import { bus } from '../main.js';
 export default {
-  name: 'CreateAsset',
+  name: 'CreateSchema',
   data () {
     return {
-      asset_owner: "",
-      copies: 0,
-      immutable_data: [],
+      schema_name: "",
+      attributes: [],
     }
   },
   methods: {

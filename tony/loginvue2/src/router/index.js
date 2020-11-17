@@ -56,12 +56,17 @@ const routes = [
   },
   {
     path: '/creator/collection/:collection_name',
-    name: 'CreateCollection',
+    name: 'CreatorCollection',
     component: () => import('../views/CreatorCollection.vue')
   },
   {
-    path: '/creator/collection/:collection_name/schema/:schema_name',
+    path: '/creator/collection/:collection_name/createSchema',
     name: 'CreateSchema',
+    component: () => import('../views/CreateSchema.vue')
+  },
+  {
+    path: '/creator/collection/:collection_name/schema/:schema_name',
+    name: 'CreatorSchema',
     component: () => import('../views/CreatorSchema.vue')
   },
   {

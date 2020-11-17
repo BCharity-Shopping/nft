@@ -27,7 +27,7 @@
                   <img v-bind:src="ipfs + asset.immutable_data.img" width="100%" height="100%">
                 </div>
               </div>
-              <div class="mint-num">
+              <div class="mint-num" v-if="asset.atomicassets_asset_mints!=null">
                 {{asset.atomicassets_asset_mints.template_mint}}
               </div>
               <div class="col-name">
