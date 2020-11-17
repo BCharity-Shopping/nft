@@ -75,6 +75,11 @@ const routes = [
     component: () => import('../views/CreateAsset.vue')
   },
   {
+    path: '/creator/collection/:collection_name/schema/:schema_name/createTemplate',
+    name: 'CreateTemplate',
+    component: () => import('../views/CreateTemplate.vue')
+  },
+  {
     path: '/fundraisers/',
     name: 'Fundraisers',
     component: () => import('../views/Fundraisers.vue')
