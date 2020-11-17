@@ -68,18 +68,15 @@ export default {
                     console.log("this is a array"+array[j].placeholder);
                     console.log(array[j].name)
                     console.log("this is a array"+array[j].value);
+                    if(array[j].placeholder=="image"){
+                        array[j].placeholder="string"
+                        console.log(array[j].value);
+                    }
                      if(array[j].value!=""){
                         this.immutable_data.push({"key":array[j].name,"value":[array[j].placeholder, array[j].value]})
                      }
                  }
             console.log("this is "+this.immutable_data);
-            //console.log("this is a array"+array[j].value);
-            //         console.log(this.immutable_data[j].value[0]);
-            //         this.immutable_data.push({"key":this.attribute_table[i].name,"value":[this.attribute_table[i].type,array[j].value]})
-
-                    
-            //     }
-            // }
             console.log(this.immutable_data);
             if(!this.getWax.api){
                return console.log("Need to login first")

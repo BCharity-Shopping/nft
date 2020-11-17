@@ -42,6 +42,11 @@ const router = new VueRouter({
       component: ()=>import("./../components/SchemaInfo.vue")
     },
     {
+      path:'/creator/:collectname/schema/:schemaName/CreateTemplate',
+      name:"templateInfo",
+      component: ()=>import("./../components/CreateTemplate.vue")
+    },
+    {
       path:'/creator/:collectname/schema/:schemaName/CreateAssets',
       name:"CreateAsset",
       component: ()=>import("./../components/CreateAssets.vue")
