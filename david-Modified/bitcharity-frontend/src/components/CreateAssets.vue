@@ -5,15 +5,11 @@
         <input v-model="AssetOwner" placeholder="Account Name"><br/>
         <input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
         <input v-model="Template" placeholder="Template"><br/>
-        {{ attribute_table}}
-        {{input_value}}
-         <div v-for="(item,index) in attribute_table" :key="index">
-            {{item.name}}:<td><input v-model="item.swe" :key="index"></td>
+        {{ attribute_table }}
+         <div v-for="(item) in attribute_table" :key="item.name">
+            {{item.name}}:<td><input :id=item.type class="item-name" :name=item.name :placeholder=item.type></td>
         </div>
-        <button @click="addFind()">
-            New Find
-        </button>
-        <button class="button btn-primary" @click="CreateAssets()">Add Schema</button>
+        <button class="button btn-primary" @click="CreateAssets()">Create Asset</button>
     </div>
 </template>
 <script>
@@ -24,7 +20,7 @@ export default {
    
     data(){
         return {
-            input_value:[],
+            immutable_data:[],
             schema_name:"",
             AssetOwner:"",
             NumberOfCopies:"",
@@ -58,21 +54,33 @@ export default {
       console.log("collection name is" + this.collection_name);
       console.log("the schema name is"+this.schema_name);
     },
-    updated(){
-        console.log("this is modified"+this.data);
-    },
     computed: {
       ...mapGetters([
         'getWax'
       ]),
     },
     methods:{
-        addFind() {
-            this.input_value.push({ value:"" });
-        },
         async CreateAssets(){
-            console.log("it is the data"+this.modified);
-            console.log("it is "+this.collectionName);
+            var array=document.getElementsByClassName("item-name")
+            console.log(array);
+            //console.log(this.immutable_data);
+            for(var j=0;j<array.length;j++){
+                    console.log("this is a array"+array[j].placeholder);
+                    console.log(array[j].name)
+                    console.log("this is a array"+array[j].value);
+                     if(array[j].value!=""){
+                        this.immutable_data.push({"key":array[j].name,"value":[array[j].placeholder, array[j].value]})
+                     }
+                 }
+            console.log("this is "+this.immutable_data);
+            //console.log("this is a array"+array[j].value);
+            //         console.log(this.immutable_data[j].value[0]);
+            //         this.immutable_data.push({"key":this.attribute_table[i].name,"value":[this.attribute_table[i].type,array[j].value]})
+
+                    
+            //     }
+            // }
+            console.log(this.immutable_data);
             if(!this.getWax.api){
                return console.log("Need to login first")
            } 
@@ -80,7 +88,7 @@ export default {
                this.result=await this.getWax.api.transact({
                    actions:[{
                     account: 'atomicassets',
-                    name: 'createschema',
+                    name: 'mintasset',
                     authorization: [{
                         actor: this.getWax.userAccount,
                         permission:'active',
@@ -88,13 +96,12 @@ export default {
                     data: {
                         authorized_minter:this.getWax.userAccount,
                         collection_name:this.collection_name,
-                        immutable_data:[],
+                        immutable_data:this.immutable_data,
                         mutable_data:[],
-                        schema_format:this.schema_name,
                         new_asset_owner:this.AssetOwner,
-                        schema_name:this.Schema_name,
+                        schema_name:this.schema_name,
                         template_id:-1,
-                        token_to_back:[
+                        tokens_to_back:[
 
                         ]
                     },
