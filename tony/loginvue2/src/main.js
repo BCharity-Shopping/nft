@@ -11,8 +11,6 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-export const bus = new Vue();
-
 Vue.config.productionTip = false
 
 new Vue({

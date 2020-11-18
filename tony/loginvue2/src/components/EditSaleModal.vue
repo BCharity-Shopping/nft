@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 import CancelSale from '@/components/CancelSale.vue'
 import EditSalePrice from '@/components/EditSalePrice.vue'
 export default {
@@ -24,10 +24,11 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs['edit-sale-modal'].show()
+        this.$refs['edit-sale-modal'].show()
     },
     hideModal() {
-      this.$refs['edit-sale-modal'].hide()
+      if(this.$refs['edit-sale-modal']!=null)
+        this.$refs['edit-sale-modal'].hide()
     }
   },
   created () {

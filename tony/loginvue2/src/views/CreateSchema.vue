@@ -42,7 +42,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 export default {
   name: 'CreateSchema',
   data () {

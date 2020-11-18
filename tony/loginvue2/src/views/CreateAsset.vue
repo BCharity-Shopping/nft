@@ -31,22 +31,19 @@
             </div>
           </div>
           <div v-else>
-              <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-                
-                <div v-for="template in data.atomicassets_templates" :key="template.template_id">
-                  <label v-if="template.template_id==use_template" :for="format.name">{{format.name}}</label>
-                  <input v-if="template.template_id==use_template" :id="template.template_id+format.name" :placeholder="template.immutable_data[format.name]" disabled>
-                </div>
+            <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+              <div v-for="template in data.atomicassets_templates" :key="template.template_id">
+                <label v-if="template.template_id==use_template" :for="format.name">{{format.name}}</label>
+                <input v-if="template.template_id==use_template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
+                <input v-else-if="template.template_id==use_template" class="format-name" :id="format.name" :placeholder="format.type">
               </div>
-              <br>
-
-            
+            </div>
+            <br>
           </div>
         </div>
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
-      <b-button @click="cc">CC</b-button>
       <b-button @click="createCause">Create Cause</b-button>
     </ApolloQuery>
   </div>
@@ -54,7 +51,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 export default {
   name: 'CreateAsset',
   data () {
@@ -63,14 +60,21 @@ export default {
       copies: "",
       immutable_data: [],
       use_template: "No Template",
+      template_id: -1,
     }
   },
+  mounted () {
+    this.asset_owner = ""
+    this.copies = ""
+    this.immutable_data = []
+    this.use_template = "No Template"
+    this.template_id = -1
+  },
   methods: {
-    cc() {
-      let template = document.getElementById("template")
-      console.log(template.value)
-    },
     createCause() {
+      if(this.use_template!="No Template") {
+        this.template_id = this.use_template
+      }
       this.immutable_data = []
       let array = document.getElementsByClassName("format-name")
       for(let i=0;i<array.length;i++){
@@ -135,7 +139,7 @@ export default {
           authorized_minter: this.getWax.userAccount,
           collection_name: this.$route.params.collection_name,
           schema_name: this.$route.params.schema_name,
-          template_id: -1,
+          template_id: this.template_id,
           new_asset_owner: this.asset_owner,
           immutable_data: this.immutable_data,
           mutable_data: [],

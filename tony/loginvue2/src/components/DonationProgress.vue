@@ -20,7 +20,7 @@ export default {
     }
   },
   mounted () {
-    console.log("API URL: " + this.url)
+    //console.log("API URL: " + this.url)
     axios
       .get(this.url)
       .then(response => (this.result = response))

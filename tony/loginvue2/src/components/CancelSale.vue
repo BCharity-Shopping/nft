@@ -6,7 +6,7 @@
 
 
 <script>
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 import { mapGetters } from 'vuex'
 export default {
   name: 'CancelSale',
