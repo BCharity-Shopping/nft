@@ -6,6 +6,7 @@
     <div v-else>
       <h1>Schema: {{$route.params.schema_name}}</h1>
       <b-button variant="info" :to="`/creator/collection/${$route.params.collection_name}/schema/${$route.params.schema_name}/createAsset`">Mint New Asset</b-button>
+      <b-button variant="info" :to="`/creator/collection/${$route.params.collection_name}/schema/${$route.params.schema_name}/createTemplate`">Create New Template</b-button>
     </div>
   </div>
 </template>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 import CreateSale from '@/components/CreateSale.vue'
 export default {
   name: 'CreateSaleModal',
@@ -22,14 +22,20 @@ export default {
   },
   methods: {
     showModal() {
-      this.$refs['list-sale-modal'].show()
+        this.$refs['list-sale-modal'].show()
     },
     hideModal() {
-      this.$refs['list-sale-modal'].hide()
+      if(this.$refs['list-sale-modal']!=null)
+        this.$refs['list-sale-modal'].hide()
     }
   },
   created () {
     bus.$on('signing', () => {
+      this.hideModal()
+    })
+  },
+  destroyed () {
+    bus.$off('signing', () => {
       this.hideModal()
     })
   }

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { bus } from '../main.js';
+import { bus } from '../event-bus.js';
 export default {
   name: "TransactionStatusModal",
   data () {
