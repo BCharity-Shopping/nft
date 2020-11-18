@@ -1,0 +1,11 @@
+query atomicmarket_sales($asset_id: bigint, $state: smallint) {
+  atomicmarket_sales(where: {atomicassets_offer: {atomicassets_offers_assets: {asset_id: {_eq: $asset_id}}}, state: {_eq: $state}}) {
+    state
+    seller
+    sale_id
+    settlement_symbol
+    listing_symbol
+    listing_price
+    collection_name
+  }
+}

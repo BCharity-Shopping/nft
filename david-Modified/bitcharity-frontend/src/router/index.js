@@ -18,6 +18,11 @@ const router = new VueRouter({
       component: ()=>import("./../components/MarketPlace.vue")
     },
     {
+      path: '/trading',
+      name: 'Trading',
+      component: () => import('../views/Trading.vue')
+    },
+    {
       path: '/NFT',
       name: 'NFT',
       component: ()=>import("./../components/NFTPage.vue")
