@@ -1,0 +1,15 @@
+query atomicassets_schemas($schema_name: String, $collection_name: String) {
+  atomicassets_schemas(where: {collection_name: {_eq: $collection_name}, schema_name: {_eq: $schema_name}}) {
+    format
+  }
+  atomicassets_templates(where: {collection_name: {_eq: $collection_name}, schema_name: {_eq: $schema_name}}) {
+    template_id
+    immutable_data
+    schema_name
+    collection_name
+    burnable
+    transferable
+    max_supply
+    issued_supply
+  }
+}

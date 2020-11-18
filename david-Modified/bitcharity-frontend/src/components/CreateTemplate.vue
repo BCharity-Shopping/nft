@@ -69,7 +69,7 @@ export default {
             console.log("max supply is "+this.MaxSupply);
             console.log("Transferable is "+this.Transfered);
 
-
+            this.immutable_data=[];
             var array=document.getElementsByClassName("item-name")
             console.log(array);
             for(var j=0;j<array.length;j++){

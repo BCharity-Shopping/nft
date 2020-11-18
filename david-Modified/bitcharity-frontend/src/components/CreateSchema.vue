@@ -93,7 +93,16 @@ export default {
                     this.rows.splice(index, 1);
         },
         async CreateSchema(){
-            
+            this.schema_format=[
+                {
+                    "name":"name",
+                    "type":"string"
+                },
+                {
+                    "name":"img",
+                    "type":"image"
+                }
+            ]
             for(var key in this.rows){
                this.schema_format.push({"name":this.rows[key].name,"type":this.rows[key].type})
            }

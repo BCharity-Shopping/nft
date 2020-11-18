@@ -10,7 +10,7 @@
             </div>
             </template>
             </ApolloQuery> 
-        <button class="btn btn-primary" @click="$router.push({path:`/creator/${collection_name}/schema/${schema_name}/CreateAssets`})">Asset Info</button>&nbsp;&nbsp;
+        <button class="btn btn-primary" @click="$router.push({path:`/creator/${collection_name}/schema/${schema_name}/CreateAssets`})">Mint Asset</button>&nbsp;&nbsp;
         <button class="btn btn-primary" @click="$router.push({path:`/creator/${collection_name}/schema/${schema_name}/CreateTemplate`})">Create Template</button>&nbsp;&nbsp;
     </div>
 </template>

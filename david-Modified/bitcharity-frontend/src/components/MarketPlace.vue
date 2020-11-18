@@ -21,7 +21,7 @@
                   <p>{{ waxPriceFormat(item.price.amount,item.price.token_precision) }}.00{{item.price.token_symbol}}&nbsp;&nbsp;(${{wasPriceUSDollarConversion(item.price.amount,item.price.token_precision, exchangePriceUSD)}})</p>
                   <p style="white-space: nowrap;overflow: hidden; text-overflow:ellipsis">{{item.assets[0].name}}</p>
                   <button class="btn btn-primary" @click="jump(item.sale_id)">Details</button>&nbsp;&nbsp;
-                  <button class="btn btn-primary">Buy</button>
+                  <button class="btn btn-primary" @click="purchase(item)">Buy</button>
                 </b-card-text>
               </div>
             </div>
@@ -84,6 +84,7 @@ import { BootstrapVue,IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import { mapGetters } from 'vuex';
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
@@ -107,6 +108,7 @@ export default {
           this.exchangePriceUSD=resp.data.market_data.current_price.usd
         })
   },
+
   methods: {
     containsCharacter:function(x) {
       if (x.includes("https")) {
@@ -129,9 +131,71 @@ export default {
       console.log(exchangeRate);
       var usDollar=(PriceSplit*exchangeRate).toFixed(2);
       return usDollar;
-    }
+    },
+    async purchase(item){
+      if(item.taker_marketplace==null){
+        item.taker_marketplace=""
+      }
+      console.log(item);
+      console.log(this.getWax.userAccount);
+      console.log(item.market_contract);
+      console.log(item.sale_id);
+      console.log(item.taker_marketplace);
+      console.log("memo : deposit");
+      console.log("precision is "+item.price.token_precision);
+      var newPrice = Number.parseFloat(this.waxPriceFormat(item.price.amount,item.price.token_precision)).toFixed(item.price.token_precision)+" WAX";
+      console.log(newPrice);
 
+       if(!this.getWax.api){
+               return console.log("Need to login first")
+           }
+           try {
+               this.result=await this.getWax.api.transact({
+                   actions:[{
+                    account: "eosio.token",
+                    name: "transfer",
+                    authorization: [{
+                        actor: this.getWax.userAccount,
+                        permission:'active',
+                    }],
+                    data: {
+                        from:this.getWax.userAccount,
+                        memo:'deposit',
+                        quantity:newPrice,
+                        to:'atomicmarket',
+                       },},{
+                        account: 'atomicmarket',
+                        name: 'purchasesale',
+                        authorization: [{
+                          actor: this.getWax.userAccount,
+                          permission:'active',
+                        }],
+                        data: {
+                          buyer:this.getWax.userAccount,
+                          intended_delphi_median:0,
+                          sale_id:item.sale_id,
+                          taker_marketplace:item.taker_marketplace,
+                      },
+                    }]
+                   
+                   
+               },{
+                   blocksBehind: 3,
+                   expireSeconds: 30
+               });
+           }
+           catch(e){
+               this.result=e
+               console.log(e)
+           }  
+
+    }
   },
+  computed:{
+    ...mapGetters([
+        'getWax'
+      ]),
+    },
   watch: {
     '$route' () {
       this.$router.go(0);

@@ -14,6 +14,7 @@ const router = new VueRouter({
     },
     {
       path:'/MarketPlace',
+      name:'MarketPlace',
       component: ()=>import("./../components/MarketPlace.vue")
     },
     {

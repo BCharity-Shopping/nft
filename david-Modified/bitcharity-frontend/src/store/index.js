@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        wax: ""
+        wax: "",
+        Immutable_data:[]
     },
     mutations: {
         storeWax (state, waxObj){
@@ -15,6 +16,10 @@ export default new Vuex.Store({
         },
         clearWax(state) {
             state.wax=""
+        },
+
+        storeImmutableData(state, Immutable_data){
+            state.Immutable_data=Immutable_data
         }
     },
     actions: {
@@ -26,6 +31,9 @@ export default new Vuex.Store({
     getters: {
         getWax: state => {
             return state.wax
+        },
+        getImmutableData: state=>{
+            return state.Immutable_data
         }
     }
 })

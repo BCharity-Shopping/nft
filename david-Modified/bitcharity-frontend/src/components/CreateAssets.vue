@@ -4,11 +4,43 @@
         <p>{{collection_name}}</p>
         <input v-model="AssetOwner" placeholder="Account Name"><br/>
         <input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
-        <input v-model="Template" placeholder="Template"><br/>
-        {{ attribute_table }}
-         <div v-for="(item) in attribute_table" :key="item.name">
+        <input v-model="use_Template" placeholder="Template"><br/>
+        <!-- <div v-for="(item) in attribute_table" :key="item.name">
             {{item.name}}:<td><input :id=item.type class="item-name" :name=item.name :placeholder=item.type></td>
-        </div>
+        </div>-->
+
+        <ApolloQuery :query="require('../graphQL/atomicasset_templates.gql')" :variables="{schema_name:this.schema_name,collection_name:this.collection_name}">
+            <template v-slot="{ result: { loading, error, data } }">
+                {{data}}
+                <div v-if="loading" class="loading apollo">Loading...</div>
+                <div v-else-if="error" class="error apollo">An error occurred</div>
+                <div v-else-if="data" class="result apollo">
+                    <select id="template" v-model="use_Template" >
+                        <option value="No Template" selected>No Template</option>
+                        <option v-for="template in data.atomicassets_templates" :key="template.template_id" :value="template.template_id">
+                            #{{template.template_id}} - ({{template.issued_supply}}/{{template.max_supply}}) {{template.immutable_data.name}}
+                        </option>
+                    </select>
+                    <div v-if="use_Template=='No Template'">
+                        <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                            <label :for="format.name">{{format.name}}</label>
+                            <input :id="format.name" class="format-name" :name="format.name" :placeholder="format.type"> 
+                            <br/>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                            <div v-for="template in data.atomicassets_templates" :key="template.template_id">
+                                <label v-if="template.template_id==use_Template" :for="format.name">{{format.name}}</label>
+                                <input v-if="template.template_id==use_Template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
+                                <input v-else-if="template.template_id==use_Template" class="format-name" :id="format.name" :placeholder="format.type">
+                            </div>
+                        </div>
+                    <br>
+                    </div>
+                </div>
+            </template>
+        </ApolloQuery>
         <button class="button btn-primary" @click="CreateAssets()">Create Asset</button>
     </div>
 </template>
@@ -24,8 +56,7 @@ export default {
             schema_name:"",
             AssetOwner:"",
             NumberOfCopies:"",
-            Template:"",
-            attribute_table:this.data,
+            use_Template:"No Template",
         }
     },
     apollo:{
@@ -54,6 +85,12 @@ export default {
       console.log("collection name is" + this.collection_name);
       console.log("the schema name is"+this.schema_name);
     },
+    mounted(){
+        this.asset_owner=""
+        this.copies=""
+        this.immutable_data=[]
+        this.user_template="No Template"
+    },
     computed: {
       ...mapGetters([
         'getWax'
@@ -61,19 +98,20 @@ export default {
     },
     methods:{
         async CreateAssets(){
-            var array=document.getElementsByClassName("item-name")
+            if(this.use_Template!="No Template") {
+                this.template_id = this.useTemplate
+            }
+            this.immutable_data=[];
+            var array=document.getElementsByClassName("format-name")
             console.log(array);
             //console.log(this.immutable_data);
             for(var j=0;j<array.length;j++){
-                    console.log("this is a array"+array[j].placeholder);
-                    console.log(array[j].name)
-                    console.log("this is a array"+array[j].value);
                     if(array[j].placeholder=="image"){
                         array[j].placeholder="string"
                         console.log(array[j].value);
                     }
-                     if(array[j].value!=""){
-                        this.immutable_data.push({"key":array[j].name,"value":[array[j].placeholder, array[j].value]})
+                    if(array[j].value!=""){
+                        this.immutable_data.push({"key":array[j].id,"value":[array[j].placeholder, array[j].value]})
                      }
                  }
             console.log("this is "+this.immutable_data);
