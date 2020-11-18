@@ -51,12 +51,14 @@ export default {
       attrs: [],
       attributes: [],
       index: 0,
+      schema_format: []
     }
   },
   mounted () {
     this.schema_name = ""
     this.index = 0
     this.attributes = []
+    this.schema_format = []
   },
   methods: {
     removeAttribute(index) {
@@ -72,36 +74,23 @@ export default {
       }
     },
     createSchema() {
+      this.schema_format = []
+      this.schema_format.push({"name":"name", "type":"string"})
+      this.schema_format.push({"name":"img", "type":"string"})
       for(let i = 0; i<this.index; i++) {
         let name = document.getElementById("attribute-name-"+i)
         let type = document.getElementById("attribute-type-"+i)
         if(name!=null && type!=null) {
-          console.log(name.value)
-          console.log(type.value)
+          //console.log(name.value)
+          //console.log(type.value)
+          this.schema_format.push({"name":name.value,"type":type.value})
         }
       }
-      //this.createschema()
+      this.createschema()
     },
     addAttribute() {
       this.attrs.push({index: this.index})
       this.index++
-    },
-    createCause() {
-      let array = document.getElementsByClassName("format-name")
-      for(let i=0;i<array.length;i++){
-        let key = array[i].id
-        let value
-        if(array[i].placeholder=="image") {
-          value = ["string",array[i].value]
-        }
-        else {
-          value = [array[i].placeholder,array[i].value]
-        }
-        if(array[i].value != "") {
-          this.immutable_data.push({"key":key,"value":value})
-        }
-      }
-      this.cancelSale()
     },
     async createschema() {
       if(!this.getWax.api) {
@@ -112,20 +101,16 @@ export default {
         this.result = await this.getWax.api.transact({
           actions: [{
             account: 'atomicassets',
-            name: 'mintasset',
+            name: 'createschema',
             authorization: [{
               actor: this.getWax.userAccount,
               permission: 'active',
             }],
             data: {
-              authorized_minter: this.getWax.userAccount,
+              authorized_creator: this.getWax.userAccount,
               collection_name: this.$route.params.collection_name,
-              schema_name: this.$route.params.schema_name,
-              template_id: -1,
-              new_asset_owner: this.asset_owner,
-              immutable_data: this.immutable_data,
-              mutable_data: [],
-              tokens_to_back: [],
+              schema_name: this.schema_name,
+              schema_format: this.schema_format
             },
           }]
         }, {
