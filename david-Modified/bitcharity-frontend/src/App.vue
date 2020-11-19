@@ -1,31 +1,44 @@
 <template>
-   <div id="app">
-    <Navbar />
-     <router-view></router-view>
-    <Login />
-   </div>
+  <div id="app">
+     <div id="nav">
+      <router-link to="/MarketPlace">Market Place</router-link> |
+      
+      <router-link to="/NFT">NFT</router-link> |
+      <router-link to="/trading">trading</router-link> |
+      <router-link to="/MarketPlace">Market</router-link> |
+      <router-link to="/trading">Trading</router-link> |
+      <router-link to="/creator">Create Cause</router-link> |
+      <router-link to="/fundraisers">Fundraisers</router-link> |
+      <div v-if='this.getWax==""'>
+            <Login/>
+      </div>
+      <div v-else>
+          <AccountDropdown/>
+      </div>
+      </div>
+          <router-view/>
+      </div>
+      
 </template>
 <script>
-  import Navbar from './components/Navbar'
-  import Login from './components/Login'
+  import { mapGetters } from 'vuex'
+  import Login from '@/components/Login.vue'
+  import AccountDropdown from '@/components/AccountDropdown.vue'
   export default {
       name: "App",
       components: {
-        Navbar,
         Login,
+        AccountDropdown
       },
       data(){
         return {
           wax:""
         }
       },
-      methods: {
-        setWax: function() {
-          this.wax=this.$store.getters.getWax
-        },
-        clearWax: function(){
-          this.wax=""
-        }
+      computed: {
+        ...mapGetters([
+          'getWax'
+        ])
       }
     }
 

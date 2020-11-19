@@ -1,0 +1,29 @@
+query atomicmarket_sales ($fundraiser_id:bigint){
+  atomicmarket_sales(where: {sale_id: {_eq: $fundraiser_id}}) {
+    atomicassets_offer {
+      atomicassets_offers_assets {
+        atomicassets_asset {
+          asset_id
+          atomicassets_asset_mints {
+            template_mint
+          }
+          atomicassets_template {
+            immutable_data
+            schema_name
+            collection_name
+            template_id
+            transferable
+            burnable
+            issued_supply
+            max_supply
+          }
+          immutable_data
+        }
+      }
+    }
+    collection_name
+    sale_id
+    listing_price
+    seller
+  }
+}

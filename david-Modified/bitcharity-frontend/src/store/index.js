@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         wax: "",
-        Immutable_data:[]
+        blocksBehind: 3,
+        expireSeconds: 1200,
     },
     mutations: {
         storeWax (state, waxObj){
@@ -18,9 +19,6 @@ export default new Vuex.Store({
             state.wax=""
         },
 
-        storeImmutableData(state, Immutable_data){
-            state.Immutable_data=Immutable_data
-        }
     },
     actions: {
 
@@ -34,6 +32,12 @@ export default new Vuex.Store({
         },
         getImmutableData: state=>{
             return state.Immutable_data
+        },
+        getBlocksBehind: state => {
+            return state.blocksBehind
+          },
+        getExpireSeconds: state => {
+            return state.expireSeconds
         }
     }
 })

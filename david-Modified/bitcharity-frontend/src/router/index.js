@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomePage from "./../components/Home.vue";
+import HomePage from "../views/Home.vue";
 
 Vue.use(VueRouter)
 
@@ -10,12 +10,19 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      name:'Home',
       component: HomePage,
+    },
+    {
+      path: '/profile/:account_name/:tab?',
+      name: 'Profile',
+      props: true,
+      component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
     },
     {
       path:'/MarketPlace',
       name:'MarketPlace',
-      component: ()=>import("./../components/MarketPlace.vue")
+      component: ()=>import("../views/MarketPlace.vue")
     },
     {
       path: '/trading',
@@ -56,6 +63,11 @@ const router = new VueRouter({
       path:'/creator/:collectname/schema/:schemaName/CreateAssets',
       name:"CreateAsset",
       component: ()=>import("./../components/CreateAssets.vue")
+    },
+    {
+      path: '/trading/new-offer',
+      name: 'New-Offer',
+      component: () => import('../views/new-offer.vue')
     },
     {
       path: '/login/',

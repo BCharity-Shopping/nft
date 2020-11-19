@@ -1,0 +1,31 @@
+query atomicmarket_sales ($seller: String, $state: smallint) {
+  atomicmarket_sales(where: {seller: {_eq: $seller}, state: {_eq: $state}}) {
+    collection_fee
+    collection_name
+    listing_price
+    maker_marketplace
+    listing_symbol
+    market_contract
+    offer_id
+    sale_id
+    seller
+    settlement_symbol
+    taker_marketplace
+    state
+    assets_contract
+    atomicmarket_sale_mints {
+      sale_id
+    }
+    atomicmarket_token {
+      token_symbol
+      token_precision
+      token_contract
+      market_contract
+    }
+    atomicassets_offer {
+      atomicassets_offers_assets {
+        asset_id
+      }
+    }
+  }
+}

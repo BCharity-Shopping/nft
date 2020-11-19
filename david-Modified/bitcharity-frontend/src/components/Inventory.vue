@@ -1,7 +1,7 @@
 <template>
   <div>
     <ApolloQuery
-    :query="require('../graphQl/getAccountInventory.gql')"
+    :query="require('../graphQL/getAccountInventory.gql')"
     :variables="{owner}"
     >
       <template v-slot="{ result: { loading, error, data } }">
@@ -54,7 +54,7 @@
                   <b-dropdown-item>Burn</b-dropdown-item>
                 </b-dropdown>
                 <ApolloQuery
-                  :query="require('../graphQl/getAssetBySale.gql')"
+                  :query="require('../graphQL/getAssetBySale.gql')"
                   :variables="{asset_id:asset.asset_id, state:state1}"
                   >
                     <template v-slot="{ result: { loading, error, data } }">

@@ -32,7 +32,7 @@ export default {
         'getWax'
       ]),
     },
-    updated(){
+    mounted(){
         console.log("fetch for"+this.getWax.userAccount);
         if(this.getWax!=null){
         this.isFiltering = true;
