@@ -1,0 +1,22 @@
+query atomicmarket_sales ($state: smallint, $maker_marketplace: String, $limit: Int) {
+  atomicmarket_sales(where: {state: {_eq: $state}, maker_marketplace: {_eq: $maker_marketplace}}, limit: $limit) {
+    atomicassets_offer {
+      atomicassets_offers_assets {
+        atomicassets_asset {
+          asset_id
+          atomicassets_asset_mints {
+            template_mint
+          }
+          atomicassets_template {
+            immutable_data
+          }
+          immutable_data
+        }
+      }
+    }
+    collection_name
+    sale_id
+    listing_price
+    seller
+  }
+}

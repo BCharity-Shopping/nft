@@ -1,7 +1,7 @@
 <template>
   <div class="active-events">
     <ApolloQuery
-    :query="require('../graphql/getFundraisers.gql')"
+    :query="require('../graphQL/getFundraisers.gql')"
     :variables="{maker_marketplace:market_place, state:state, limit:limit}"
     >
       <template v-slot="{ result: { loading, error, data } }">

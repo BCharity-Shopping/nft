@@ -75,9 +75,19 @@ const router = new VueRouter({
       component: ()=>import("./../components/Login.vue")
     },
     {
-      path: '/:id',
+      path: '/MarketPlace/:id',
       name: 'salesDetail',
       component: ()=>import("./../components/Sales.vue")
+    },
+    {
+      path: '/fundraisers',
+      name: 'Fundraisers',
+      component: () => import('../views/Fundraisers.vue')
+    },
+    {
+      path: '/fundraisers/:fundraiser_id',
+      name: 'Fundraiser',
+      component: () => import('../views/Fundraiser.vue')
     },
   ]
 })

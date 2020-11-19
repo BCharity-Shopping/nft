@@ -20,7 +20,7 @@
                   <p>{{item.assets[0].collection.collection_name}}</p>
                   <p>{{ waxPriceFormat(item.price.amount,item.price.token_precision) }}.00{{item.price.token_symbol}}&nbsp;&nbsp;(${{wasPriceUSDollarConversion(item.price.amount,item.price.token_precision, exchangePriceUSD)}})</p>
                   <p style="white-space: nowrap;overflow: hidden; text-overflow:ellipsis">{{item.assets[0].name}}</p>
-                  <button class="btn btn-primary" @click="jump(item.sale_id)">Details</button>&nbsp;&nbsp;
+                  <button class="btn btn-primary" @click="$router.push({path:`/MarketPlace/${item.sale_id}`})">Details</button>&nbsp;&nbsp;
                   <button class="btn btn-primary" @click="purchase(item)">Buy</button>
                 </b-card-text>
               </div>
