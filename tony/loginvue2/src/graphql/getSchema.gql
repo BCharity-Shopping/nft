@@ -1,5 +1,6 @@
 query atomicassets_schemas($schema_name: String, $collection_name: String) {
   atomicassets_schemas(where: {collection_name: {_eq: $collection_name}, schema_name: {_eq: $schema_name}}) {
     format
+    schema_name
   }
 }

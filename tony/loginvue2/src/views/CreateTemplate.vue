@@ -1,7 +1,8 @@
 <template>
   <div class="create-template">
     <h1>Create New Template</h1>
-    <label>Max Supply</label>
+    <hr>
+    <label for="max-supply">Max Supply</label>
     <input id="max-supply" placeholder="Infinite">
     <br>
     <input id="transferable" type="checkbox" name="Assets Can Be Transferred" checked>
@@ -31,7 +32,8 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
-      <b-button @click="createTemplate" variant="warning">Create Template</b-button>
+      <hr>
+      <b-button @click="createTemplate" variant="success">Create Template</b-button>
     </ApolloQuery>
   </div>
 </template>
@@ -129,3 +131,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.create-template {
+  width: 70%;
+  margin-left: 15%;
+  background-color: #eeeeee;
+}
+</style>

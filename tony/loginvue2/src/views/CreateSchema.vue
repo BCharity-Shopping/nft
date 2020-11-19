@@ -1,14 +1,19 @@
 <template>
   <div class="create-schema">
     <h1>Create Schema</h1>
-    <label>Schema Name</label>
-    <input v-model="schema_name" placeholder="12 Characters Max">
+    <hr>
+    <label for="schema_name">Schema Name</label>
+    <input v-model="schema_name" id="schema_name" placeholder="12 Characters Max">
     <br>
-    <label>name</label>
-    <label>string</label>
+    <input value="name" disabled>
+    <select disabled>
+      <option>string</option>
+    </select>
     <br>
-    <label>img</label>
-    <label>image</label>
+    <input value="img" disabled>
+    <select disabled>
+      <option>image</option>
+    </select>
     <br>
     <div v-for="attr in attrs" :key="attr.index">
       <input :id="'attribute-name-'+attr.index" placeholder="New Attribute Name">
@@ -35,8 +40,9 @@
       </select>
       <b-button :id="'attribute-remove-'+attr.index" @click="removeAttribute(attr.index)" variant="danger">-</b-button>
     </div>
-    <b-button @click="addAttribute">Add New Attribute</b-button>
-    <b-button @click="createSchema" variant="warning">Create Schema</b-button>
+    <b-button @click="addAttribute" variant="primary">Add New Attribute</b-button>
+    <hr>
+    <b-button @click="createSchema" variant="success">Create Schema</b-button>
   </div>
 </template>
 
@@ -61,6 +67,10 @@ export default {
     this.schema_format = []
   },
   methods: {
+    addAttribute() {
+      this.attrs.push({index: this.index})
+      this.index++
+    },
     removeAttribute(index) {
       for(let i = 0; i<this.attrs.length; i++) {
         if(this.attrs[i].index == index) {
@@ -87,10 +97,6 @@ export default {
         }
       }
       this.createschema()
-    },
-    addAttribute() {
-      this.attrs.push({index: this.index})
-      this.index++
     },
     async createschema() {
       if(!this.getWax.api) {
@@ -133,3 +139,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.create-schema {
+  width: 70%;
+  margin-left: 15%;
+  background-color: #eeeeee;
+}
+</style>

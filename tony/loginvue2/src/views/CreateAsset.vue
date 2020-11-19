@@ -1,11 +1,12 @@
 <template>
   <div class="create-asset">
     <h1>Mint Asset</h1>
-    <label>Asset Owner</label>
-    <input v-model="asset_owner" placeholder="Account Name">
+    <hr>
+    <label for="asset_owner">Asset Owner</label>
+    <input v-model="asset_owner" id="asset_owner" placeholder="Account Name">
     <br>
-    <label>Number Of Copies</label>
-    <input v-model="copies" placeholder="Number between 1-10">
+    <label for="copies">Number Of Copies</label>
+    <input v-model="copies" id="copies" placeholder="Number between 1-10">
     <ApolloQuery
     :query="require('../graphql/getSchemaTemplate.gql')"
     :variables="{schema_name:$route.params.schema_name, collection_name:$route.params.collection_name}"
@@ -44,7 +45,8 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
-      <b-button @click="createCause">Create Cause</b-button>
+      <hr>
+      <b-button @click="createCause" variant="success">Create Cause</b-button>
     </ApolloQuery>
   </div>
 </template>
@@ -157,3 +159,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.create-asset {
+  width: 70%;
+  margin-left: 15%;
+  background-color: #eeeeee;
+}
+</style>

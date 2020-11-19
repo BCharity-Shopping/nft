@@ -55,12 +55,17 @@ const routes = [
     component: () => import('../views/Creator.vue')
   },
   {
+    path: '/creator/createcollection',
+    name: 'CreateCollection',
+    component: () => import('../views/CreateCollection.vue')
+  },
+  {
     path: '/creator/collection/:collection_name',
     name: 'CreatorCollection',
     component: () => import('../views/CreatorCollection.vue')
   },
   {
-    path: '/creator/collection/:collection_name/createSchema',
+    path: '/creator/collection/:collection_name/createschema',
     name: 'CreateSchema',
     component: () => import('../views/CreateSchema.vue')
   },
@@ -70,12 +75,12 @@ const routes = [
     component: () => import('../views/CreatorSchema.vue')
   },
   {
-    path: '/creator/collection/:collection_name/schema/:schema_name/createAsset',
+    path: '/creator/collection/:collection_name/schema/:schema_name/createasset',
     name: 'CreateAsset',
     component: () => import('../views/CreateAsset.vue')
   },
   {
-    path: '/creator/collection/:collection_name/schema/:schema_name/createTemplate',
+    path: '/creator/collection/:collection_name/schema/:schema_name/createtemplate',
     name: 'CreateTemplate',
     component: () => import('../views/CreateTemplate.vue')
   },

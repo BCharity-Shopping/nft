@@ -5,7 +5,10 @@
     </div>
     <div v-else>
       <h1>Creator</h1>
-      <b-button variant="info" :to="`/creator/collection/l5oaw1111111`">l5oaw1111111</b-button>
+      <hr>
+      <b-button variant="success" :to="`/creator/createcollection`">Create New Collection</b-button>
+      <hr>
+      <AuthorizedCollections/>
     </div>
   </div>
 </template>
@@ -13,15 +16,29 @@
 <script>
 import { mapGetters } from 'vuex'
 import Login from '@/components/Login.vue'
+import AuthorizedCollections from '@/components/AuthorizedCollections.vue'
 export default {
   name: 'Creator',
   components: {
     Login,
+    AuthorizedCollections,
+  },
+  data () {
+    return {
+    }
   },
   computed: {
     ...mapGetters([
       'getWax'
-    ])
-  }
+    ]),
+  },
 }
 </script>
+
+<style scoped>
+.creator {
+  margin-left: 15%;
+  max-width: 70%;
+  background-color: #eeeeee;
+}
+</style>

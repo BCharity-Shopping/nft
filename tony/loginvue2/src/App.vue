@@ -5,8 +5,8 @@
       <router-link to="/explorer">Explorer</router-link> |
       <router-link to="/market">Market</router-link> |
       <router-link to="/trading">Trading</router-link> |
-      <router-link to="/creator">Create Cause</router-link> |
-      <router-link to="/fundraisers">Fundraisers</router-link> |
+      <router-link to="/creator">Add a Cause</router-link> |
+      <router-link to="/fundraisers">Campaigns</router-link> |
       <div v-if='this.getWax==""'>
         <Login/>
       </div>
