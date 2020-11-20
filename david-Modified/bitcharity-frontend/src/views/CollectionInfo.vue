@@ -5,7 +5,7 @@
             <Login />
         </div>
         <div v-else>
-            <ApolloQuery :query="require('../graphQL/collectionDetails.gql')" :variables="{collection_name:collectionname}">
+            <ApolloQuery :query="require('../graphQL/collectionDetails.gql')" :variables="{collection_name:collectionname}" fetchPolicy="network-only">
                 <template v-slot="{ result: { data } }">
                     <div v-if="!edit">
                         <div class="edit-collection">
@@ -52,7 +52,7 @@
             
             <b-button v-if="!edit" variant="warning" @click="editCollection" id="edit-button">Edit Collection</b-button>
             <b-button v-if="edit" variant="warning" @click="cancelEditCollection" id="edit-button">Cancel Collection</b-button>
-            <ApolloQuery :query="require('../graphQL/collectionSchema.gql')" :variables="{collection_name:collectionname}">
+            <ApolloQuery :query="require('../graphQL/collectionSchema.gql')" :variables="{collection_name:collectionname}" fetchPolicy="network-only">
                 <template v-slot="{ result: { data } }">
                     {{data.atomicassets_schemas}}
                     <div v-for="(item,index) in data.atomicassets_schemas" :key="item.schema_name">

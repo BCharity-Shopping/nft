@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand">BitCharity</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,7 +9,6 @@
           <ul class="navbar-nav">
             <li class="nav-item active">
               <router-link to="/MarketPlace">Market Place</router-link> 
-            </li>
             <li class="nav-item">
               <router-link to="/NFT">NFT</router-link> 
             </li>
@@ -22,33 +21,7 @@
             <li class="nav-item">
               <router-link to="/fundraisers">Campaigns</router-link> 
             </li>
-          </ul>
-        </div>
-      </nav>
-     <nav class="navbar navbar-expand-sm bg-light">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/MarketPlace">Market Place</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/NFT">NFT</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/trading">trading</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/MarketPlace">Market</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/trading">Trading</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/creator">Create Cause</router-link> 
-          </li>
-          <li class="nav-item">
-            <router-link to="/fundraisers">Campaigns</router-link> 
-          </li>
-          <li class="nav-item">
+            <li class="nav-item">
             <div v-if='this.getWax==""'>
                   <Login/>
             </div>
@@ -56,9 +29,10 @@
                 <AccountDropdown/>
             </div>
           </li>
-              <router-view/>
-        </ul>
+          </ul>
+        </div>
       </nav>
+    <router-view/>
   </div>
   
 </template>
@@ -87,4 +61,11 @@
 </script>
 
 <style>
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+.li{
+  color:white;
+}
 </style>

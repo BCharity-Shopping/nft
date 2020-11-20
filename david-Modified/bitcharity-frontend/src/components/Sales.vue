@@ -18,6 +18,7 @@
                         <p>Maximum Mint:{{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_template.issued_supply}}</p>
                         <p>Collection Name: {{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_asset_data.collection_name}}</p>
                         <p>Schema Name: {{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_asset_data.schema_name}}</p>
+                        <p>Template ID: {{data.atomicmarket_sales[0].atomicassets_offer.atomicassets_offers_assets[0].atomicassets_asset.atomicassets_template.template_id}}</p>
                       </b-card>
                     </div>
                   </template>
@@ -25,7 +26,6 @@
 
             </div>
         </div>
-        <p>hello world</p>
       </div>
     </div>
       <router-view></router-view>
