@@ -1,24 +1,66 @@
 <template>
   <div id="app">
-     <div id="nav">
-      <router-link to="/MarketPlace">Market Place</router-link> |
-      
-      <router-link to="/NFT">NFT</router-link> |
-      <router-link to="/trading">trading</router-link> |
-      <router-link to="/MarketPlace">Market</router-link> |
-      <router-link to="/trading">Trading</router-link> |
-      <router-link to="/creator">Create Cause</router-link> |
-      <router-link to="/fundraisers">Campaigns</router-link> |
-      <div v-if='this.getWax==""'>
-            <Login/>
-      </div>
-      <div v-else>
-          <AccountDropdown/>
-      </div>
-      </div>
-          <router-view/>
-      </div>
-      
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <router-link to="/MarketPlace">Market Place</router-link> 
+            </li>
+            <li class="nav-item">
+              <router-link to="/NFT">NFT</router-link> 
+            </li>
+            <li class="nav-item">
+              <router-link to="/trading">trading</router-link> 
+            </li>
+            <li class="nav-item">
+              <router-link to="/creator">Create Cause</router-link> 
+            </li>
+            <li class="nav-item">
+              <router-link to="/fundraisers">Campaigns</router-link> 
+            </li>
+          </ul>
+        </div>
+      </nav>
+     <nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link to="/MarketPlace">Market Place</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/NFT">NFT</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/trading">trading</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/MarketPlace">Market</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/trading">Trading</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/creator">Create Cause</router-link> 
+          </li>
+          <li class="nav-item">
+            <router-link to="/fundraisers">Campaigns</router-link> 
+          </li>
+          <li class="nav-item">
+            <div v-if='this.getWax==""'>
+                  <Login/>
+            </div>
+            <div v-else>
+                <AccountDropdown/>
+            </div>
+          </li>
+              <router-view/>
+        </ul>
+      </nav>
+  </div>
+  
 </template>
 <script>
   import { mapGetters } from 'vuex'

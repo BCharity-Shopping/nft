@@ -1,6 +1,6 @@
 <template>
   <div class="edit-collection">
-    <h1>Collection: {{$route.params.collection_name}}</h1>
+    <h1>Collection: {{$route.params.collectionname}}</h1>
     <hr>
     <label for="image">Collection Image Hash</label>
     <input id="image" :value="collection.data.img">
@@ -170,7 +170,7 @@ export default {
           permission: 'active',
         }],
         data: {
-          collection_name: this.$route.params.collection_name,
+          collection_name: this.$route.params.collectionname,
           data: this.data
         },
       })
@@ -211,7 +211,7 @@ export default {
           permission: 'active',
         }],
         data: {
-          collection_name: this.$route.params.collection_name,
+          collection_name: this.$route.params.collectionname,
           account_to_add: acc
         },
       })
@@ -235,7 +235,7 @@ export default {
           permission: 'active',
         }],
         data: {
-          collection_name: this.$route.params.collection_name,
+          collection_name: this.$route.params.collectionname,
           account_to_remove: acc
         },
       })
@@ -278,7 +278,7 @@ export default {
           permission: 'active',
         }],
         data: {
-          collection_name: this.$route.params.collection_name,
+          collection_name: this.$route.params.collectionname,
           account_to_add: acc
         },
       })

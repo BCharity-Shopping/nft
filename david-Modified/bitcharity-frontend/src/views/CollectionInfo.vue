@@ -2,52 +2,56 @@
     <div>
         <p>it is :{{collectionname}}</p>
         <div v-if='this.getWax==""'>
-            <Login/>
+            <Login />
         </div>
         <div v-else>
             <ApolloQuery :query="require('../graphQL/collectionDetails.gql')" :variables="{collection_name:collectionname}">
                 <template v-slot="{ result: { data } }">
-                    <div class="edit-collection">
-                        <label for="display_name">Display Name</label>
-                        <input id="display_name" :value=data.atomicassets_collections[0].collection_name disabled>
-                        <br>
-                        <label for="market_fee">Market Fee (0%-15%)</label>
-                        <input type="number" max=15 min=0 id="market_fee" :value="data.atomicassets_collections[0].market_fee*100" disabled>
-                        <br>
-                        <label for="collection_description">Collection Description</label>
-                        <input id="collection_description" :value="data.atomicassets_collections[0].data.description" disabled>
-                        <br>
-                        <label for="website_url">Website URL</label>
-                        <input id="website_url" :value="data.atomicassets_collections[0].data.url" disabled>
-                        <br>
-                        <label>authorized_accounts</label>
-                        <div v-for="acc in data.atomicassets_collections[0].authorized_accounts" :key="'a'+acc" :id="'authorized-'+acc">
-                            <input class="authorized_accounts" :id="'authorized-account-'+acc" :value="acc">
-                            <b-button @click="removeExistAuthAcc(acc)" variant="danger" disabled>-</b-button>
-                        </div>
-                        <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
-                            <input :id="'authorized-account-'+aacc.index">
-                            <b-button @click="removeAuthorizedAccount(aacc.index)" variant="danger" disabled>-</b-button>
-                        </div>
-                        <label>Notify Accounts</label>
-                        <br>
-                        <div v-for="acc in data.atomicassets_collections[0].notify_accounts" :key="'n'+acc">
-                            <div>
-                                <input class="notify_accounts" :value="acc" disabled>
+                    <div v-if="!edit">
+                        <div class="edit-collection">
+                            <label for="display_name">Display Name</label>
+                            <input id="display_name" :value=data.atomicassets_collections[0].collection_name disabled>
+                            <br>
+                            <label for="market_fee">Market Fee (0%-15%)</label>
+                            <input type="number" max=15 min=0 id="market_fee" :value="data.atomicassets_collections[0].market_fee*100" disabled>
+                            <br>
+                            <label for="collection_description">Collection Description</label>
+                            <input id="collection_description" :value="data.atomicassets_collections[0].data.description" disabled>
+                            <br>
+                            <label for="website_url">Website URL</label>
+                            <input id="website_url" :value="data.atomicassets_collections[0].data.url" disabled>
+                            <br>
+                            <label>authorized_accounts</label>
+                            <div v-for="acc in data.atomicassets_collections[0].authorized_accounts" :key="'a'+acc" :id="'authorized-'+acc">
+                                <input class="authorized_accounts" :id="'authorized-account-'+acc" :value="acc">
+                                <b-button @click="removeExistAuthAcc(acc)" variant="danger" disabled>-</b-button>
+                            </div>
+                            <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
+                                <input :id="'authorized-account-'+aacc.index">
+                                <b-button @click="removeAuthorizedAccount(aacc.index)" variant="danger" disabled>-</b-button>
+                            </div>
+                            <label>Notify Accounts</label>
+                            <br>
+                            <div v-for="acc in data.atomicassets_collections[0].notify_accounts" :key="'n'+acc">
+                                <div>
+                                    <input class="notify_accounts" :value="acc" disabled>
+                                </div>
+                                <hr>
                             </div>
                         </div>
+                    </div>
+                    <div v-else>
+                        <editCollection :collection="data.atomicassets_collections[0]" :edit="edit"/>
                     </div>
                 </template>
                 
                 
                 <button @click="$router.push({path:`/creator/${collectnname}/createSchema`})">CreatSchema</button><br /><br />
-                <b-button v-if="edit" variant="warning" @click="updateCollection" id="update-button">Update Collection</b-button>
 
-            
-            
-            
-            
             </ApolloQuery> 
+            
+            <b-button v-if="!edit" variant="warning" @click="editCollection" id="edit-button">Edit Collection</b-button>
+            <b-button v-if="edit" variant="warning" @click="cancelEditCollection" id="edit-button">Cancel Collection</b-button>
             <ApolloQuery :query="require('../graphQL/collectionSchema.gql')" :variables="{collection_name:collectionname}">
                 <template v-slot="{ result: { data } }">
                     {{data.atomicassets_schemas}}
@@ -64,17 +68,18 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import { Login } from '@/components/Login.vue'
-//import editCollection from '@/components/EditCollection.vue'
+import editCollection from '@/components/EditCollection.vue'
 export default {
     components:{
-        Login,
-        //editCollection
+        editCollection
     },
     data(){
         return {
             edit:false,
             collectionname: "",
+            noti_acc: [],
+            auth_acc:[],
+
         }
     },
     created() {
@@ -96,7 +101,9 @@ export default {
         cancelEditCollection() {
             this.edit = false
         },
+        updateCollection(){
 
+        },
 
     }
     
