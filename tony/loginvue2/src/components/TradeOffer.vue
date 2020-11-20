@@ -7,6 +7,7 @@
       <ApolloQuery
       :query="require('../graphql/getAccountInventory.gql')"
       :variables="{owner:o}"
+      fetchPolicy="network-only"
       >
         <template v-slot="{ result: { loading, error, data } }">
           <!-- Loading -->

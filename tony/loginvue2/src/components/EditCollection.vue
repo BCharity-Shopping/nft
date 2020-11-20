@@ -177,6 +177,23 @@ export default {
       })
 
 
+      this.market_fee = document.getElementById("market_fee").value
+      if(this.market_fee!=""&& this.market_fee!=this.collection.market_fee*100) {
+        this.actions.push({
+          account: 'atomicassets',
+          name: 'setmarketfee',
+          authorization: [{
+            actor: this.getWax.userAccount,
+            permission: 'active',
+          }],
+          data: {
+            collection_name: this.$route.params.collection_name,
+            market_fee: this.market_fee/100
+          },
+        })
+      }
+
+
       /**
        * Sets up new authorized accounts list that will be used in comparison
        * with the old authorized accounts list from the prop
@@ -194,8 +211,8 @@ export default {
           this.authorized_accounts.push(aa.value)
         }
       }
-      console.log("old list: " + this.collection.authorized_accounts)
-      console.log("new list: " + this.authorized_accounts)
+      //console.log("old list: " + this.collection.authorized_accounts)
+      //console.log("new list: " + this.authorized_accounts)
 
       /**
        * Handles addcolauth action
@@ -220,7 +237,7 @@ export default {
         },
       })
       });
-      console.log("add auth: " + this.add_auth)
+      //console.log("add auth: " + this.add_auth)
 
       /**
        * Handles remocolauth action
@@ -245,7 +262,7 @@ export default {
         },
       })
       });
-      console.log("rem auth: " + this.rem_auth)
+      //console.log("rem auth: " + this.rem_auth)
 
 
       /**
@@ -265,8 +282,8 @@ export default {
           this.notify_accounts.push(aa.value)
         }
       }
-      console.log("old list: " + this.collection.notify_accounts)
-      console.log("new list: " + this.notify_accounts)
+      //console.log("old list: " + this.collection.notify_accounts)
+      //console.log("new list: " + this.notify_accounts)
 
       /**
        * Handles addnotifyacc action
@@ -291,7 +308,7 @@ export default {
         },
       })
       });
-      console.log("add noti: " + this.add_noti)
+      //console.log("add noti: " + this.add_noti)
 
       /**
        * Handles remnotifyacc action
@@ -316,7 +333,7 @@ export default {
         },
       })
       });
-      console.log("rem auth: " + this.rem_noti)
+      //console.log("rem auth: " + this.rem_noti)
 
 
 

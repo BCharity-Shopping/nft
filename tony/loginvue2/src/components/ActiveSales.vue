@@ -3,6 +3,7 @@
     <ApolloQuery
     :query="require('../graphql/getAccountSales.gql')"
     :variables="{seller:seller2, state:state1}"
+    fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
@@ -19,6 +20,7 @@
               <ApolloQuery
                 :query="require('../graphql/getAsset.gql')"
                 :variables="{asset_id:sale.atomicassets_offer.atomicassets_offers_assets[0].asset_id }"
+                fetchPolicy="network-only"
                 >
                   <template v-slot="{ result: { loading, error, data } }">
                     <!-- Loading -->

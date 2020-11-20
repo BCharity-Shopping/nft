@@ -3,6 +3,7 @@
     <ApolloQuery
     :query="require('../graphql/getAccountInventory.gql')"
     :variables="{owner}"
+    fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
@@ -57,6 +58,7 @@
                 <ApolloQuery
                   :query="require('../graphql/getAssetBySale.gql')"
                   :variables="{asset_id:asset.asset_id, state:state1}"
+                  fetchPolicy="network-only"
                   >
                     <template v-slot="{ result: { loading, error, data } }">
                       <!-- Loading -->

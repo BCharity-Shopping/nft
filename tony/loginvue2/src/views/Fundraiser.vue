@@ -1,8 +1,9 @@
 <template>
   <div class="fundraiser">
-     <ApolloQuery
+    <ApolloQuery
     :query="require('../graphql/getFundraiser.gql')"
     :variables="{fundraiser_id:$route.params.fundraiser_id}"
+    fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->

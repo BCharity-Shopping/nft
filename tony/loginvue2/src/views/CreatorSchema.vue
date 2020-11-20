@@ -7,6 +7,7 @@
       <ApolloQuery
         :query="require('../graphql/getSchemaAssetTemplate.gql')"
         :variables="{collection_name:$route.params.collection_name, schema_name:$route.params.schema_name}"
+        fetchPolicy="network-only"
         >
         <template v-slot="{ result: { loading, error, data } }">
           <!-- Loading -->

@@ -4,6 +4,7 @@
     <ApolloQuery
     :query="require('../graphql/getAsset.gql')"
     :variables="{ asset_id: $route.params.asset_id}"
+    fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->

@@ -3,6 +3,7 @@
     <ApolloQuery
     :query="require('../graphql/getFundraisers.gql')"
     :variables="{maker_marketplace:getMakerMarketplace, state:state, limit:limit}"
+    fetchPolicy="network-only"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
