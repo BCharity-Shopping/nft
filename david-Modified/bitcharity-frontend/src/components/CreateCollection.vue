@@ -7,7 +7,27 @@
         <input v-model="WebURL" placeholder="Web URL">
         <input v-model="Collection_Description" placeholder="Collection Description">
         <input v-model="market_fee" placeholder="market fee">
-        <input v-model="authorized_accounts" placeholder="authorized account ">
+        <input v-model="authorized_accounts" placeholder="authorized account "><br>
+        <label>Authorized Accounts</label>
+        <br>
+        <input :value="getWax.userAccount" disabled>
+        <br>
+        <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
+            <input :id="'authorized-account-'+aacc.index">
+            <b-button :id="'authorized-remove-'+aacc.index" @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
+        </div>
+        <b-button @click="addAuthorizedAccount" variant="primary">+</b-button><br>
+         <br>
+        <br>
+            <label>Notify Accounts</label>
+        <br>
+
+         <div v-for="nacc in noti_acc" :key="'n'+nacc.index" :id="'notify-'+nacc.index">
+            <input :id="'notify-account-'+nacc.index">
+            <b-button :id="'notify-remove-'+nacc.index" @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
+        </div>
+        <b-button @click="addNotifyAccount" variant="primary">+</b-button>
+
         <b-button @click="CreateCollection">Create Collection</b-button>
     </div>
 </template>
@@ -25,9 +45,13 @@ export default {
             Display_name:"",
             WebURL:"",
             Collection_Description:"",
-            authorized_accounts:[this.$store.getters.getWax.userAccount],
-            notified_accounts:[],
-            market_fee:""
+            authorized_accounts:[],
+            auth_index:0,
+            market_fee:"",
+            auth_acc:[],
+            notify_accounts: [],
+            noti_acc: [],
+            noti_index: 0,
         }
     },
     computed: {
@@ -67,10 +91,49 @@ export default {
         }
     },
     methods:{
+         removeAuthorizedAccount(index) {
+            for(let i = 0; i<this.auth_acc.length; i++) {
+                if(this.auth_acc[i].index == index) {
+                    let div = document.getElementById("authorized-"+i)
+                    div.remove()
+                }
+            }
+        },
+        addAuthorizedAccount() {
+            this.auth_acc.push({index: this.auth_index})
+            this.auth_index++
+        },
+        addNotifyAccount() {
+            this.noti_acc.push({index: this.noti_index})
+            this.noti_index++
+        },
+        removeNotifyAccount(index) {
+        for(let i = 0; i<this.noti_acc.length; i++) {
+            if(this.noti_acc[i].index == index) {
+            let div = document.getElementById("notify-"+i)
+            div.remove()
+            }
+            }
+        },
        async CreateCollection(){
             if(!this.getWax.api){
                return console.log("Need to login first")
-           }
+            }
+            this.authorized_accounts=[this.getWax.userAccount]
+            for(let i=0;i<this.auth_index; i++){
+                let acc=document.getElementById("authorized-account-"+i);
+                if(acc!=null && acc.value!="") {
+                    this.authorized_accounts.push(acc.value);
+                }
+            }
+            this.notify_accounts=[]
+            for(let i = 0; i<this.noti_index; i++) {
+                let acc = document.getElementById("notify-account-"+i)
+                if(acc!=null && acc.value!="") {
+                    this.notify_accounts.push(acc.value)
+                    console.log(acc.value)
+                }
+            }
            try {
                this.result=await this.getWax.api.transact({
                    actions:[{
@@ -87,7 +150,7 @@ export default {
                         collection_name:this.Collection_name,
                         data:this.data,
                         market_fee:this.market_fee,
-                        notify_accounts:this.notified_accounts,
+                        notify_accounts:this.notify_accounts,
                     },
                    }]
                },{

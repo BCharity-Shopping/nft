@@ -40,9 +40,9 @@ const router = new VueRouter({
       component: ()=>import("./../components/CreateCollection.vue")
     },
     {
-      path:'/creator/:collectionname',
+      path:'/creator/collection/:collectionname',
       name: "collectionInfo",
-      component: ()=>import("./../components/CollectionInfo.vue")
+      component: ()=>import("../views/CollectionInfo.vue")
     },
     {
       path:'/creator/:collectionname/createSchema',

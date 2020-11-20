@@ -8,7 +8,7 @@
                 {{index}}: {{item.collection_name}}
               <button class="btn btn-primary" @click="$router.push({name:'collectionInfo',params:{collectionname:item.collection_name}})">Details</button>&nbsp;&nbsp;
           </div>
-          <button @click="$router.push({path:'/NFT/creator'})">Create</button>
+          <button @click="$router.push({path:'/NFT/creator'})">Create Collection</button>
       </div>
 </template>
 
