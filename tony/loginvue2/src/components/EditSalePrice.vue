@@ -22,7 +22,6 @@ export default {
     return {
       price: this.listingPrice,
       settlement_symbol: "8,WAX",
-      maker_marketplace: "l5oaw.wam",
 
       recipient: "atomicmarket",
       recipient_asset_ids: [],
@@ -54,6 +53,7 @@ export default {
       'getWax',
       'getBlocksBehind',
       'getExpireSeconds',
+      'getMakerMarketplace',
     ])
   },
   methods: {
@@ -87,7 +87,7 @@ export default {
               asset_ids: [Number(this.assetID)],
               listing_price: this.listing_price + " WAX",
               settlement_symbol: this.settlement_symbol,
-              maker_marketplace: this.maker_marketplace,
+              maker_marketplace: this.getMakerMarketplace,
             },
           },
           {

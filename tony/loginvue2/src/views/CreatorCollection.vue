@@ -19,6 +19,7 @@
           <div v-else-if="data" class="result apollo">
             <div v-if="data.atomicassets_collections.length==0">
               <h1>Collection {{$route.params.collection_name}} doesn't exist</h1>
+              <hr>
             </div>
             <div v-else>
               <div v-if="!edit">

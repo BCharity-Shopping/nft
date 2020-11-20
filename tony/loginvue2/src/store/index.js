@@ -8,6 +8,8 @@ export default new Vuex.Store({
     wax: "",
     blocksBehind: 3,
     expireSeconds: 1200,
+    makerMarketplace: "l5oaw.wam",
+    takerMarketplace: "l5oaw.wam",
   },
   mutations: {
     storeWax (state, waxObj) {
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     },
     getExpireSeconds: state => {
       return state.expireSeconds
-    }
+    },
+    getMakerMarketplace: state => {
+      return state.makerMarketplace
+    },
+    getTakerMarketplace: state => {
+      return state.takerMarketplace
+    },
   }
 })

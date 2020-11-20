@@ -32,16 +32,17 @@
                       <div class="asset">
                         <div v-for="asset in data.atomicassets_assets" :key="asset.asset_id">
                           <div class="card">
-                            <div class="asset-img" v-if="asset.atomicassets_template!=null">
+                            <div class="asset-img" v-if="asset.atomicassets_template!=null && asset.atomicassets_template.immutable_data.img!=null">
                               <div class="asset-img-2" v-if="asset.atomicassets_template.immutable_data.img!=null">
                                 <img v-bind:src="ipfs + asset.atomicassets_template.immutable_data.img" width="100%" height="100%">
                               </div>
                             </div>
-                            <div class="asset-img" v-else-if="asset.immutable_data!=null">
+                            <div class="asset-img" v-else-if="asset.immutable_data!=null && asset.immutable_data.img!=null">
                               <div class="asset-img-2" v-if="asset.immutable_data.img!=null">
                                 <img v-bind:src="ipfs + asset.immutable_data.img" width="100%" height="100%">
                               </div>
                             </div>
+                            <div class="asset-img" v-else/>
                             <div class="mint-num" v-if="asset.atomicassets_asset_mints!=null">
                               #{{asset.atomicassets_asset_mints.template_mint}}
                             </div>

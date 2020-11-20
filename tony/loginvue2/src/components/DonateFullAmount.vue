@@ -1,12 +1,7 @@
 <template>
   <div>
-    <input v-model=donationAmount placeholder="Amount">
-    WAX
-    <b-button id="donate-button" variant="warning" @click="inputCheck">Donate Now</b-button>
-    <!--
-    quantity: {{this.quantity}} WAX
-    isNaN? {{isNaN(this.quantity)}}
-    -->
+    Fully support this cause by donating the fundraiser goal amount.
+    <b-button id="buy-button" variant="warning" @click="inputCheck">Donate Full Amount</b-button>
   </div>
 </template>
 
@@ -16,59 +11,19 @@ import * as waxjs from "@waxio/waxjs/dist"
 import { bus } from '../event-bus.js';
 import { mapGetters } from 'vuex'
 export default {
-  name: 'DonateWax',
-  props: ['recipient','fundraiserID'],
-  data () {
-    return {
-      donationAmount: ""
-    }
-  },
-  computed: {
-    quantity: function() {
-      if(Number(this.donationAmount)<=0) {
-        return "0.00000000"
-      }
-      else {
-        var d = this.donationAmount
-        if(d.includes('.')){
-          var decimals = d.split('.')[1].length
-          if(decimals>8) {
-            return +(Number(d).toFixed(8))
-          }
-          else {
-            for (var i=0; i<(8-decimals); i++) {
-              d = d + "0"
-            }
-            return d
-          }
-        }
-        else {
-          return d + ".00000000"
-        }
-      }
-    },
-    ...mapGetters([
-      'getWax',
-      'getBlocksBehind',
-      'getExpireSeconds',
-    ])
-  },
+  name: 'DonateFullAmount',
+  props: ['saleID','salePrice'],
   methods: {
     async inputCheck() {
-      if(!(isNaN(this.quantity)) && !(isNaN(parseFloat(this.quantity)))) {
-        if(this.getWax=="") {
-          await this.login()
-          await this.transfer()
-        }
-        else {
-          await this.transfer()
-        }
+      if(this.getWax=="") {
+        await this.login()
+        await this.purchaseSale()
       }
       else {
-        window.alert("Donation amount has to be a number")
+        await this.purchaseSale()
       }
     },
-    async transfer() {
+    async purchaseSale() {
       if(!this.getWax.api) {
         return console.log("Need to Login first")
       }
@@ -84,9 +39,22 @@ export default {
             }],
             data: {
               from: this.getWax.userAccount,
-              memo: "donation to fundraiser #" + this.fundraiserID,
+              to: "atomicmarket",
               quantity: this.quantity + " WAX",
-              to: this.recipient
+              memo: "deposit"
+            },
+          },{
+            account: 'atomicmarket',
+            name: 'purchasesale',
+            authorization: [{
+              actor: this.getWax.userAccount,
+              permission: 'active',
+            }],
+            data: {
+              buyer: this.getWax.userAccount,
+              sale_id: Number(this.saleID),
+              intended_delphi_median: 0,
+              taker_marketplace: this.getTakerMarketplace
             },
           }]
         }, {
@@ -115,6 +83,37 @@ export default {
       }
     },
   },
+  computed: {
+    ...mapGetters([
+      'getWax',
+      'getBlocksBehind',
+      'getExpireSeconds',
+      'getTakerMarketplace',
+    ]),
+    quantity: function() {
+      if(Number(this.salePrice)<=0) {
+        return "0.00000000"
+      }
+      else {
+        var d = String(this.salePrice/100000000)
+        if(d.includes('.')){
+          var decimals = d.split('.')[1].length
+          if(decimals>8) {
+            return +(Number(d).toFixed(8))
+          }
+          else {
+            for (var i=0; i<(8-decimals); i++) {
+              d = d + "0"
+            }
+            return d
+          }
+        }
+        else {
+          return d + ".00000000"
+        }
+      }
+    },
+  }
 }
 </script>
 

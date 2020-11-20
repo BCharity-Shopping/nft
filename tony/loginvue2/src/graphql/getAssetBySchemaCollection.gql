@@ -1,0 +1,14 @@
+query atomicassets_assets($schema_name:String), $collection_name:String) {
+  atomicassets_assets(where: {schema_name: {_eq: $schema_name}, atomicassets_collection: {collection_name: {_eq: $collection_name}}}, limit: 9) {
+    owner
+    atomicassets_collection {
+      collection_name
+    }
+    atomicassets_template {
+      template_id
+      immutable_data
+    }
+    asset_id
+    immutable_data
+  }
+}

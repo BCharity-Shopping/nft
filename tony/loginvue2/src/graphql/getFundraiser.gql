@@ -18,6 +18,9 @@ query atomicmarket_sales ($fundraiser_id:bigint){
             max_supply
           }
           immutable_data
+          collection_name
+          schema_name
+          owner
         }
       }
     }

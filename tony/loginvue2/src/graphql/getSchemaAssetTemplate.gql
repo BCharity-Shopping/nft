@@ -1,0 +1,24 @@
+query atomicassets_schemas($schema_name: String, $collection_name: String) {
+  atomicassets_schemas(where: {collection_name: {_eq: $collection_name}, schema_name: {_eq: $schema_name}}) {
+    format
+    schema_name
+  }
+  atomicassets_assets(where: {schema_name: {_eq: $schema_name}, atomicassets_collection: {collection_name: {_eq: $collection_name}}}, limit: 10) {
+    owner
+    collection_name
+    atomicassets_template {
+      template_id
+      immutable_data
+    }
+    asset_id
+    immutable_data
+    atomicassets_asset_mints {
+      template_mint
+    }
+  }
+  atomicassets_templates(where: {collection_name: {_eq: $collection_name}, schema_name: {_eq: $schema_name}}) {
+    immutable_data
+    template_id
+    collection_name
+  }
+}

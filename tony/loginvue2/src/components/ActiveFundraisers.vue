@@ -2,7 +2,7 @@
   <div class="active-events">
     <ApolloQuery
     :query="require('../graphql/getFundraisers.gql')"
-    :variables="{maker_marketplace:market_place, state:state, limit:limit}"
+    :variables="{maker_marketplace:getMakerMarketplace, state:state, limit:limit}"
     >
       <template v-slot="{ result: { loading, error, data } }">
         <!-- Loading -->
@@ -24,7 +24,13 @@
                     atomicassets_offer.
                     atomicassets_offers_assets[0].
                     atomicassets_asset.
-                    atomicassets_template!=null">
+                    atomicassets_template!=null 
+                    && event.
+                    atomicassets_offer.
+                    atomicassets_offers_assets[0].
+                    atomicassets_asset.
+                    atomicassets_template.
+                    immutable_data.img!=null">
                     <div class="asset-img-2" v-if="event.
                       atomicassets_offer.
                       atomicassets_offers_assets[0].
@@ -43,19 +49,25 @@
                     atomicassets_offer.
                     atomicassets_offers_assets[0].
                     atomicassets_asset.
-                    immutable_data!=null">
+                    immutable_data!=null
+                    && event.
+                    atomicassets_offer.
+                    atomicassets_offers_assets[0].
+                    atomicassets_asset.
+                    immutable_data.img!=null">
                     <div class="asset-img-2" v-if="event.
                       atomicassets_offer.
-                      atomicassets_offers_assets.
+                      atomicassets_offers_assets[0].
                       atomicassets_asset.
                       immutable_data.img!=null">
                       <img v-bind:src="ipfs + event.
                         atomicassets_offer.
-                        atomicassets_offers_assets.
+                        atomicassets_offers_assets[0].
                         atomicassets_asset.
                         immutable_data.img" width="100%" height="100%">
                     </div>
                   </div>
+                  <div class="asset-img" v-else/>
                   <div class="mint-num" v-if="event.
                       atomicassets_offer.
                       atomicassets_offers_assets[0].
@@ -106,6 +118,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import DonationProgress from '@/components/DonationProgress.vue'
 export default {
   name: 'ActiveFundraisers',
@@ -115,7 +128,6 @@ export default {
   data () {
     return {
       limit: 10,
-      market_place: "l5oaw.wam",
       state: 1,
       ipfs: "http://ipfs.io/ipfs/",
     }
@@ -131,7 +143,10 @@ export default {
     },
     seller2: function() {
       return this.seller1
-    }
+    },
+    ...mapGetters([
+      'getMakerMarketplace',
+    ])
   },
 }
 </script>
