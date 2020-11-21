@@ -5,7 +5,7 @@
       <Login/>
     </div>
     <div v-else>
-      <h1>Trading</h1>
+      <h1>Listing</h1>
       <div class="trading-page">
         <div class="menu-items">
           <div class="button-group">
@@ -63,19 +63,22 @@ export default {
 </script>
 
 <style scoped>
+.trading {
+  margin-left: 15%;
+  max-width: 70%;
+}
+
 .trading-page {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 15%;
-  max-width: 70%;
 }
 
 .menu-items {
   width: 25%;
   min-width: 300px;
   max-height: 100%;
-  background-color: #ebebeb;
+  /*background-color: #ebebeb;*/
   
 }
 
@@ -87,7 +90,7 @@ export default {
 .inventory {
   max-width: 70%;
   min-width: 300px;
-  background-color: #ebebeb;
+  /*background-color: #ebebeb;*/
 }
 
 .hr {

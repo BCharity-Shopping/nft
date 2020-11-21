@@ -2,55 +2,73 @@
   <div class="edit-collection">
     <h1>Collection: {{$route.params.collection_name}}</h1>
     <hr>
-    <label for="image">Collection Image Hash</label>
-    <input id="image" :value="collection.data.img">
-    <br>
-    <label for="display_name">Display Name</label>
-    <input id="display_name" :value="collection.data.name">
-    <br>
-    <label for="website_url">Website URL</label>
-    <input id="website_url" :value="collection.data.url">
-    <br>
-    <label for="collection_description">Collection Description</label>
-    <input id="collection_description" :value="collection.data.description">
-    <br>
-    <label for="market_fee">Market Fee (0%-15%)</label>
-    <input type="number" max=15 min=0 id="market_fee" :value="collection.market_fee*100">
-    <br>
-    <br>
-
-    <label>Authorized Accounts</label>
-    <br>
-    <!--loop through each account in the collection's authorized accounts-->
-    <div v-for="acc in collection.authorized_accounts" :key="'a'+acc" :id="'authorized-'+acc">
-      <input class="authorized_accounts" :id="'authorized-account-'+acc" :value="acc">
-      <b-button @click="removeExistAuthAcc(acc)" variant="danger">-</b-button>
+    <div id="collection-info">
+      <table id="table">
+        <tr>
+          <td><label for="image">Collection Image Hash</label></td>
+          <td><input id="image" :value="collection.data.img"></td>
+        </tr>
+        <tr>
+          <td><label for="display_name">Display Name</label></td>
+          <td><input id="display_name" :value="collection.data.name"></td>
+        </tr>
+        <tr>
+          <td><label for="website_url">Website URL</label></td>
+          <td><input id="website_url" :value="collection.data.url"></td>
+        </tr>
+        <tr>
+          <td><label for="collection_description">Collection Description</label></td>
+          <td><input id="collection_description" :value="collection.data.description"></td>
+        </tr>
+        <tr>
+          <td><label for="market_fee">Market Fee (0%-15%)</label></td>
+          <td><input type="number" max=15 min=0 id="market_fee" :value="collection.market_fee*100"></td>
+        </tr>
+      </table>
     </div>
-    <!--loop through auth_acc array and create a div for every added element-->
-    <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
-      <input :id="'authorized-account-'+aacc.index">
-      <b-button @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
-    </div>
-    <b-button @click="addAuthorizedAccount" variant="primary">+</b-button>
-
     <br>
-    <br>
-
-    <label>Notify Accounts</label>
-    <br>
-    <!--loop through each account in the collection's notify accounts-->
-    <div v-for="acc in collection.notify_accounts" :key="'n'+acc" :id="'notify-'+acc">
-      <input class="notify_accounts" :id="'notify-account-'+acc" :value="acc">
-      <b-button @click="removeExistNotiAcc(acc)" variant="danger">-</b-button>
+    <div id="accounts-info">
+      <table>
+        <th>
+          <label>Authorized Accounts</label>
+        </th>
+        <tr v-for="acc in collection.authorized_accounts" :key="'a'+acc" :id="'authorized-'+acc">
+          <td>
+            <input class="authorized_accounts" :id="'authorized-account-'+acc" :value="acc">
+            <b-button @click="removeExistAuthAcc(acc)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
+          <td>
+            <input :id="'authorized-account-'+aacc.index">
+            <b-button @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr>
+          <b-button @click="addAuthorizedAccount" variant="primary">+</b-button>
+        </tr>
+      </table>
+      <table>
+        <th>
+          <label>Notify Accounts</label>
+        </th>
+        <tr v-for="acc in collection.notify_accounts" :key="'n'+acc" :id="'notify-'+acc">
+          <td>
+            <input class="notify_accounts" :id="'notify-account-'+acc" :value="acc">
+            <b-button @click="removeExistNotiAcc(acc)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr v-for="nacc in noti_acc" :key="'n'+nacc.index" :id="'notify-'+nacc.index">
+          <td>
+            <input :id="'notify-account-'+nacc.index">
+            <b-button @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr>
+        <b-button @click="addNotifyAccount" variant="primary">+</b-button>
+        </tr>
+      </table>
     </div>
-    <!--loop through noti_acc array and create a div for every added element-->
-    <div v-for="nacc in noti_acc" :key="'n'+nacc.index" :id="'notify-'+nacc.index">
-      <input :id="'notify-account-'+nacc.index">
-      <b-button @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
-    </div>
-    <b-button @click="addNotifyAccount" variant="primary">+</b-button>
-
-    <hr>
     <b-button v-if="edit" variant="warning" @click="updateCollection" id="update-button">Update Collection</b-button>
   </div>
 </template>
@@ -82,6 +100,7 @@ export default {
       rem_auth: [],
       add_noti: [],
       rem_noti: [],
+      update: false
     }
   },
   mounted () {
@@ -102,6 +121,7 @@ export default {
     this.rem_auth = []
     this.add_noti = []
     this.rem_noti = []
+    this.update = false
   },
   methods: {
     addAuthorizedAccount() {
@@ -143,38 +163,53 @@ export default {
        * and add them to setcoldata action
        */
       this.data = []
+      this.update = false
       this.image = document.getElementById("image").value
       if(this.image!="") {
         let imageValue = ["string",this.image]
         this.data.push({"key":"img","value":imageValue})
+        if(this.image != this.collection.data.img) {
+          this.update = true
+        }
       }
       this.display_name = document.getElementById("display_name").value
       if(this.display_name!="") {
         let nameValue = ["string",this.display_name]
         this.data.push({"key":"name","value":nameValue})
+        if(this.display_name != this.collection.data.name) {
+          this.update = true
+        }
       }
       this.website_url = document.getElementById("website_url").value
       if(this.website_url!="") {
         let urlValue = ["string",this.website_url]
         this.data.push({"key":"url","value":urlValue})
+        if(this.website_url != this.collection.data.url) {
+          this.update = true
+        }
       }
       this.collection_description = document.getElementById("collection_description").value
       if(this.collection_description!="") {
         let descriptionValue = ["string",this.collection_description]
         this.data.push({"key":"description","value":descriptionValue})
+        if(this.collection_description != this.collection.data.description) {
+          this.update = true
+        }
       }
-      this.actions.push({
-        account: 'atomicassets',
-        name: 'setcoldata',
-        authorization: [{
-          actor: this.getWax.userAccount,
-          permission: 'active',
-        }],
-        data: {
-          collection_name: this.$route.params.collection_name,
-          data: this.data
-        },
-      })
+      if(this.update) {
+        this.actions.push({
+          account: 'atomicassets',
+          name: 'setcoldata',
+          authorization: [{
+            actor: this.getWax.userAccount,
+            permission: 'active',
+          }],
+          data: {
+            collection_name: this.$route.params.collection_name,
+            data: this.data
+          },
+        })
+      }
 
 
       this.market_fee = document.getElementById("market_fee").value
@@ -336,8 +371,12 @@ export default {
       //console.log("rem auth: " + this.rem_noti)
 
 
-
-      this.setcoldata()
+      if(this.actions.length!=0) {
+        this.setcoldata()
+      }
+      else {
+        window.alert("No update made to Collection.")
+      }
     },
     async setcoldata() {
       if(!this.getWax.api) {
@@ -367,3 +406,20 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+#collection-info {
+  text-align: left;
+  display: flex;
+  flex-direction: columns;
+  justify-content: center;
+}
+
+#accounts-info {
+  text-align: left;
+  display: flex;
+  flex-direction: columns;
+  justify-content: space-evenly;
+}
+</style>

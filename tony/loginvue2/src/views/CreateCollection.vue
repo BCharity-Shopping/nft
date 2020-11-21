@@ -1,45 +1,70 @@
 <template>
   <div class="create-collection">
     <h1>Create Collection</h1>
-    <hr>
-    <label for="collection_name">Collection Name (12 Characters, 1-5 & a-z)</label>
-    <input v-model="collection_name" id="collection_name">
-    <br>
-    <label for="image">Collection Image Hash</label>
-    <input v-model="image" id="image">
-    <br>
-    <label for="display_name">Display Name</label>
-    <input v-model="display_name" id="display_name">
-    <br>
-    <label for="website_url">Website URL</label>
-    <input v-model="website_url" id="website_url">
-    <br>
-    <label for="collection_description">Collection Description</label>
-    <input v-model="collection_description" id="collection_description">
-    <br>
-    <label for="market_fee">Market Fee (0%-15%)</label>
-    <input v-model="mkt_fee" type="number" max=15 min=0 id="market_fee">
-    <br>
-    <br>
-    <label>Authorized Accounts</label>
-    <br>
-    <input :value="getWax.userAccount" disabled>
-    <br>
-    <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
-      <input :id="'authorized-account-'+aacc.index">
-      <b-button :id="'authorized-remove-'+aacc.index" @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
+
+    <div id="collection-info">
+      <table id="table">
+        <tr>
+          <td><label for="collection_name">Collection Name (12 Characters, 1-5 & a-z)</label></td>
+          <td><input v-model="collection_name" id="collection_name"></td>
+        </tr>
+        <tr>
+          <td><label for="image">Collection Image Hash</label></td>
+          <td><input v-model="image" id="image"></td>
+        </tr>
+        <tr>
+          <td><label for="display_name">Display Name</label></td>
+          <td><input v-model="display_name" id="display_name"></td>
+        </tr>
+        <tr>
+          <td><label for="website_url">Website URL</label></td>
+          <td><input v-model="website_url" id="website_url"></td>
+        </tr>
+        <tr>
+          <td><label for="collection_description">Collection Description</label></td>
+          <td><input v-model="collection_description" id="collection_description"></td>
+        </tr>
+        <tr>
+          <td><label for="market_fee">Market Fee (0%-15%)</label></td>
+          <td><input v-model="mkt_fee" type="number" max=15 min=0 id="market_fee"></td>
+        </tr>
+      </table>
     </div>
-    <b-button @click="addAuthorizedAccount" variant="primary">+</b-button>
     <br>
-    <br>
-    <label>Notify Accounts</label>
-    <br>
-    <div v-for="nacc in noti_acc" :key="'n'+nacc.index" :id="'notify-'+nacc.index">
-      <input :id="'notify-account-'+nacc.index">
-      <b-button :id="'notify-remove-'+nacc.index" @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
+    <div id="accounts-info">
+      <table>
+        <th>
+          <label>Authorized Accounts</label>
+        </th>
+        <tr>
+        </tr>
+          <input :value="getWax.userAccount" disabled>
+        <tr v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
+          <td>
+            <input :id="'authorized-account-'+aacc.index">
+            <b-button :id="'authorized-remove-'+aacc.index" @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr>
+          <b-button @click="addAuthorizedAccount" variant="primary">+</b-button>
+        </tr>
+      </table>
+      <table>
+        <th>
+          <label>Notify Accounts</label>
+        </th>
+        <tr v-for="nacc in noti_acc" :key="'n'+nacc.index" :id="'notify-'+nacc.index">
+          <td>
+            <input :id="'notify-account-'+nacc.index">
+            <b-button :id="'notify-remove-'+nacc.index" @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
+          </td>
+        </tr>
+        <tr>
+          <b-button @click="addNotifyAccount" variant="primary">+</b-button>
+        </tr>
+      </table>
     </div>
-    <b-button @click="addNotifyAccount" variant="primary">+</b-button>
-    <hr>
+    <br>
     <b-button @click="createCollection" variant="success">Create Collection</b-button>
   </div>
 </template>
@@ -196,6 +221,20 @@ export default {
 .create-collection {
   width: 70%;
   margin-left: 15%;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
+}
+
+#collection-info {
+  text-align: left;
+  display: flex;
+  flex-direction: columns;
+  justify-content: center;
+}
+
+#accounts-info {
+  text-align: left;
+  display: flex;
+  flex-direction: columns;
+  justify-content: space-evenly;
 }
 </style>

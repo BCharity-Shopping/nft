@@ -1,12 +1,13 @@
 <template>
   <div class="creator">
     <div v-if='this.getWax==""'>
+      <p>Please login to view this page</p>
       <Login/>
     </div>
     <div v-else>
       <h1>Creator</h1>
       <hr>
-      <b-button variant="success" :to="`/creator/createcollection`">Create New Collection</b-button>
+      <b-button variant="warning" :to="`/creator/createcollection`">Create New Collection</b-button>
       <hr>
       <AuthorizedCollections/>
     </div>
@@ -39,6 +40,6 @@ export default {
 .creator {
   margin-left: 15%;
   max-width: 70%;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 </style>

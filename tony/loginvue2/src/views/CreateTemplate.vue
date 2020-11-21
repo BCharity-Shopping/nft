@@ -33,7 +33,7 @@
         <!-- No result -->
         <div v-else class="no-result apollo">No result :(</div>
       </template>
-      <hr>
+      <br>
       <b-button @click="createTemplate" variant="success">Create Template</b-button>
     </ApolloQuery>
   </div>
@@ -137,6 +137,6 @@ export default {
 .create-template {
   width: 70%;
   margin-left: 15%;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 </style>

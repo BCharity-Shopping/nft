@@ -2,7 +2,7 @@
   <div>
     <input v-model=donationAmount placeholder="Amount">
     WAX
-    <b-button id="donate-button" variant="warning" @click="inputCheck">Donate Now</b-button>
+    <b-button id="donate-button" variant="warning" @click="inputCheck">Donate</b-button>
     <!--
     quantity: {{this.quantity}} WAX
     isNaN? {{isNaN(this.quantity)}}

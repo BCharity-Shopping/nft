@@ -46,7 +46,7 @@ export default {
 <style scoped>
 .new-offer {
   margin-left: 15%;
-  background-color: rgb(255, 243, 227);
+  /*background-color: rgb(255, 243, 227);*/
   max-width: 70%;
 }
 
@@ -59,12 +59,12 @@ export default {
 .sender {
   max-width: 45%;
   min-width: 45%;
-  background-color: rgb(230, 254, 255);
+  /*background-color: rgb(230, 254, 255);*/
 }
 
 .recipient {
   max-width: 45%;
   min-width: 45%;
-  background-color: rgb(230, 254, 255);
+  /*background-color: rgb(230, 254, 255);*/
 }
 </style>

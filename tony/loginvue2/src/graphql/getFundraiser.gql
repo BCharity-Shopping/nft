@@ -21,6 +21,7 @@ query atomicmarket_sales ($fundraiser_id:bigint){
           collection_name
           schema_name
           owner
+          mutable_data
         }
       }
     }
