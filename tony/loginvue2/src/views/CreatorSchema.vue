@@ -1,6 +1,7 @@
 <template>
   <div class="creator-schema">
     <div v-if='this.getWax==""'>
+      <p>Please login to view this page</p>
       <Login/>
     </div>
     <div v-else>
@@ -56,8 +57,9 @@
                 </select>
                 <b-button :id="'attribute-remove-'+attr.index" @click="removeAttribute(attr.index)" variant="danger">-</b-button>
               </div>
-              <b-button @click="addAttribute" variant="primary">Add New Attribute +</b-button>
-              <hr>
+              <b-button @click="addAttribute" variant="primary">Add New Attribute</b-button>
+              <br>
+              <br>
               <b-button @click="saveChanges" variant="warning">Save Changes</b-button>
               <hr>
               <b-button variant="success" :to="`/creator/collection/${$route.params.collection_name}/schema/${$route.params.schema_name}/createasset`">Mint New Asset</b-button>
@@ -224,7 +226,7 @@ export default {
 .creator-schema {
   width: 70%;
   margin-left: 15%;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 
 .cards {

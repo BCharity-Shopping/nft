@@ -1,6 +1,6 @@
 <template>
   <div class="discover">
-    <h1>Browse Fundraisers</h1>
+    <h1>Browse Campaigns</h1>
     <ActiveFundraisers/>
   </div>
 </template>
@@ -19,6 +19,6 @@ export default {
 .discover {
   margin-left: 15%;
   max-width: 70%;
-  background-color: wheat;
+  /*background-color: wheat;*/
 }
 </style>

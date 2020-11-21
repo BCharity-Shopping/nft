@@ -3,7 +3,7 @@
     <h1>Create Schema</h1>
     <hr>
     <label for="schema_name">Schema Name</label>
-    <input v-model="schema_name" id="schema_name" placeholder="12 Characters Max">
+    <input v-model="schema_name" id="schema_name" pattern="[a-z1-5]{1,12}" placeholder="12 Characters Max">
     <br>
     <input value="name" disabled>
     <select disabled>
@@ -41,7 +41,8 @@
       <b-button :id="'attribute-remove-'+attr.index" @click="removeAttribute(attr.index)" variant="danger">-</b-button>
     </div>
     <b-button @click="addAttribute" variant="primary">Add New Attribute</b-button>
-    <hr>
+    <br>
+    <br>
     <b-button @click="createSchema" variant="success">Create Schema</b-button>
   </div>
 </template>
@@ -144,6 +145,6 @@ export default {
 .create-schema {
   width: 70%;
   margin-left: 15%;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 </style>

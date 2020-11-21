@@ -2,10 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/explorer">Explorer</router-link> |
-      <router-link to="/market">Market</router-link> |
-      <router-link to="/trading">Trading</router-link> |
-      <router-link to="/creator">Add a Cause</router-link> |
+      <router-link to="/trading">Listing</router-link> |
+      <router-link to="/creator">Create Campaign</router-link> |
       <router-link to="/fundraisers">Campaigns</router-link> |
       <div v-if='this.getWax==""'>
         <Login/>
@@ -14,6 +12,7 @@
         <AccountDropdown/>
       </div>
     </div>
+    <hr>
     <router-view/>
     <!--
     <div v-if='this.getWax==""'>
@@ -55,9 +54,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   /*background-color: #3d3d5c;*/
-  color: #b3b4c5;
+  color: grey;
+  text-align: center;
 }
 
 #nav {

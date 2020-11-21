@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="heading">Listing Price</p>
-    <input v-model="price" placeholder="Amount of Wax">
+    <input v-model="price" placeholder="Amount of Wax"> WAX
     <p class="heading">Fee Summary</p>
     <p>Collection Fee: {{ this.collectionFee * 100 }}%</p>
     <p>Maker Marketplace Fee: {{ this.makerMarketPlaceFee * 100 }}%</p>

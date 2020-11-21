@@ -127,6 +127,9 @@ export default {
 <style scoped>
 .card {
   margin-bottom : 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
   width: 250px;
   height: 360px;
   display: flex;
@@ -136,7 +139,6 @@ export default {
   align-content: flex-start;
   /*background-color: #666699;*/
   box-shadow: 0px 0px 10px 1px #262626;
-  margin-top: 10px;
   color: grey;
   border-radius: 15px;
 }
