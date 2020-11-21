@@ -1,16 +1,30 @@
 <template>
     <div>
-        <p>{{getWax}}</p>
-        <P>this is:{{collectionname}}</P>
-        <p>Create Schema</p>
-        <p>Schema_name</p>
-        <input v-model="Schema_name" placeholder="Schema name">
-        <p>Attribute Name</p><br />
-        <p>name</p><br />
-        <p>img</p>
-        <p>Attribute Type</p><br />
-        <p>text</p><br />
-        <p>img</p>
+        <h1>Create Schema:{{collectionname}}</h1>
+        <p>Schemas define which kind of attributes the assets will have. You can add attributes later.</p>
+        Schema_name<input v-model="Schema_name" placeholder="Schema name, 12 character at max">
+        <div class="large-card">
+            <div class="grid-container">
+                <b-card>
+                    <div class="grid-item">Attribute Name</div>
+                </b-card>
+                <b-card>
+                    <div class="grid-item">name</div>
+                </b-card>
+                <b-card>
+                    <div class="grid-item">img</div>
+                </b-card>
+                <b-card>
+                    <div class="grid-item">Attribute Type</div>
+                </b-card>
+                <b-card>
+                    <div class=grid-item>text</div>
+                </b-card>
+                <b-card>
+                    <div class=grid-item>img</div>
+                </b-card>
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -107,7 +121,7 @@ export default {
                this.schema_format.push({"name":this.rows[key].name,"type":this.rows[key].type})
            }
             console.log("it is "+this.collectionName);
-            if(!this.getWax.api){
+           if(!this.getWax.api){
                return console.log("Need to login first")
            }
            try {
@@ -139,3 +153,5 @@ export default {
     }
 }
 </script>
+<style lang="scoped">
+</style>

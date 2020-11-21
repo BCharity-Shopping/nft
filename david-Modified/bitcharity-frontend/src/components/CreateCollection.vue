@@ -1,22 +1,20 @@
 <template>
     <div>
-        <p>Create Collection</p>
-        <p>{{getWax}}</p>
-        <input v-model="Collection_name" placeholder="Collection name">
-        <input v-model="Display_name" placeholder="Display name">
-        <input v-model="WebURL" placeholder="Web URL">
-        <input v-model="Collection_Description" placeholder="Collection Description">
-        <input v-model="market_fee" placeholder="market fee">
-        <input v-model="authorized_accounts" placeholder="authorized account "><br>
-        <label>Authorized Accounts</label>
+        <h1>Create Collection</h1>
+        
+        Collection Name(Mandatory): <input v-model="Collection_name" placeholder="Collection name">
+        Display Name(Mandatory): <input v-model="Display_name" placeholder="Display name">
+        WebURL: <input v-model="WebURL" placeholder="Web URL"><br>
+        Collection_Description: <input v-model="Collection_Description" placeholder="Collection Description">
+        Market Fee: <input v-model="market_fee" placeholder="market fee">
         <br>
+        <label>Authorized Accounts</label>
         <input :value="getWax.userAccount" disabled>
         <br>
         <div v-for="aacc in auth_acc" :key="'a'+aacc.index" :id="'authorized-'+aacc.index">
             <input :id="'authorized-account-'+aacc.index">
             <b-button :id="'authorized-remove-'+aacc.index" @click="removeAuthorizedAccount(aacc.index)" variant="danger">-</b-button>
-        </div>
-        <b-button @click="addAuthorizedAccount" variant="primary">+</b-button><br>
+        </div>&nbsp;<br><b-button @click="addAuthorizedAccount" variant="primary">+</b-button><br>
          <br>
         <br>
             <label>Notify Accounts</label>
@@ -27,7 +25,8 @@
             <b-button :id="'notify-remove-'+nacc.index" @click="removeNotifyAccount(nacc.index)" variant="danger">-</b-button>
         </div>
         <b-button @click="addNotifyAccount" variant="primary">+</b-button>
-
+        <br>
+        <br>
         <b-button @click="CreateCollection">Create Collection</b-button>
     </div>
 </template>

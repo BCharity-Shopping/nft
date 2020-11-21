@@ -1,46 +1,43 @@
 <template>
     <div>
-        <p>name is</p>
-        <p>{{collection_name}}</p>
-        <input v-model="AssetOwner" placeholder="Account Name"><br/>
-        <input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
-        <input v-model="use_Template" placeholder="Template"><br/>
-        <!-- <div v-for="(item) in attribute_table" :key="item.name">
-            {{item.name}}:<td><input :id=item.type class="item-name" :name=item.name :placeholder=item.type></td>
-        </div>-->
-
-        <ApolloQuery :query="require('../graphQL/atomicasset_templates.gql')" :variables="{schema_name:this.schema_name,collection_name:this.collection_name}">
-            <template v-slot="{ result: { loading, error, data } }">
-                {{data}}
-                <div v-if="loading" class="loading apollo">Loading...</div>
-                <div v-else-if="error" class="error apollo">An error occurred</div>
-                <div v-else-if="data" class="result apollo">
-                    <select id="template" v-model="use_Template" >
-                        <option value="No Template" selected>No Template</option>
-                        <option v-for="template in data.atomicassets_templates" :key="template.template_id" :value="template.template_id">
-                            #{{template.template_id}} - ({{template.issued_supply}}/{{template.max_supply}}) {{template.immutable_data.name}}
-                        </option>
-                    </select>
-                    <div v-if="use_Template=='No Template'">
-                        <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-                            <label :for="format.name">{{format.name}}</label>
-                            <input :id="format.name" class="format-name" :name="format.name" :placeholder="format.type"> 
-                            <br/>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-                            <div v-for="template in data.atomicassets_templates" :key="template.template_id">
-                                <label v-if="template.template_id==use_Template" :for="format.name">{{format.name}}</label>
-                                <input v-if="template.template_id==use_Template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
-                                <input v-else-if="template.template_id==use_Template" class="format-name" :id="format.name" :placeholder="format.type">
+        <h1>Create Asset</h1>
+        Account Name:<input v-model="AssetOwner" placeholder="Account Name"><br/>
+        Number of Copies(Number):<input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
+        <div class="grid-item">
+            <ApolloQuery :query="require('../graphQL/atomicasset_templates.gql')" :variables="{schema_name:this.schema_name,collection_name:this.collection_name}">
+                <template v-slot="{ result: { loading, error, data } }">
+                    <div v-if="loading" class="loading apollo">Loading...</div>
+                    <div v-else-if="error" class="error apollo">An error occurred</div>
+                    <div v-else-if="data" class="result apollo">
+                        <select id="template" v-model="use_Template" >
+                            <option value="No Template" selected>No Template</option>
+                            <option v-for="template in data.atomicassets_templates" :key="template.template_id" :value="template.template_id">
+                                #{{template.template_id}} - ({{template.issued_supply}}/{{template.max_supply}}) {{template.immutable_data.name}}
+                            </option>
+                        </select>
+                        
+                        <div v-if="use_Template=='No Template'">
+                            <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                                <label :for="format.name">{{format.name}}</label>
+                                <input :id="format.name" class="format-name" :name="format.name" :placeholder="format.type"> 
+                                <br/>
                             </div>
                         </div>
-                    <br>
+                        
+                        <div v-else>
+                            <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                                <div v-for="template in data.atomicassets_templates" :key="template.template_id">
+                                    <label v-if="template.template_id==use_Template" :for="format.name">{{format.name}}</label>
+                                    <input v-if="template.template_id==use_Template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
+                                    <input v-else-if="template.template_id==use_Template" class="format-name" :id="format.name" :placeholder="format.type">
+                                </div>
+                            </div>
+                            <br>
+                        </div>
                     </div>
-                </div>
-            </template>
-        </ApolloQuery>
+                </template>
+            </ApolloQuery>
+        </div>
         <button class="button btn-primary" @click="CreateAssets()">Create Asset</button>
     </div>
 </template>
@@ -104,7 +101,6 @@ export default {
             this.immutable_data=[];
             var array=document.getElementsByClassName("format-name")
             console.log(array);
-            //console.log(this.immutable_data);
             for(var j=0;j<array.length;j++){
                     if(array[j].placeholder=="image"){
                         array[j].placeholder="string"
@@ -112,10 +108,8 @@ export default {
                     }
                     if(array[j].value!=""){
                         this.immutable_data.push({"key":array[j].id,"value":[array[j].placeholder, array[j].value]})
-                     }
-                 }
-            console.log("this is "+this.immutable_data);
-            console.log(this.immutable_data);
+                    }
+            }
             if(!this.getWax.api){
                return console.log("Need to login first")
            } 
@@ -137,7 +131,6 @@ export default {
                         schema_name:this.schema_name,
                         template_id:-1,
                         tokens_to_back:[
-
                         ]
                     },
                 }]
@@ -155,3 +148,17 @@ export default {
 }
 
 </script>
+<style scoped>
+    .large-card {
+        width: 180px;
+        border-radius: 20px;
+        box-shadow: 0 3px 20px rgba(0,0,0,.4);
+        display: inline-block;
+        height: fit-content;
+        margin: 15px 10px;
+        padding: 0;
+        position: relative;
+        text-align: left;
+        text-align: initial;
+    }
+</style>

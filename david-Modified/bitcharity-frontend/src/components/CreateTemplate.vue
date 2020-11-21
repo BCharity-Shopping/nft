@@ -1,9 +1,8 @@
 <template>
     <div>
-        {{ collection_name }}
-        {{ schema_name }}
-        <input v-model="MaxSupply" placeholder="Max Supply"><br/>
-        Asset can be burned:<input type="checkbox" v-model="Burned" v-bind:true-value=true v-bind:false-value=false>
+        <h1>Create Template</h1>
+        Maximum Supply(number)<input v-model="MaxSupply" placeholder="Max Supply"><br/>
+        Asset can be burned:<input type="checkbox" v-model="Burned" v-bind:true-value=true v-bind:false-value=false>&nbsp;&nbsp;
         Asset can be Transfered: <input type="checkbox" v-model="Transfered" v-bind:true-value=true v-bind:false-value=false>
         <div v-for="(item) in attribute_table" :key="item.name">
             {{item.name}}:<td><input :id=item.type class="item-name" :name=item.name :placeholder=item.type></td>

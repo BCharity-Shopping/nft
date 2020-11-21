@@ -10,16 +10,10 @@
             <li class="nav-item active">
               <router-link to="/MarketPlace">Market Place</router-link> 
             <li class="nav-item">
-              <router-link to="/NFT">NFT</router-link> 
-            </li>
-            <li class="nav-item">
               <router-link to="/trading">trading</router-link> 
             </li>
-            <li class="nav-item">
-              <router-link to="/creator">Create Cause</router-link> 
-            </li>
-            <li class="nav-item">
-              <router-link to="/fundraisers">Campaigns</router-link> 
+             <li class="nav-item">
+              <router-link to="/NFT">NFT Creator</router-link> 
             </li>
             <li class="nav-item">
             <div v-if='this.getWax==""'>
@@ -67,5 +61,8 @@
 }
 .li{
   color:white;
+}
+body {
+  background-color: azure;
 }
 </style>
