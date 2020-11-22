@@ -1,7 +1,11 @@
 <template>
   <div>
+    Donate to this cause
+    <br>
     <input v-model=donationAmount placeholder="Amount">
     WAX
+    <br>
+    <br>
     <b-button id="donate-button" variant="warning" @click="inputCheck">Donate</b-button>
     <!--
     quantity: {{this.quantity}} WAX

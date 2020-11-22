@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">BCause</router-link> |
       <router-link to="/trading">Listing</router-link> |
       <router-link to="/creator">Create Campaign</router-link> |
       <router-link to="/fundraisers">Campaigns</router-link> |

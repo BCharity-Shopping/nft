@@ -38,8 +38,8 @@ export default {
 
 <style scoped>
 .creator {
-  margin-left: 15%;
-  max-width: 70%;
+  margin-left: 20%;
+  max-width: 60%;
   /*background-color: #eeeeee;*/
 }
 </style>

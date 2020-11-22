@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-progress :value="donationTotal" :max="listingPrice"></b-progress>
-    {{donationTotal}} WAX raised of {{listing_price/100000000}} WAX Goal
+    <b>{{donationTotal}}</b> WAX raised of {{listing_price/100000000}} WAX Goal
   </div>
 </template>
 

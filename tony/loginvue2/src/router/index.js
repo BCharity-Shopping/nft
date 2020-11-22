@@ -91,8 +91,8 @@ const routes = [
   },
   {
     path: '/fundraisers/:fundraiser_id',
-    name: 'Fundraiser',
-    component: () => import('../views/Fundraiser.vue')
+    name: 'Donation',
+    component: () => import('../views/Donation.vue')
   },
 ]
 
