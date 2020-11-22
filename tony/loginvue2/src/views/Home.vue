@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home Page</h1>
+    <h1>Welcome to BCause</h1>
   </div>
 </template>
 
@@ -10,3 +10,10 @@ export default {
   props: ['wax']
 }
 </script>
+
+<style scoped>
+.home {
+  margin-left: 20%;
+  max-width: 60%;
+}
+</style>

@@ -224,8 +224,8 @@ export default {
 
 <style scoped>
 .creator-schema {
-  width: 70%;
-  margin-left: 15%;
+  margin-left: 20%;
+  max-width: 60%;
   /*background-color: #eeeeee;*/
 }
 

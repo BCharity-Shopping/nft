@@ -45,9 +45,9 @@ export default {
 
 <style scoped>
 .new-offer {
-  margin-left: 15%;
+  margin-left: 20%;
+  max-width: 60%;
   /*background-color: rgb(255, 243, 227);*/
-  max-width: 70%;
 }
 
 .offers {

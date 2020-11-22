@@ -17,8 +17,8 @@ export default {
 
 <style scoped>
 .discover {
-  margin-left: 15%;
-  max-width: 70%;
+  margin-left: 20%;
+  max-width: 60%;
   /*background-color: wheat;*/
 }
 </style>

@@ -87,8 +87,8 @@ export default {
 
 <style scoped>
 .profile {
-  margin-left: 15%;
-  max-width: 70%;
+  margin-left: 20%;
+  max-width: 60%;
   color: grey;
   /*background-color: #eeeeee;*/
 }

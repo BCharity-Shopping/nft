@@ -1,6 +1,8 @@
 <template>
   <div>
     Fully support this cause by donating the fundraiser goal amount.
+    <br>
+    <br>
     <b-button id="buy-button" variant="warning" @click="inputCheck">Donate Full Amount</b-button>
   </div>
 </template>
