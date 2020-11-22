@@ -1,42 +1,55 @@
 <template>
     <div>
         <h1>Create Asset</h1>
-        Account Name:<input v-model="AssetOwner" placeholder="Account Name"><br/>
-        Number of Copies(Number):<input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
-        <div class="grid-item">
-            <ApolloQuery :query="require('../graphQL/atomicasset_templates.gql')" :variables="{schema_name:this.schema_name,collection_name:this.collection_name}">
-                <template v-slot="{ result: { loading, error, data } }">
-                    <div v-if="loading" class="loading apollo">Loading...</div>
-                    <div v-else-if="error" class="error apollo">An error occurred</div>
-                    <div v-else-if="data" class="result apollo">
-                        <select id="template" v-model="use_Template" >
-                            <option value="No Template" selected>No Template</option>
-                            <option v-for="template in data.atomicassets_templates" :key="template.template_id" :value="template.template_id">
-                                #{{template.template_id}} - ({{template.issued_supply}}/{{template.max_supply}}) {{template.immutable_data.name}}
-                            </option>
-                        </select>
-                        
-                        <div v-if="use_Template=='No Template'">
-                            <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-                                <label :for="format.name">{{format.name}}</label>
-                                <input :id="format.name" class="format-name" :name="format.name" :placeholder="format.type"> 
-                                <br/>
-                            </div>
-                        </div>
-                        
-                        <div v-else>
-                            <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
-                                <div v-for="template in data.atomicassets_templates" :key="template.template_id">
-                                    <label v-if="template.template_id==use_Template" :for="format.name">{{format.name}}</label>
-                                    <input v-if="template.template_id==use_Template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
-                                    <input v-else-if="template.template_id==use_Template" class="format-name" :id="format.name" :placeholder="format.type">
+        <div class="edit-collection">
+            <div class="grid-container">
+                <div class="grid-item">
+                    Account Name:<input v-model="AssetOwner" placeholder="Account Name"><br/>
+                </div>
+                <div class="grid-item">
+                    Number of Copies(Number):<input v-model="NumberOfCopies" placeholder="Number between 1-10"><br/>
+                </div>
+                <ApolloQuery :query="require('../graphQL/atomicasset_templates.gql')" :variables="{schema_name:this.schema_name,collection_name:this.collection_name}">
+                    <template v-slot="{ result: { loading, error, data } }">
+                                <div class="container-fluid">
+                                    <div class="grid-item">
+                                        <div v-if="loading" class="loading apollo">Loading...</div>
+                                        <div v-else-if="error" class="error apollo">An error occurred</div>
+                                        <div v-else-if="data" class="result apollo">
+                                            <select id="template" v-model="use_Template" >
+                                                <option value="No Template" selected>No Template</option>
+                                                <option v-for="template in data.atomicassets_templates" :key="template.template_id" :value="template.template_id">
+                                                    #{{template.template_id}} - ({{template.issued_supply}}/{{template.max_supply}}) {{template.immutable_data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <div v-if="use_Template=='No Template'">
+                                <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                                    <div class="grid-item">
+                                        <label :for="format.name">{{format.name}}</label>
+                                        <input :id="format.name" class="format-name" :name="format.name" :placeholder="format.type"> 
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
-                            <br>
-                        </div>
-                    </div>
-                </template>
-            </ApolloQuery>
+                            
+                            <div v-else>
+                                <div v-for="format in data.atomicassets_schemas[0].format" :key="format.name">
+                                    <div v-for="template in data.atomicassets_templates" :key="template.template_id">
+                                        <div class="grid-item">
+                                            <label v-if="template.template_id==use_Template" :for="format.name">{{format.name}}</label>
+                                            <input v-if="template.template_id==use_Template && template.immutable_data[format.name]!=null" :id="format.name" :placeholder="template.immutable_data[format.name]" disabled>
+                                            <input v-else-if="template.template_id==use_Template" class="format-name" :id="format.name" :placeholder="format.type">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </template>
+                </ApolloQuery>
+            </div>
         </div>
         <button class="button btn-primary" @click="CreateAssets()">Create Asset</button>
     </div>
@@ -161,4 +174,27 @@ export default {
         text-align: left;
         text-align: initial;
     }
+    div.container-fluid {
+       text-align:right;
+   }
+   div.grid-container {
+       display: grid;
+       grid-template-columns:auto auto auto;
+       padding: 2px;
+       align-content: column;
+   }
+   #accountParent{
+       display:flex;
+       flex-direction:row;
+       margin:14px;
+       justify-content: space-between;
+    }
+   #authorizedaccount {
+        width:50%;
+       height:500px
+
+   }
+   #notifyaccounts {
+       width:50%;
+   }
 </style>
