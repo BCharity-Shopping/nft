@@ -149,8 +149,7 @@ export default {
        flex-direction:row;
        margin:14px;
        justify-content: space-between;
-      
-   }
+    }
    #authorizedaccount {
         width:50%;
        height:500px
