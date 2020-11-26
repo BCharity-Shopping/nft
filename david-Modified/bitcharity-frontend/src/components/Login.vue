@@ -15,7 +15,17 @@ export default {
     }
   },
   methods: {
-    
+    async login() {
+      this.wax = new waxjs.WaxJS('https://wax.greymass.com', null, null, false)
+      console.log("logging in through WCW")
+      try {
+        this.userAccount = await this.wax.login()
+        this.$store.commit('storeWax', this.wax)
+      }
+      catch (e) {
+        console.log(e)
+      }
   },
+}
 }
 </script>
