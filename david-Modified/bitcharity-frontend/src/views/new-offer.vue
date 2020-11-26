@@ -43,7 +43,8 @@ export default {
   },
   methods: {
     sendOffer:function(){
-      this.$refs.TradeOffer.click();
+      this.selectedAssets=this.$refs.TradeOffer.click();
+      console.log("this selected asset is "+this.selectedAssets);
     }
   }
 }

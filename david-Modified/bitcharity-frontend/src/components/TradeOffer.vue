@@ -63,7 +63,7 @@ export default {
       console.log(this.selectedAssets);
     },
     click(){
-      console.log("child is clicked"+this.selectedAssets);
+      return this.selectedAssets;
     }
     
   },
