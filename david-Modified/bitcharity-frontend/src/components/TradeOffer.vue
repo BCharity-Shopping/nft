@@ -29,7 +29,7 @@
           <div v-else class="no-result apollo">No result :(</div>
         </template>
       </ApolloQuery>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -59,9 +59,13 @@ export default {
         this.selectedAssets.push(asset_id)
         document.getElementById(id).className = "selected"
       }
-      console.log("clicked " + asset_id + " on " + this.role)
-      console.log(this.selectedAssets)
+      console.log("clicked " + asset_id + " on " + this.role);
+      console.log(this.selectedAssets);
+    },
+    click(){
+      console.log("child is clicked"+this.selectedAssets);
     }
+    
   },
   computed: {
     o: function() {

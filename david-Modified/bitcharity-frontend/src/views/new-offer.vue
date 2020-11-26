@@ -5,15 +5,15 @@
       <Login/>
     </div>
     <div v-else>
-      <h1>New Offer</h1>
-      <b-button variant="warning" @onClick="sendOffer()">send Trade Offer</b-button>
+      <h1>New Offer</h1> 
+      <b-button variant="warning" @click="sendOffer">send Trade Offer</b-button>
       <input v-model="recipient" placeholder="Recepient">
       <div class="offers">
         <div class="sender">
-          <TradeOffer :key="this.getWax.userAccount" :account_name="this.getWax.userAccount" role="sender"/>
+          <TradeOffer ref="TradeOffer" :key="this.getWax.userAccount" :account_name="this.getWax.userAccount" role="sender"/>
         </div>
         <div class="recipient">
-          <TradeOffer :key="this.recipient" :account_name="this.recipient" role="recipient"/>
+          <TradeOffer ref="TradeOffer" :key="this.recipient" :account_name="this.recipient" role="recipient"/>
         </div>
       </div>
     </div>
@@ -32,13 +32,19 @@ export default {
   },
   data () {
     return {
-      recipient: ""
+      recipient: "",
+      selectedAssets:""
     }
   },
   computed: {
     ...mapGetters([
       'getWax'
     ])
+  },
+  methods: {
+    sendOffer:function(){
+      this.$refs.TradeOffer.click()
+    }
   }
 }
 </script>

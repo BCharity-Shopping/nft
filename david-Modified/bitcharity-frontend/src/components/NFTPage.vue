@@ -54,10 +54,10 @@ export default {
         'getWax'
       ]),
     },
-    mounted(){
+    async mounted(){
           console.log("fetch for"+this.getWax.userAccount);
           this.isFiltering = true;
-          axios.get('https://wax.api.atomicassets.io/atomicassets/v1/collections'
+          await axios.get('https://wax.api.atomicassets.io/atomicassets/v1/collections'
           ,{
             params:{
               authorized_account:this.getWax.userAccount,
