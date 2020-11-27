@@ -44,7 +44,6 @@ export default {
   methods: {
     sendOffer:function(){
       this.selectedAssets=this.$refs.TradeOffer.click();
-      console.log("this selected asset is "+this.selectedAssets);
     }
   }
 }
