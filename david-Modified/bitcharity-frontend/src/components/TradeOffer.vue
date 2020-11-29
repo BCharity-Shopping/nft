@@ -63,12 +63,14 @@ export default {
       console.log(this.selectedAssets);
     },
     click(){
+      this.selectedAssets.push({"accountName":this.owner});
       return this.selectedAssets;
     }
     
   },
   computed: {
     o: function() {
+      console.log("it is "+this.owner)
       return this.owner
     }
   }
