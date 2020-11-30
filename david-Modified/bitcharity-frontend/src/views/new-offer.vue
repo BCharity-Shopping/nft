@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       recipient: "",
-      selectedAssets:""
+      selectedAssets:[]
     }
   },
   computed: {
@@ -47,9 +47,9 @@ export default {
       this.recipient="";
       this.selectedAssets=this.$refs.TradeOffer.click();
       this.recipient=this.selectedAssets[1].accountName;
-      console.log("it is choosed "+this.recipient);
-      this.selectedAssets.pop(this.selectedAssets[1]);
-      console.log(this.selectedAssets);
+      //console.log("it is choosed "+this.recipient);
+      //this.selectedAssets.pop(this.selectedAssets[1]);
+      //console.log(this.selectedAssets);
 
     }
   }
