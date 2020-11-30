@@ -63,6 +63,11 @@ export default {
       console.log(this.selectedAssets);
     },
     click(){
+      for(var element in this.selectedAssets){
+        if(typeof(this.selectedAssets[element])=="object"){
+          return this.selectedAssets;
+        }
+      }
       this.selectedAssets.push({"accountName":this.owner});
       return this.selectedAssets;
     }

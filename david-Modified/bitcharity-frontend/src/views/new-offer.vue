@@ -43,13 +43,12 @@ export default {
   },
   methods: {
     sendOffer:function(){
-      this.selectedAssets=[];
-      this.recipient="";
       this.selectedAssets=this.$refs.TradeOffer.click();
+      console.log(this.selectedAssets);
       this.recipient=this.selectedAssets[1].accountName;
-      //console.log("it is choosed "+this.recipient);
-      //this.selectedAssets.pop(this.selectedAssets[1]);
-      //console.log(this.selectedAssets);
+      console.log("it is choosed "+this.recipient);
+      this.selectedAssets.pop(this.selectedAssets[1]);
+      console.log(this.selectedAssets);
 
     }
   }
