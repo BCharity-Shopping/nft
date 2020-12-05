@@ -34,10 +34,10 @@ export default {
         }
     },
     created() {
-      this.schema_name=this.$route.params.schemaname;
-      console.log(this.schema_name);
-      this.collection_name = this.$route.params.collectionname;
-      console.log(this.collection_name);
+        this.schema_name=this.$route.params.schemaname;
+        console.log(this.schema_name);
+        this.collection_name = this.$route.params.collectionname;
+        console.log(this.collection_name);
       },
     computed: {
       ...mapGetters([

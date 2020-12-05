@@ -10,10 +10,10 @@
       <input v-model="recipient" placeholder="Recepient">
       <div class="offers">
         <div class="sender">
-          <TradeOffer v-on:selectedAssets="sendValue" ref="TradeOffer" :key="this.getWax.userAccount" :account_name="this.getWax.userAccount" role="sender"/>
+          <TradeOffer ref="TradeOffer" :key="this.getWax.userAccount" :account_name="this.getWax.userAccount" role="sender"/>
         </div>
         <div class="recipient">
-          <TradeOffer v-on:selectedAssets="sendValue" ref="TradeOffer" :key="this.recipient" :account_name="this.recipient" role="recipient"/>
+          <TradeOffer ref="TradeOffer" :key="this.recipient" :account_name="this.recipient" role="recipient"/>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
     sendOffer:function(){
       this.selectedAssets=this.$refs.TradeOffer.click();
       console.log(this.selectedAssets);
-      this.recipient=this.selectedAssets[1].accountName;
+      this.recipient=this.selectedAssets[this.selectedAssets.length-1].accountName;
       console.log("it is choosed "+this.recipient);
       this.selectedAssets.pop(this.selectedAssets[1]);
       console.log(this.selectedAssets);
