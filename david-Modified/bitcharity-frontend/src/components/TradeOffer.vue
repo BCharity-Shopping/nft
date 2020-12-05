@@ -44,31 +44,51 @@ export default {
   data () {
     return {
       owner: this.account_name,
-      selectedAssets: [],
-      key: 0
+      selectedAssets_sender:[],
+      selectedAssets_receiver:[],
+      key: 0,
+      selectedAssets:[]
     }
   },
   methods: {
     toggleOfferAsset(asset_id) {
       var id = "asset" + asset_id + this.role
-      if(this.selectedAssets.includes(asset_id)){
-        this.selectedAssets.splice(this.selectedAssets.indexOf(asset_id), 1)
-        document.getElementById(id).className = "unselected"
-      }
-      else {
-        this.selectedAssets.push(asset_id)
-        document.getElementById(id).className = "selected"
-      }
-      console.log("clicked " + asset_id + " on " + this.role);
-      console.log(this.selectedAssets);
-    },
-    click(){
-      for(var element in this.selectedAssets){
-        if(typeof(this.selectedAssets[element])=="object"){
-          return this.selectedAssets;
+      if(this.role==='sender'){
+        console.log("sender block is executed"+this.role);
+        if(this.selectedAssets_sender.includes(asset_id)){
+          this.selectedAssets_sender.splice(this.selectedAssets_sender.indexOf(asset_id), 1)
+          document.getElementById(id).className = "unselected"
+        }
+        else {
+          console.log("the asset id is"+asset_id);
+          this.selectedAssets_sender.push(asset_id)
+          console.log("sender is "+this.selectedAssets_sender);
+          console.log("sender length is "+this.selectedAssets_sender.length)
+          document.getElementById(id).className = "selected"
         }
       }
-      this.selectedAssets.push({"accountName":this.owner});
+      if(this.role!=='sender'){
+        console.log("non sender block executed")
+        if(this.selectedAssets_receiver.includes(asset_id)){
+          this.selectedAssets_receiver.splice(this.selectedAssets_receiver.indexOf(asset_id), 1)
+          document.getElementById(id).className = "unselected"
+        }
+         else {
+          this.selectedAssets_receiver.push(asset_id)
+          console.log("receiver is "+this.selectedAssets_receiver);
+          document.getElementById(id).className = "selected"
+        }
+      }
+      
+      //console.log("clicked " + asset_id + " on " + this.role);
+      //console.log(this.selectedAssets);
+    },
+    click(){
+      this.selectedAssets_receiver.push(this.owner);
+      console.log("this receiver is"+this.selectedAssets_receiver);
+      console.log("this sender is "+this.selectedAssets_sender);
+      //console.log(this.selectedAssets_sender.length);
+      //console.log("selected asset is "+this.selectedAssets_receiver);
       return this.selectedAssets;
     }
     
